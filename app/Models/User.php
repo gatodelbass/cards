@@ -42,4 +42,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function userAdmin(){
+
+        if($this->role != "admin"){
+            return redirect()->route('dashboard')->send();
+        }
+    } 
+
+
+    public function usercollections()
+    {
+        return $this->hasMany(UserCollection::class);
+    }
+
+    public function userprizes()
+    {
+        return $this->hasMany(UserPrize::class);
+    }
 }

@@ -11,9 +11,9 @@ import { usePage } from '@inertiajs/vue3'
 
 const showingNavigationDropdown = ref(false);
 const page = usePage()
-const user = computed(() => page.props.auth.user)
+const user = page.props.auth.user
 
-console.log(page.props.auth.user.nickname);
+console.log(user.nickname);
 
 </script>
 
@@ -38,6 +38,13 @@ console.log(page.props.auth.user.nickname);
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
+                                </NavLink>
+                            </div>
+
+                             <!-- Navigation Links -->
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('login.index')" :active="route().current('login.index')">
+                                    Home
                                 </NavLink>
                             </div>
                         </div>
