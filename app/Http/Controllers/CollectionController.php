@@ -148,6 +148,44 @@ class CollectionController extends Controller
         return Redirect::route('collections.index');
     }
 
+
+    public function addCards($collectionId){
+
+        $collection = Collection::find($collectionId);
+        $cards = Card::where('collection_id', $collectionId)->get();
+
+        return Inertia::render('Collection/AddCard', [
+            'cards' => $cards,
+            'collection' => $collection,
+        ]);
+
+
+    }
+
+    public function addNewCard(Request $request)
+    {
+
+        //dd($request);     
+       
+
+        $card = new Card();
+        $card->name = $request->cardName;
+        $card->image = $request->cardImage;
+        $card->collection_id = $request->collectionId;
+        $card->save();
+
+        $cards = Card::where('collection_id', $request->collectionId)->get();
+
+        return back();
+
+
+        return response()->json([
+            'cards' => $cards,
+        ]);
+      
+        return response()->noContent();
+    }
+
     public function manageCards($collectionId)
     {
 

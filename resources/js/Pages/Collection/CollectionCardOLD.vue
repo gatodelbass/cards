@@ -65,7 +65,11 @@
                     </button>
                 </inertia-link>
 
-                <inertia-link :href="route('manageCards', collection.id)">
+
+                 <inertia-link
+                   
+                    :href="route('manageCards', collection.id)"
+                >
                     <button
                         class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                     >
@@ -73,13 +77,16 @@
                     </button>
                 </inertia-link>
 
-                <inertia-link :href="route('addCards', collection.id)">
-                    <button
-                        class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
-                    >
-                        Add cards
-                    </button>
-                </inertia-link>
+                <inertia-link
+                   
+                   :href="route('addCards', collection.id)"
+               >
+                   <button
+                       class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
+                   >
+                       Add cards
+                   </button>
+               </inertia-link>
 
                 <!--
 
@@ -119,11 +126,14 @@
 </template>
 
 <script>
+
 import { reactive } from "vue";
 
 export default {
     name: "CollectionCard",
-    components: {},
+    components: {
+          
+    },
     props: {
         collection: {
             type: Object,

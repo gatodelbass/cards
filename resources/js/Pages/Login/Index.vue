@@ -153,7 +153,9 @@
             {{ $page.props.auth.user }}
 
             <div class="flex flex-nowrap bg-gray-200">
-            <div
+         
+
+                <div
                 class="w-44 h-72 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
             >
                 <div class="rounded-sm">
@@ -168,77 +170,7 @@
 
                         <div class="w-3/10 mx-1">
                             <img
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-shape-1.png"
-                                class="w-6 inline-block bg-yellow-200 p-0.5"
-                            />
-                        </div>
-
-                        <div class="w-4/10 mx-auto text-right">
-                            <span
-                                class="rounded-sm px-1 text-gray-800 bg-yellow-200"
-                                ># <span class="font-semibold">20</span> -
-                                700</span
-                            >
-                        </div>
-                    </div>
-                    <div
-                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-base"
-                    >
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                    <div
-                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-4 border-white"
-                    >
-                        <img
-                            class="max-h-full min-h-full object-contain mx-auto rounded-sm"
-                            alt="img"
-                            src="https://www.amalgamcollection.com/cdn/shop/products/DSCF2369_Resized_65a2f27a-e530-48ee-bbf7-2a484d5c8f08_4000x2677_crop_center.jpg?v=1601655188"
-                        />
-                        <p
-                            v-if="true"
-                            class="z-10 absolute bottom-1 left-1 bg-yellow-200 text-gray-700 md:font-semibold px-1 rounded-sm truncate ... mx-auto"
-                        >
-                            $400
-                        </p>
-                    </div>
-                    <div
-                        class="flex my-1 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-yellow-200"
-                    >
-                        <p class="px-1 py-0.5 truncate ...">Ferrari</p>
-                    </div>
-
-                    <div class="flex mb-1">
-                        <div class="w-1/2 text-center">
-                            <p class="px-1 font-semibold text-rose-400">
-                                ATK: 5600
-                            </p>
-                        </div>
-
-                        <div class="w-1/2 text-center">
-                            <p class="px-1 font-semibold text-emerald-400">
-                                DEF: 5600
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="w-44 h-72 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
-            >
-                <div class="rounded-sm">
-                    <div class="flex my-1">
-                        <div class="w-3/10 mx-1">
-                            <img
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2018/96/iconmonstr-soccer-1.png"
-                                class="w-6 inline-block bg-yellow-200 p-0.5 rounded-full border-1 border-gray-100"
-                            />
-                            &nbsp;
-                        </div>
-
-                        <div class="w-3/10 mx-1">
-                            <img
-                                :src="'/images/image-vertical.png'"
+                                :src="'/images/image-center.png'"
                                 src="https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-shape-1.png"
                                 class="w-6 inline-block p-0.5"
                             />
@@ -246,36 +178,36 @@
 
                         <div class="w-4/10 mx-auto text-right">
                             <span
-                                class="rounded-sm px-1 text-gray-800 bg-yellow-200"
+                                class="rounded-sm px-1 text-yellow-200 bg-gray-800 "
                                 ># <span class="font-semibold">20</span> -
-                                700</span
+                                32</span
                             >
                         </div>
                     </div>
                     <div
-                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-base"
+                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"
                     >
-                        ⭐⭐
+                        ⭐
                     </div>
                     <div
-                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-white"
+                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
                     >
                         <img
                             class="max-h-full min-h-full object-contain mx-auto rounded-sm"
                             alt="img"
-                            src="https://i.pinimg.com/564x/21/94/47/219447e09dd82c7b004643edfabfb75e.jpg"
+                            src="https://www.banknoteworld.com/images/product/Vietnam%20500%2C000%20Dong%20Banknote%2C%202020%2C%20P-124p%2C%20UNC.jpg"
                         />
                         <p
                             v-if="true"
                             class="z-10 absolute bottom-1 left-1 bg-yellow-200 text-gray-700 md:font-semibold px-1 rounded-sm truncate ... mx-auto"
                         >
-                            $400
+                            $4000
                         </p>
                     </div>
                     <div
-                        class="flex my-1 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-yellow-200"
+                        class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
                     >
-                        <p class="px-1 py-0.5 truncate ...">Pagani Zonda</p>
+                        <p class="px-1 py-0.5 truncate ...">Kanon</p>
                     </div>
 
                     <div class="flex mb-1">
@@ -293,6 +225,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div
                 class="w-44 h-72 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
@@ -317,34 +250,34 @@
 
                         <div class="w-4/10 mx-auto text-right">
                             <span
-                                class="rounded-sm px-1 text-gray-800 bg-yellow-200"
+                                class="rounded-sm px-1 text-yellow-200 bg-gray-800 "
                                 ># <span class="font-semibold">20</span> -
-                                700</span
+                                32</span
                             >
                         </div>
                     </div>
                     <div
-                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-base"
+                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"
                     >
                         ⭐
                     </div>
                     <div
-                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-4 border-white"
+                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
                     >
                         <img
                             class="max-h-full min-h-full object-contain mx-auto rounded-sm"
                             alt="img"
-                            src="https://i.pinimg.com/564x/72/35/81/7235814972a21a0ca4516aa7b0ca754a.jpg"
+                            src="https://1-bp-blogspot-com.cdn.ampproject.org/i/s/1.bp.blogspot.com/-6HABJIH5Hnw/X_2wbpDBimI/AAAAAAAAY8I/DE5ho5C3_FogI_5iQGn2o1ki5PyD2tJcQCLcBGAsYHQ/s550/49-reimagined-premier-league-logos-2.png"
                         />
                         <p
                             v-if="true"
                             class="z-10 absolute bottom-1 left-1 bg-yellow-200 text-gray-700 md:font-semibold px-1 rounded-sm truncate ... mx-auto"
                         >
-                            $400
+                            $4000
                         </p>
                     </div>
                     <div
-                        class="flex my-1 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-yellow-200"
+                        class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
                     >
                         <p class="px-1 py-0.5 truncate ...">Kanon</p>
                     </div>
@@ -388,16 +321,16 @@
 
                         <div class="w-4/10 mx-auto text-right">
                             <span
-                                class="rounded-sm px-1 text-gray-800 bg-yellow-200"
+                                class="rounded-sm px-1 text-yellow-200 bg-gray-800 "
                                 ># <span class="font-semibold">20</span> -
-                                23</span
+                                32</span
                             >
                         </div>
                     </div>
                     <div
-                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-yellow-200 mx-1 text-base rounded-sm"
+                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"
                     >
-                        ⭐⭐⭐⭐
+                        ⭐
                     </div>
                     <div
                         class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
@@ -405,21 +338,19 @@
                         <img
                             class="max-h-full min-h-full object-contain mx-auto rounded-sm"
                             alt="img"
-                            src="https://football-balls.com/ball_files/2007-j-league-adidas-teamgeist-red-official-match-ball.png"
+                            src="https://i.pinimg.com/564x/72/35/81/7235814972a21a0ca4516aa7b0ca754a.jpg"
                         />
                         <p
                             v-if="true"
                             class="z-10 absolute bottom-1 left-1 bg-yellow-200 text-gray-700 md:font-semibold px-1 rounded-sm truncate ... mx-auto"
                         >
-                            $400
+                            $4000
                         </p>
                     </div>
                     <div
-                        class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200 rounded-sm"
+                        class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
                     >
-                        <p class="px-1 py-0.5 truncate ...">
-                            American Idiot (2004)
-                        </p>
+                        <p class="px-1 py-0.5 truncate ...">Kanon</p>
                     </div>
 
                     <div class="flex mb-1">
@@ -437,6 +368,78 @@
                     </div>
                 </div>
             </div>
+
+            <div
+                class="w-44 h-72 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
+            >
+                <div class="rounded-sm">
+                    <div class="flex my-1">
+                        <div class="w-3/10 mx-1">
+                            <img
+                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2018/96/iconmonstr-soccer-1.png"
+                                class="w-6 inline-block bg-yellow-200 p-0.5 rounded-full border-1 border-gray-100"
+                            />
+                            &nbsp;
+                        </div>
+
+                        <div class="w-3/10 mx-1">
+                            <img
+                                :src="'/images/image-center.png'"
+                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-shape-1.png"
+                                class="w-6 inline-block p-0.5"
+                            />
+                        </div>
+
+                        <div class="w-4/10 mx-auto text-right">
+                            <span
+                                class="rounded-sm px-1 text-yellow-200 bg-gray-800 "
+                                ># <span class="font-semibold">20</span> -
+                                32</span
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"
+                    >
+                        ⭐
+                    </div>
+                    <div
+                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
+                    >
+                        <img
+                            class="max-h-full min-h-full object-contain mx-auto rounded-sm"
+                            alt="img"
+                            src="https://i.pinimg.com/564x/35/9c/9a/359c9a5d6320fb04ef2a20b1e0a8fc62.jpg"
+                        />
+                        <p
+                            v-if="true"
+                            class="z-10 absolute bottom-1 left-1 bg-yellow-200 text-gray-700 md:font-semibold px-1 rounded-sm truncate ... mx-auto"
+                        >
+                            $4000
+                        </p>
+                    </div>
+                    <div
+                        class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
+                    >
+                        <p class="px-1 py-0.5 truncate ...">Kanon</p>
+                    </div>
+
+                    <div class="flex mb-1">
+                        <div class="w-1/2 text-center">
+                            <p class="px-1 font-semibold text-rose-400">
+                                ATK: 5600
+                            </p>
+                        </div>
+
+                        <div class="w-1/2 text-center">
+                            <p class="px-1 font-semibold text-emerald-400">
+                                DEF: 5600
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         </div>
     </div>

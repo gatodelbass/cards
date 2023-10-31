@@ -37,7 +37,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('index', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
     
-
+    Route::get('addCards/{collectionId}', [App\Http\Controllers\CollectionController::class, 'addCards'])->name('addCards');
+    Route::post('addNewCard', [App\Http\Controllers\CollectionController::class, 'addNewCard'])->name('addNewCard');
 
     Route::get('manageCards/{collectionId}', [App\Http\Controllers\CollectionController::class, 'manageCards'])->name('manageCards');
     Route::get('manageCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'manageCollection'])->name('manageCollection');
