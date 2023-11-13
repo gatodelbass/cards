@@ -6,10 +6,10 @@
                 :class="bg(collection.category_id, 'front')"
             >
                 <div class="justify-center mx-auto flex">
-                    <div class="border-4 border-white rounded-sm">
+                    <div class="border-1 border-white rounded-sm">
                         <img
-                            class="w-36 border-gray-900 border-4 rounded-sm"
-                            :src="'/storage/' + collection.cover_card"
+                            class="w-full border-gray-900 border-1 rounded-sm"
+                            :src="collection.cover_card"
                             alt="image"
                         />
                     </div>

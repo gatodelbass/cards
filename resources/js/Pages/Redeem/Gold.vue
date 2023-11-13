@@ -66,7 +66,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 
 export default {
     name: "OperatorIndex",

@@ -41,7 +41,7 @@
 
 <script>
 import { reactive } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 
 export default {
     name: "PlayerCard",

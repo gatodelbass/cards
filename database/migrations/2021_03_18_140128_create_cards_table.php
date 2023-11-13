@@ -19,6 +19,7 @@ class CreateCardsTable extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->tinyInteger('rarity')->nullable();
+            $table->integer('order')->default(0);
             $table->integer('cost')->default(0);
             $table->string('status')->default("inactive");
             $table->string('top_filter')->default("none");

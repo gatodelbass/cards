@@ -149,32 +149,32 @@ class CollectionController extends Controller
     }
 
 
-    public function addCards($collectionId){
+    public function addCards($collectionId)
+    {
 
         $collection = Collection::find($collectionId);
-        $cards = Card::where('collection_id', $collectionId)->get();
+        $cards = Card::where('collection_id', $collectionId)->orderby("order")->get();
 
         return Inertia::render('Collection/AddCard', [
             'cards' => $cards,
             'collection' => $collection,
         ]);
-
-
     }
 
     public function addNewCard(Request $request)
     {
 
-        //dd($request);     
-       
+        $maxOrder = Card::where('collection_id', $request->collectionId)->max('order');
+
 
         $card = new Card();
+        $card->collection_id = $request->collectionId;
         $card->name = $request->cardName;
         $card->image = $request->cardImage;
-        $card->collection_id = $request->collectionId;
+        $card->order = $maxOrder + 1;
         $card->save();
 
-        $cards = Card::where('collection_id', $request->collectionId)->get();
+        $cards = Card::where('collection_id', $request->collectionId)->orderby("order")->get();
 
         return back();
 
@@ -182,7 +182,7 @@ class CollectionController extends Controller
         return response()->json([
             'cards' => $cards,
         ]);
-      
+
         return response()->noContent();
     }
 
@@ -190,7 +190,7 @@ class CollectionController extends Controller
     {
 
         $collection = Collection::find($collectionId);
-        $cards = Card::where('collection_id', $collectionId)->get();
+        $cards = Card::where('collection_id', $collectionId)->orderBy('order')->get();
 
         return Inertia::render('Collection/ManageCard', [
             'cards' => $cards,
@@ -202,7 +202,7 @@ class CollectionController extends Controller
     {
 
         $collection = Collection::find($collectionId);
-        $cards = Card::where('collection_id', $collectionId)->get();
+        $cards = Card::where('collection_id', $collectionId)->orderBy('order')->get();
 
         $numberOfCards = $cards->count();
 
@@ -393,5 +393,59 @@ class CollectionController extends Controller
         $collection->save();
 
         return response()->noContent();
+    }
+
+
+    public function saveCardName($cardId, $cardName)
+    {
+        $card = Card::find($cardId);
+        $card->name = $cardName;
+        $card->save();
+
+        return response()->json([
+            'card' => $card,
+        ]);
+    }
+
+    public function saveCardImage(Request $request)
+    {
+
+        // dd($request);
+
+        $card = Card::find($request["id"]);
+        $card->image = $request["image"];
+        $card->save();
+
+        return response()->noContent();
+    }
+
+    public function saveCardLayout($cardId, $cardLayout)
+    {
+        $card = Card::find($cardId);
+        $card->layout = $cardLayout;
+        $card->save();
+
+        return response()->noContent();
+    }
+
+    public function saveCardOrder(Request $request)
+    {
+
+        $collectionId = $request->collection_id;
+        $cards = $request->cards;
+
+        $order = 1;
+
+        foreach ($cards as $key => $card) {
+
+
+            $card = Card::find($card["id"]);
+            $card->order = $order;
+            $card->save();
+            $order++;
+        }
+
+
+        return redirect()->back();
     }
 }

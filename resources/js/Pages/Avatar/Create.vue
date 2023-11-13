@@ -110,7 +110,7 @@ import JetLabel from "@/Jetstream/Label";
 import JetSelect from "@/Jetstream/Select";
 import JetTextArea from "@/Jetstream/Textarea";
 import Swal from "sweetalert2";
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 
 export default {
     name: "OperatorCreate",

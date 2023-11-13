@@ -43,6 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::get('manageCards/{collectionId}', [App\Http\Controllers\CollectionController::class, 'manageCards'])->name('manageCards');
     Route::get('manageCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'manageCollection'])->name('manageCollection');
 
+    Route::get('saveCardName/{cardId}/{cardName}', [App\Http\Controllers\CollectionController::class, 'saveCardName'])->name('saveCardName');
+    Route::post('saveCardImage', [App\Http\Controllers\CollectionController::class, 'saveCardImage'])->name('saveCardImage');
+    Route::get('saveCardLayout/{cardId}/{cardLayout}', [App\Http\Controllers\CollectionController::class, 'saveCardLayout'])->name('saveCardLayout');
+    Route::post('saveCardOrder', [App\Http\Controllers\CollectionController::class, 'saveCardOrder'])->name('saveCardOrder');
+
     Route::post('submitCollection', [App\Http\Controllers\CollectionController::class, 'submitCollection'])->name('submitCollection');
     Route::get('setCover/{collectionId}/{cardId}', [App\Http\Controllers\CollectionController::class, 'setCover'])->name('setCover');
     Route::get('buyCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'buyCollection'])->name('buyCollection');

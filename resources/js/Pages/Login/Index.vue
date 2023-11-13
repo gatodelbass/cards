@@ -195,7 +195,7 @@
                         <img
                             class="max-h-full min-h-full object-contain mx-auto rounded-sm"
                             alt="img"
-                            src="https://www.banknoteworld.com/images/product/Vietnam%20500%2C000%20Dong%20Banknote%2C%202020%2C%20P-124p%2C%20UNC.jpg"
+                            src="https://media.sweetwater.com/api/i/q-82__h-750__f-webp__ha-a802ae5ba9ef002c__hmac-b5aaf84493a804d14d1665b8292e30e1cb121275/images/guitars/BTB1936SFL/211P01230802253/211P01230802253-front-large.jpg.auto.webp"
                         />
                         <p
                             v-if="true"
@@ -262,12 +262,12 @@
                         ⭐
                     </div>
                     <div
-                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
+                        class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-xs m-1 border-1 border-gray-400"
                     >
                         <img
-                            class="max-h-full min-h-full object-contain mx-auto rounded-sm"
+                        class="max-h-full min-h-full object-contain mx-auto rounded-sm"
                             alt="img"
-                            src="https://1-bp-blogspot-com.cdn.ampproject.org/i/s/1.bp.blogspot.com/-6HABJIH5Hnw/X_2wbpDBimI/AAAAAAAAY8I/DE5ho5C3_FogI_5iQGn2o1ki5PyD2tJcQCLcBGAsYHQ/s550/49-reimagined-premier-league-logos-2.png"
+                            src="https://media.sweetwater.com/api/i/q-82__h-750__f-webp__ha-3f583441c2517975__hmac-67701e75579aefbc41195948e6d541bb7742aa47/images/guitars/JBassAUVMAP/US23068178/US23068178-front-large.jpg.auto.webp"
                         />
                         <p
                             v-if="true"
@@ -384,8 +384,7 @@
 
                         <div class="w-3/10 mx-1">
                             <img
-                                :src="'/images/image-center.png'"
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-shape-1.png"
+                                :src="'/images/image-vertical.png'"                               
                                 class="w-6 inline-block p-0.5"
                             />
                         </div>
@@ -409,7 +408,7 @@
                         <img
                             class="max-h-full min-h-full object-contain mx-auto rounded-sm"
                             alt="img"
-                            src="https://i.pinimg.com/564x/35/9c/9a/359c9a5d6320fb04ef2a20b1e0a8fc62.jpg"
+                            src="https://media.sweetwater.com/api/i/q-82__h-750__f-webp__ha-a00f92cdfe9d53a1__hmac-5d219a6a15154535f30cfed505e3911e0227f1bc/images/closeup/750-LB208SMNS_front.jpg.auto.webp"
                         />
                         <p
                             v-if="true"

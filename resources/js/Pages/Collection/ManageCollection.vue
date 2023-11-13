@@ -112,109 +112,58 @@
 
     <div class="flex flex-wrap justify-center">
         <div v-for="(card, index) in state.cards" :key="card.id" class="m-1">
+            <CardSetRarity :card="card"> </CardSetRarity>
+
             <div
-                class="w-36 mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-2"
+                class="w-44 mb-1 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
             >
                 <div
-                    v-bind:class="{
-                        'bg-gray-600': card.rarity == null,
-                        'bg-red-400': card.rarity == 5,
-                        'bg-sky-400': card.rarity == 4,
-                        'bg-violet-400': card.rarity == 3,
-                        'bg-teal-400': card.rarity == 2,
-                        'bg-yellow-400': card.rarity == 1,
-                    }"
-                    class="w-full m-auto p-1 rounded-t h-8"
+                    v-if="state.availableRarity[1] > 0"
+                    @click="setRarity(index, 1)"
+                    class="bg-yellow-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
                 >
-                    <span v-for="n in card.rarity" :key="n">
-                        <img
-                            class="inline-block align-middle w-4 m-0.5"
-                            :src="'/icons/starHueso.svg'"
-                        />
-                    </span>
+                    1★
                 </div>
-
-                <div class="w-full m-auto p-2">
-                    <div class="relative h-40">
-                        <img
-                            :src="'/storage/' + card.image"
-                            class="z-0 absolute border-white border-4"
-                        />
-                    </div>
-                </div>
-
                 <div
-                    class="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 rounded-sm align-middle text-center p-1 w-full text-gray-200 mt-2 text-xs"
+                    v-if="state.availableRarity[2] > 0"
+                    @click="setRarity(index, 2)"
+                    class="bg-teal-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
                 >
-                    <p class="text-rye">{{ card.name }}</p>
+                    2★
                 </div>
-
-                <div class="mt-1 flex flex-wrap text-sm justify-center">
-                    <div
-                        v-if="state.availableRarity[1] > 0"
-                        @click="setRarity(index, 1)"
-                        class="bg-yellow-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
-                    >
-                        1★
-                    </div>
-                    <div
-                        v-if="state.availableRarity[2] > 0"
-                        @click="setRarity(index, 2)"
-                        class="bg-teal-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
-                    >
-                        2★
-                    </div>
-                    <div
-                        v-if="state.availableRarity[3] > 0"
-                        @click="setRarity(index, 3)"
-                        class="bg-violet-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
-                    >
-                        3★
-                    </div>
-                    <div
-                        v-if="state.availableRarity[4] > 0"
-                        @click="setRarity(index, 4)"
-                        class="bg-sky-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
-                    >
-                        4★
-                    </div>
-                    <div
-                        v-if="state.availableRarity[5] > 0"
-                        @click="setRarity(index, 5)"
-                        class="bg-red-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
-                    >
-                        5★
-                    </div>
-                    <div
-                        v-if="card.rarity > 0"
-                        @click="clearRarity(index)"
-                        class="bg-white inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
-                    >
-                        <img
-                            :src="'/icons/eraser.svg'"
-                            class="w-5 inline-block"
-                        />
-                    </div>
-                </div>
-
                 <div
-                    v-if="collection.cover_card == card.image"
-                    @click="setCover(collection.id, card)"
-                    class="mt-2 flex flex-wrap text-sm justify-center bg-teal-500 text-gray-800 text-jost border-1 border-teal-300 rounded-sm cursor-pointer"
+                    v-if="state.availableRarity[3] > 0"
+                    @click="setRarity(index, 3)"
+                    class="bg-violet-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
                 >
-                    Current cover
+                    3★
                 </div>
-
                 <div
-                    v-else
-                    @click="setCover(collection.id, card)"
-                    class="mt-2 flex flex-wrap text-sm justify-center text-teal-300 text-jost border-1 border-teal-300 rounded-sm cursor-pointer"
+                    v-if="state.availableRarity[4] > 0"
+                    @click="setRarity(index, 4)"
+                    class="bg-sky-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
                 >
-                    Set as cover
+                    4★
+                </div>
+                <div
+                    v-if="state.availableRarity[5] > 0"
+                    @click="setRarity(index, 5)"
+                    class="bg-red-400 inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
+                >
+                    5★
+                </div>
+                <div
+                    v-if="card.rarity > 0"
+                    @click="clearRarity(index)"
+                    class="bg-white inline-block m-0.5 px-1 py-1 rounded-sm cursor-pointer"
+                >
+                    <img :src="'/icons/eraser.svg'" class="w-5 inline-block" />
                 </div>
             </div>
         </div>
     </div>
+
+    <div></div>
 </template>
 
 <script>
@@ -223,12 +172,14 @@ import CollectionCard from "./CollectionCard.vue";
 import { onMounted, reactive } from "vue";
 import Swal from "sweetalert2";
 import { useForm } from "@inertiajs/inertia-vue3";
+import CardSetRarity from "./CardSetRarity.vue";
 
 export default {
     name: "OperatorIndex",
     components: {
         AppLayout,
         CollectionCard,
+        CardSetRarity,
     },
     props: {
         cards: {
@@ -270,6 +221,7 @@ export default {
             props.cards.forEach((element) => {
                 let card = {
                     id: element.id,
+                    collection_id: element.collection_id,
                     name: element.name,
                     rarity: element.rarity == null ? null : element.rarity,
 
@@ -340,32 +292,12 @@ export default {
             state.cards[index].rarity = null;
         }
 
-        async function setCover(collectionId, card) {
-            await axios
-                .get(route("setCover", [collectionId, card.id]))
-                .then(function (response) {
-                    props.collection.cover_card = card.image;
-
-                    Swal.fire({
-                        toast: true,
-                        title: '<p class="text-xl text-blueGray-300">Done!</p>',
-                        showClass: { popup: "" },
-                        position: "top-end",
-                        showConfirmButton: false,
-                        icon: "success",
-                        background: "#334155",
-                        timer: 1500,
-                    });
-                })
-                .catch(function (error) {});
-        }
-
         return {
             state,
             setRarity,
             clearRarity,
             submitCollection,
-            setCover,
+
             form,
         };
     },

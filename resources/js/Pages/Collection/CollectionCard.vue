@@ -32,7 +32,7 @@
                 <div class="border-4 border-white">
                     <img
                         class="border-gray-900 border-4"
-                        :src="'/storage/' + collection.cover_card"
+                        :src="collection.cover_card"
                         alt="image"
                     />
                 </div>
@@ -57,11 +57,11 @@
                     Number of cards: {{ collection.cards.length }}
                 </p>
 
-                <inertia-link :href="route('manageCollection', collection.id)">
+                <inertia-link :href="route('addCards', collection.id)">
                     <button
                         class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                     >
-                        Manage collection
+                        Add cards
                     </button>
                 </inertia-link>
 
@@ -73,44 +73,11 @@
                     </button>
                 </inertia-link>
 
-                <inertia-link :href="route('addCards', collection.id)">
+                <inertia-link :href="route('manageCollection', collection.id)">
                     <button
                         class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                     >
-                        Add cards
-                    </button>
-                </inertia-link>
-
-                <!--
-
-                <inertia-link
-                    v-if="collection.status != 'active'"
-                    :href="route('manageCards', collection.id)"
-                >
-                    <button
-                        class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
-                    >
-                        Manage cards
-                    </button>
-                </inertia-link>
-
-                <button
-                    v-else
-                    class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700"
-                >
-                    Can't manage cards on active collection
-                </button>
-
-                -->
-
-                <inertia-link
-                    v-if="collection.status != 'active'"
-                    :href="route('batchCollection', collection.id)"
-                >
-                    <button
-                        class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-pink-400"
-                    >
-                        Batch collection
+                        Manage collection rarity
                     </button>
                 </inertia-link>
             </div>

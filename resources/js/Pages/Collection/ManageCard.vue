@@ -14,109 +14,81 @@
         >
             Go back
         </inertia-link>
-        <inertia-link
-            :href="route('cards.create', collection.id)"
-            class="px-4 bg-emerald-400 py-2 hover:bg-teal-400 text-jost mx-1"
-        >
-            Create new card
-        </inertia-link>
     </div>
 
-    <div class="flex flex-wrap justify-center">
-
-       
-
-
-
-        <div v-for="card in cards" :key="card.id" class="m-1">
-
-             <inertia-link
-            :href="route('cards.edit', card.id)"
-           
-        >
-           
-       
-
-
-
-            <div
-                class="w-36 mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-2"
-            >
-                <div class="w-full text-right">
-                    <span
-                        class="bg-amber-200 rounded-sm px-2 text-sm text-lobster text-gray-700"
-                        >card #{{ card.id }}</span
-                    >
-                </div>
-
-                <div
-                    v-bind:class="{
-                        'bg-gradient-to-r from-gray-500 via-gray-400 to-gray-300':
-                            card.rarity == null,
-                        'bg-gradient-to-r from-red-500 via-red-400 to-red-300':
-                            card.rarity == 5,
-                        'bg-gradient-to-r from-sky-500 via-sky-400 to-sky-300':
-                            card.rarity == 4,
-                        'bg-gradient-to-r from-violet-500 via-violet-400 to-violet-300':
-                            card.rarity == 3,
-                        'bg-gradient-to-r from-teal-500 via-teal-400 to-teal-300':
-                            card.rarity == 2,
-                        ' bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300':
-                            card.rarity == 1,
-                    }"
-                    class="w-full m-auto p-1 rounded-t h-8"
-                >
-                    <span v-for="n in card.rarity" :key="n">
-                        <img
-                            class="inline-block align-middle w-4 m-0.5"
-                            :src="'/icons/starHueso.svg'"
-                        />
-                    </span>
-                </div>
-
-                <div class="w-full m-auto p-2">
-                    <div class="relative h-40">
-                        <img
-                            :src="'/storage/' + card.image"
-                            class="z-0 absolute border-white border-4"
-                        />
-                    </div>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-cyan-900 via-cyan-800 to-cyan-500 rounded-sm align-middle text-center p-1 w-full text-cyan-200 mt-2 text-xs"
-                >
-                    <p class="text-rye">{{ card.name }}</p>
-                </div>
-
-                <div class="text-cyan-200 mt-1 text-xs">
+    <draggable :list="state.cards" @change="saveCardOrder(state.cards)">
+        <template #item="{ element: card }">
+            <div class="max-w-5xl mx-auto cursor-move">
+                <div class="border-1 border-gray-600 bg-yellow-50">
+                    <span>{{ card.order }}</span>
                     <img
-                        :src="'/icons/coinCyan.svg'"
-                        class="w-4 inline-block"
+                        class="w-24 h-24 object-contain rounded-sm inline-block mx-2"
+                        alt="img"
+                        :src="card.image"
                     />
-                    <p class="inline-block ml-1 text-lobster">
-                        {{ card.cost }}
-                    </p>
+
+                    <jet-input
+                        @change="saveCardName(card)"
+                        type="text"
+                        class="mt-1 inline-block w-96 mx-1"
+                        v-model="card.name"
+                    />
+
+                    <jet-input
+                        @change="saveCardImage(card)"
+                        type="text"
+                        class="mt-1 inline-block w-96 mx-1"
+                        v-model="card.image"
+                    />
+
+                    <img
+                        @click="saveCardLayout(card, 'center')"
+                        :src="'/images/image-center.png'"
+                        class="w-6 inline-block p-0.5 border-2"
+                        v-bind:class="{
+                            'border-green-400': card.layout == 'center',
+                        }"
+                    />
+
+                    <img
+                        @click="saveCardLayout(card, 'horizontal')"
+                        :src="'/images/image-horizontal.png'"
+                        class="w-6 inline-block p-0.5 border-2"
+                        v-bind:class="{
+                            'border-green-400': card.layout == 'horizontal',
+                        }"
+                    />
+
+                    <img
+                        @click="saveCardLayout(card, 'vertical')"
+                        :src="'/images/image-vertical.png'"
+                        class="w-6 inline-block p-0.5 border-2"
+                        v-bind:class="{
+                            'border-green-400': card.layout == 'vertical',
+                        }"
+                    />
                 </div>
             </div>
-             </inertia-link>
-        </div>
-    </div>
+        </template>
+    </draggable>
 </template>
 
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CollectionCard from "./CollectionCard.vue";
-import { reactive } from "vue";
-import Swal from "sweetalert2";
+import { reactive, onMounted } from "vue";
+import JetInput from "@/Jetstream/Input.vue";
+import draggable from "vuedraggable";
 
-import { Inertia } from "@inertiajs/inertia";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     name: "OperatorIndex",
     components: {
         AppLayout,
         CollectionCard,
+        JetInput,
+        draggable,
     },
     props: {
         cards: {
@@ -130,43 +102,68 @@ export default {
     },
 
     setup(props, { emit }) {
-        const state = reactive({});
+        const state = reactive({
+            cards: [],
+        });
 
-        function remove(id) {
-            Swal.fire({
-                title: "Desea eliminar el registro?",
-                showDenyButton: true,
-                confirmButtonText: `Si`,
-                denyButtonText: `No`,
-
-                confirmButtonColor: "#22C55E",
-                showClass: { popup: "" },
-
-                customClass: {
-                    confirmButton: "order-2",
-                    denyButton: "order-3",
-                },
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Inertia.delete(route("categories.destroy", id));
-
-                    Swal.fire({
-                        toast: true,
-                        title: '<p class="text-2xl text-gray-900 text-jost">Hecho</p>',
-                        showClass: { popup: "" },
-                        position: "top-end",
-                        showConfirmButton: false,
-                        icon: "success",
-                        background: "#6EE7B7",
-                        timer: 1500,
-                    });
-                }
+        onMounted(() => {
+            props.cards.forEach((element) => {
+                let card = {
+                    id: element.id,
+                    collection_id: element.collection_id,
+                    name: element.name,
+                    image: element.image,
+                    order: element.order,
+                    layout: element.layout,
+                };
+                state.cards.push(card);
             });
+        });
+
+        const form = useForm({
+            collection_id: props.collection.id,
+            cards: null,
+        });
+
+        async function saveCardName(card) {
+            await axios
+                .get(route("saveCardName", [card.id, card.name]))
+                .then(function (response) {
+                    card = response.data.card;
+                })
+                .catch(function (error) {});
+        }
+
+        async function saveCardImage(card) {
+            await axios
+                .post(route("saveCardImage", card))
+                .then(function (response) {
+                    card = response.data.card;
+                })
+                .catch(function (error) {});
+        }
+
+        async function saveCardLayout(card, layout) {
+            await axios
+                .get(route("saveCardLayout", [card.id, layout]))
+                .then(function (response) {
+                    card.layout = layout;
+                })
+                .catch(function (error) {});
+        }
+
+        async function saveCardOrder() {
+            form.cards = state.cards;
+
+            form.post(route("saveCardOrder"), {});
         }
 
         return {
-            remove,
+            saveCardName,
+            saveCardImage,
+            saveCardLayout,
             state,
+            saveCardOrder,
         };
     },
 };

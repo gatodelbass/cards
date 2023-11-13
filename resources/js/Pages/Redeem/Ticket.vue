@@ -62,7 +62,8 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
+
 
 import CardSmall from "../Card/CardSmall.vue";
 
@@ -89,6 +90,11 @@ export default {
                 .get(route("redeemCards", quantity))
                 .then(function (response) {
                     state.obtainedCards = {};
+
+                   // console.log(usePage().props.auth.user.tickets);
+                    console.log(response);
+
+                    //$page.props.auth.user
 
                     usePage().props.auth.user.tickets = response.data.tickets;
                     state.obtainedCards = response.data.obtainedCards;

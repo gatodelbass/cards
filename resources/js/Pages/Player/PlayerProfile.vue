@@ -33,7 +33,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 
 import PlayerCard from "../Player/PlayerCard.vue";
 import PrizeCard from "../Player/PrizeCard.vue";

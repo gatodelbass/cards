@@ -83,7 +83,7 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import JetTextArea from "@/Jetstream/Textarea";
+import JetTextArea from "@/Jetstream/Textarea.vue";
 import { reactive } from "vue";
 
 export default {

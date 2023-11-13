@@ -190,7 +190,6 @@ class RedeemController extends Controller
             $user->data = json_encode($userData);
             $user->save();
 
-
             return response()->json([
                 'tickets' => $user->tickets,
                 'obtainedCards' => $obtainedCards,

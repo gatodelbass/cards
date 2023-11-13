@@ -18,7 +18,7 @@
     <div class="w-full h-80 transform rotate-0 p-1">
         <div class="relative w-56 mx-20">
             <img
-                :src="'/storage/' + card.image"
+                :src="card.image"
                 class="z-10 absolute border-white border-8"
             />
             <img
