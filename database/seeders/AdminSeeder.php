@@ -23,9 +23,7 @@ class AdminSeeder extends Seeder
             'role' => "admin"
         ]);
 
-        $users = User::all();
-
-        
+        $users = User::all();        
 
         foreach ($users as $user) {
             $data = [];

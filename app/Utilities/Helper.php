@@ -21,11 +21,26 @@ class Helper
    * 
    * @param array $weightedValues
    */
+
+
+  public static function getRandomCard()
+  {
+
+    $rarity = Helper::getRandomWeightedElement();
+    return Card::all()->where('rarity', '=', $rarity)->random();
+  }
+
   public static function getRandomWeightedElement()
   {
 
-    //$weights = array("1"=>"56", "2"=>"30", "3"=>"10", "4"=>"3", "5"=>"1");
-    $weights = array("1" => "45", "2" => "35", "3" => "15", "4" => "3", "5" => "2");
+    $rarityWeight =  mt_rand(1, 20);
+
+    if($rarityWeight == 1){
+      $weights = array("4" => "75", "5" => "25");
+    } else{ 
+      $weights = array("1" => "50", "2" => "40", "3" => "10");
+    }    
+    
     $rand = mt_rand(1, (int) array_sum($weights));
     foreach ($weights as $key => $value) {
       $rand -= $value;
@@ -35,16 +50,8 @@ class Helper
     }
   }
 
-  public static function getRandomCard()
-  {
-
-    $rarity = Helper::getRandomWeightedElement();
-    return Card::all()->where('rarity', '=', $rarity)->random();
-  }
-
   public static function getRandomAvatar()
   {
-
     return Avatar::all()->random();
   }
 }

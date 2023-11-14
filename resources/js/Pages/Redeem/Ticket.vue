@@ -51,8 +51,8 @@
 
     <div class="flex flex-wrap justify-center">
         <div v-for="card in state.obtainedCards" :key="card.id" class="m-1">
-            <card-small :card="card.randomCard" :exists="card.exists">
-            </card-small>
+            <CardRedeem :card="card.randomCard" :exists="card.exists">
+            </CardRedeem>
         </div>
     </div>
 </template>
@@ -65,13 +65,13 @@ import Swal from "sweetalert2";
 import { usePage } from '@inertiajs/vue3'
 
 
-import CardSmall from "../Card/CardSmall.vue";
+import CardRedeem from "../Card/CardRedeem.vue";
 
 export default {
     name: "OperatorIndex",
     components: {
         AppLayout,
-        CardSmall,
+        CardRedeem,
     },
     props: {
         categories: {
@@ -86,6 +86,9 @@ export default {
         });
 
         async function redeemCards(quantity) {
+
+            state.obtainedCards = {};
+
             await axios
                 .get(route("redeemCards", quantity))
                 .then(function (response) {
