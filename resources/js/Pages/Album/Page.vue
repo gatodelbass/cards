@@ -11,9 +11,9 @@
     <div
         v-if="state.showModal"
         id="dialog"
-        class="fixed z-50 md:top-1/4 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/3 w-full md:w-1/2 rounded-md px-8 py-0 drop-shadow-lg justify-center flex"
+        class="fixed z-50 md:top-1/4 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/3 w-2/3 rounded-md px-8 py-0 drop-shadow-lg justify-center flex"
     >
-        <card-big @click="closeModal" :card="state.showCard"> </card-big>
+        <CardBig @click="closeModal" :card="state.showCard"> </CardBig>
     </div>
 
     <div
@@ -95,7 +95,7 @@
             <div
                 :key="card.id"
                 v-for="card in state.collection.cards"
-                class="w-96 h-96 mx-0 my-8 transform rotate-3"
+                class="w-96 h-96 mx-0 my-0"
             >
                 <div :id="card.id">&nbsp;</div>
 
@@ -103,15 +103,31 @@
                     @click="showModal(card)"
                     v-if="state.pastedUserCards.includes(card.id)"
                 >
+                    <div v-if="card.layout == 'center'" class="cursor-pointer">
+                        <AlbumCardAddedCenter
+                            :card="card"
+                        ></AlbumCardAddedCenter>
+                    </div>
+
+                    <div v-if="card.layout == 'circle'" class="cursor-pointer">
+                        <AlbumCardAddedCircle
+                            :card="card"
+                        ></AlbumCardAddedCircle>
+                    </div>
+
                     <div
-                        v-if="card.layout == 'Horizontal'"
+                        v-if="card.layout == 'horizontal'"
                         class="cursor-pointer"
                     >
                         <AlbumCardAddedHorizontal
                             :card="card"
                         ></AlbumCardAddedHorizontal>
                     </div>
-                    <div v-else class="cursor-pointer">
+
+                    <div
+                        v-if="card.layout == 'vertical'"
+                        class="cursor-pointer"
+                    >
                         <AlbumCardAddedVertical
                             :card="card"
                         ></AlbumCardAddedVertical>
@@ -139,7 +155,7 @@
                 </div>
             </div>
         </div>
-        <div class="my-2 text-center space-x-4 md:block w-full">
+        <div class="mt-8 text-center space-x-4 md:block w-full">
             <inertia-link :href="route('albumIndex')">
                 <button
                     @click="closeModal"
@@ -158,6 +174,8 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 
 import AlbumCardEmptyVertical from "../Card/AlbumCardEmptyVertical.vue";
 import AlbumCardEmptyHorizontal from "../Card/AlbumCardEmptyHorizontal.vue";
+import AlbumCardAddedCenter from "../Card/AlbumCardAddedCenter.vue";
+import AlbumCardAddedCircle from "../Card/AlbumCardAddedCircle.vue";
 import AlbumCardAddedVertical from "../Card/AlbumCardAddedVertical.vue";
 import AlbumCardAddedHorizontal from "../Card/AlbumCardAddedHorizontal.vue";
 import CardBig from "../Card/CardBig.vue";
@@ -166,6 +184,8 @@ export default {
     components: {
         AlbumCardEmptyVertical,
         AlbumCardEmptyHorizontal,
+        AlbumCardAddedCenter,
+        AlbumCardAddedCircle,
         AlbumCardAddedVertical,
         AlbumCardAddedHorizontal,
         CardBig,

@@ -1,6 +1,6 @@
-<template>
-    <div class="justify-center pl-12">
-        <div class="w-72 mb-1">
+<template>sdfkjsdnf
+    <div class="justify-center pl-20">
+        <div class="w-56 mb-1">
             <div class="w-6/12 inline-block">
                 <span v-for="n in card.rarity" :key="n"> ⭐ </span>
             </div>
@@ -12,10 +12,10 @@
                 >
             </div>
         </div>
-        <div class="w-72">
-            <img :src="card.image" class="border-white border-8" />
+        <div class="w-56 rounded-full">
+            <img :src="card.image" class="border-white border-8 rounded-full" />
         </div>
-        <div class="w-72 h-8 text-left text-amber-100 mt-1 text-sm">
+        <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm">
             {{ card.name }}
         </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="justify-center pl-20">
-        <div class="w-56 mb-1">
+        <div class="w-56">
             <div class="w-6/12 inline-block">
                 <span v-for="n in card.rarity" :key="n"> ⭐ </span>
             </div>
@@ -12,11 +12,28 @@
                 >
             </div>
         </div>
-        <div class="w-56">
-            <img :src="card.image" class="border-white border-8" />
+
+        <div class="w-56 h-78 mt-16">
+            <div class="relative cursor-pointer -my-14">
+                <img
+                    :src="card.image"
+                    class="z-10 absolute border-white border-8"
+                />
+                <img
+                    v-if="card.top_filter != 'none'"
+                    :src="'/filters/' + card.top_filter"
+                    class="z-20 absolute border-white border-8"
+                />
+                <img
+                    v-if="card.bottom_filter != 'none'"
+                    :src="'/filters/' + card.bottom_filter"
+                    class="z-0 absolute border-white border-8"
+                />
+            </div>
         </div>
-        <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm">
-            {{ card.name }}
+
+        <div class="w-56 h-8 text-left text-amber-200 mt-1 text-sm">
+            {{ card.name }} y aqui mas nombre y descipciones del la carta
         </div>
     </div>
 </template>

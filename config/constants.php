@@ -13,8 +13,8 @@ return [
     'boxes_redeemed_interval' => 25,
     'boxes_redeemed_milestone' => 100,
 
-    'prize_interval' => 15, //tickets obtained
-    'prize_milestone' => 50,   //tickets obtained
+    'prize_interval' => 10, //tickets obtained
+    'prize_milestone' => 25,   //tickets obtained
 
     'bottom_filters' => [
         "bottom1.png", "bottom2_aqua.png", "bottom1_blue.png", "bottom1_emerald.png", "bottom1_gold.png", "bottom1_green.png", "bottom1_orange.png", "bottom1_pink.png", "bottom1_purple.png", "bottom1_red.png", "bottom1_sky.png", "bottom1_violet.png", "bottom1_yellow.png",

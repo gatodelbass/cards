@@ -104,23 +104,15 @@
 import { useForm } from "@inertiajs/inertia-vue3";
 import { reactive } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import JetInput from "@/Jetstream/Input";
-import JetInputError from "@/Jetstream/InputError";
-import JetLabel from "@/Jetstream/Label";
-import JetSelect from "@/Jetstream/Select";
-import JetTextArea from "@/Jetstream/Textarea";
+import JetLabel from "@/Jetstream/Label.vue";
 import Swal from "sweetalert2";
-import { usePage } from '@inertiajs/vue3'
 
 export default {
     name: "OperatorCreate",
     components: {
         AppLayout,
-        JetInput,
-        JetInputError,
-        JetLabel,
-        JetSelect,
-        JetTextArea,
+       
+        JetLabel,       
     },
     props: {
         collectionId: {

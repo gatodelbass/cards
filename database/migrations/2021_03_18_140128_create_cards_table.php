@@ -17,7 +17,7 @@ class CreateCardsTable extends Migration
             $table->id();  
             $table->foreignId('collection_id')->constrained();        
             $table->string('name');
-            $table->string('image')->nullable();
+            $table->text('image')->nullable();
             $table->tinyInteger('rarity')->nullable();
             $table->integer('order')->default(0);
             $table->integer('cost')->default(0);

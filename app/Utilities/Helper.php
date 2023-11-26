@@ -33,7 +33,9 @@ class Helper
   public static function getRandomWeightedElement()
   {
 
-    $rarityWeight =  mt_rand(1, 20);
+    $rarityWeight =  mt_rand(1, 25);
+
+
 
     if($rarityWeight == 1){
       $weights = array("4" => "75", "5" => "25");

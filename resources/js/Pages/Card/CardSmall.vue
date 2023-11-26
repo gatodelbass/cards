@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-24 md:w-36 mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-1 md:p-2 "
+        class="w-36 mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-1 md:p-2 "
     >
         <div class="flex">
             <div class="w-1/3 text-left -mt-1">

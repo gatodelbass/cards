@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-44 h-60 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
+        class="w-44 h-60  mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
     >
         <div class="rounded-sm">
             <div

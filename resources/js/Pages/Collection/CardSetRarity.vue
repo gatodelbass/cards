@@ -7,10 +7,7 @@
                 class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"
             >
                 <span v-for="n in card.rarity" :key="n">
-                    <img
-                        class="inline-block align-middle w-4 m-0.5"
-                        :src="'/icons/starHueso.svg'"
-                    />
+                    ⭐
                 </span>
             </div>
             <div

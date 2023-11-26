@@ -22,10 +22,17 @@ module.exports = {
            '8': '8px',
           },
 
+
+        
+
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+         
+              spacing: {
+                '78': '19.4rem',
+              }
         },
     },
 
