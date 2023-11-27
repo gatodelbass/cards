@@ -51,6 +51,15 @@
                     />
 
                     <img
+                        @click="saveCardLayout(card, 'circle')"
+                        :src="'/images/image-circle.png'"
+                        class="w-6 inline-block p-0.5 border-2"
+                        v-bind:class="{
+                            'border-green-400': card.layout == 'circle',
+                        }"
+                    />
+
+                    <img
                         @click="saveCardLayout(card, 'horizontal')"
                         :src="'/images/image-horizontal.png'"
                         class="w-6 inline-block p-0.5 border-2"

@@ -1,10 +1,12 @@
 <template>
     <div class="justify-center pl-20">
         <div class="w-56 mb-1">
-            <div class="w-6/12 inline-block">
-                <span v-for="n in card.rarity" :key="n"> ⭐ </span>
+            <div class="w-7/12 inline-block">
+                <span v-for="n in card.rarity" :key="n" class="text-lg"
+                    >⭐</span
+                >
             </div>
-            <div class="w-6/12 inline-block text-right">
+            <div class="w-5/12 inline-block text-right">
                 <span
                     class="bg-amber-200 rounded-sm px-2 mt-1 text-base text-lobster text-blueGray-700"
                 >
@@ -12,7 +14,9 @@
                 >
             </div>
         </div>
-        <div class="w-56">
+        <div
+            class="w-56 bg-gradient-to-tr from-sky-500 via-purple-500 to-rose-500"
+        >
             <img :src="card.image" class="border-white border-8" />
         </div>
         <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm">

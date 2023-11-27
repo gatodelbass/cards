@@ -134,7 +134,25 @@
                     </div>
                 </div>
                 <div v-else>
-                    <div v-if="card.layout == 'Horizontal'">
+                    <div v-if="card.layout == 'center'">
+                        <AlbumCardEmptyCenter
+                            :card="card"
+                            :availableCard="
+                                availableUserCards.includes(card.id)
+                            "
+                            @refreshAlbumPage="refreshAlbumPage"
+                        ></AlbumCardEmptyCenter>                       
+                    </div>
+                    <div v-if="card.layout == 'circle'">
+                        <AlbumCardEmptyCircle
+                            :card="card"
+                            :availableCard="
+                                availableUserCards.includes(card.id)
+                            "
+                            @refreshAlbumPage="refreshAlbumPage"
+                        ></AlbumCardEmptyCircle>
+                    </div>
+                    <div v-if="card.layout == 'horizontal'">
                         <AlbumCardEmptyHorizontal
                             :card="card"
                             :availableCard="
@@ -143,7 +161,7 @@
                             @refreshAlbumPage="refreshAlbumPage"
                         ></AlbumCardEmptyHorizontal>
                     </div>
-                    <div v-else>
+                    <div v-if="card.layout == 'vertical'">
                         <AlbumCardEmptyVertical
                             :card="card"
                             :availableCard="
@@ -172,6 +190,8 @@
 import { reactive, onMounted } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
+import AlbumCardEmptyCenter from "../Card/AlbumCardEmptyCenter.vue";
+import AlbumCardEmptyCircle from "../Card/AlbumCardEmptyCircle.vue";
 import AlbumCardEmptyVertical from "../Card/AlbumCardEmptyVertical.vue";
 import AlbumCardEmptyHorizontal from "../Card/AlbumCardEmptyHorizontal.vue";
 import AlbumCardAddedCenter from "../Card/AlbumCardAddedCenter.vue";
@@ -182,6 +202,8 @@ import CardBig from "../Card/CardBig.vue";
 
 export default {
     components: {
+        AlbumCardEmptyCenter,
+        AlbumCardEmptyCircle,
         AlbumCardEmptyVertical,
         AlbumCardEmptyHorizontal,
         AlbumCardAddedCenter,

@@ -15,7 +15,7 @@
 
         <div class="content-center">
             <div
-                class="w-56 h-72 border-1 content-center items-center justify-center"
+                class="w-56 h-56 border-1 content-center items-center justify-center"
             >
                 <span v-if="availableCard" class="">
                     <button
@@ -51,7 +51,7 @@ export default {
         availableCard: Boolean,
     },
 
-    name: "AlbumCardEmptyVertical",
+    name: "AlbumCardEmptyHorizontal",
 
     setup(props, { emit }) {
         const state = reactive({});

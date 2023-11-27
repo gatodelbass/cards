@@ -32,7 +32,18 @@ module.exports = {
          
               spacing: {
                 '78': '19.4rem',
-              }
+              },
+
+              animation: {
+                'ping1': 'ping 0.8s cubic-bezier(0, 0, 0.2, 1) ',
+                'ping2': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+                'ping3': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
+                'ping4': 'ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite',
+                'ping5': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',         
+                'ping10': 'ping 5s cubic-bezier(0, 0, 0.2, 1) infinite',
+        
+               
+               }
         },
     },
 

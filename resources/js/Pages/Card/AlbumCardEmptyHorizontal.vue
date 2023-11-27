@@ -1,36 +1,42 @@
 <template>
-    <div :id="card.id" class="w-full h-8 pl-20 mt-10">
-        <div class="w-6/12 inline-block">
-            <span v-for="n in card.rarity" :key="n">
-                <img
-                    class="inline-block w-4 mx-1"
-                    :src="'/icons/starHueso.svg'"
-                />
-            </span>
+    <div class="justify-center pl-20">
+        <div class="w-78 mb-1">
+            <div class="w-6/12 inline-block">
+                <span
+                    class="text-lg text-gray-200"
+                    v-for="n in card.rarity"
+                    :key="n"
+                >
+                    ☆
+                </span>
+            </div>
+            <div class="w-6/12 inline-block text-right"></div>
         </div>
-        <div class="w-6/12 inline-block"></div>
-    </div>
-    <div class="w-80 pt-1 mt-1 mb-2 mx-8 border-1 content-center">
-        <div v-if="availableCard" class="w-64 h-20 p-1 mx-auto">
-            <button
-                @click="pasteCard(card)"
-                class="bg-amber-200 p-4 text-2xl tracking-wider text-gray-800 rounded hover:bg-amber-300 my-2 mx-4 shadow-lg text-jost"
+
+        <div class="content-center">
+            <div
+                class="w-78 h-56 border-1 content-center items-center justify-center"
             >
-                Paste!
-            </button>
+                <span v-if="availableCard" class="">
+                    <button
+                        @click="pasteCard(card)"
+                        class="bg-amber-200 p-4 text-2xl tracking-wider text-gray-800 rounded hover:bg-amber-300 mt-4 mx-auto shadow-lg text-jost"
+                    >
+                        Paste!
+                    </button>
+                </span>
+                <br /><br /><br />
+                <span
+                    class="border-1 rounded-full py-5 px-4 my-6 text-lobster text-2xl text-center text-gray-200"
+                >
+                    #{{ card.collection_id }} - {{ card.order }}
+                </span>
+            </div>
         </div>
 
-        <div v-else class="w-64 h-20 p-1"></div>
-
-        <div
-            class="border-1 rounded-full py-5 my-6 mx-28 text-lobster text-2xl text-center text-gray-200"
-        >
-            #{{ card.id }}
+        <div class="w-78 h-8 text-left text-amber-100 mt-1 text-sm">
+            {{ card.name }}
         </div>
-    </div>
-
-    <div class="w-full h-8 text-center text-rye text-amber-200 opacity-20">
-        {{ card.name }}
     </div>
 </template>
 
@@ -45,7 +51,7 @@ export default {
         availableCard: Boolean,
     },
 
-    name: "AlbumCardEmptyHorizontal",
+    name: "AlbumCardEmptyVertical",
 
     setup(props, { emit }) {
         const state = reactive({});
