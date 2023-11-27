@@ -15,7 +15,7 @@
             </div>
         </div>
         <div
-            class="w-56 bg-gradient-to-tr from-sky-500 via-purple-500 to-rose-500"
+            class="w-56  bg-gradient-to-tr from-sky-500 via-purple-500 to-rose-500"
         >
             <img :src="card.image" class="border-white border-8" />
         </div>

@@ -12,7 +12,7 @@
                 >
             </div>
         </div>
-        <div class="w-72 bg-gradient-to-tr from bg-amber-500 via-lime-500 to-red-500">
+        <div class="w-72 bg-gradient-to-tr from bg-sky-500 via-lime-500 to-red-500">
             <img :src="card.image" class="border-white border-8" />
         </div>
         <div class="w-72 h-8 text-left text-amber-100 mt-1 text-sm">

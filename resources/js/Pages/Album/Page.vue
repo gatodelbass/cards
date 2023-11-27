@@ -119,6 +119,7 @@
                         v-if="card.layout == 'horizontal'"
                         class="cursor-pointer"
                     >
+                        >
                         <AlbumCardAddedHorizontal
                             :card="card"
                         ></AlbumCardAddedHorizontal>
@@ -128,22 +129,24 @@
                         v-if="card.layout == 'vertical'"
                         class="cursor-pointer"
                     >
+                        > <br /><br /><br />
                         <AlbumCardAddedVertical
                             :card="card"
                         ></AlbumCardAddedVertical>
+                        <br /><br /><br />
                     </div>
                 </div>
                 <div v-else>
-                    <div v-if="card.layout == 'center'">
+                    <div v-if="card.layout == 'center'" class=" ">
                         <AlbumCardEmptyCenter
                             :card="card"
                             :availableCard="
                                 availableUserCards.includes(card.id)
                             "
                             @refreshAlbumPage="refreshAlbumPage"
-                        ></AlbumCardEmptyCenter>                       
+                        ></AlbumCardEmptyCenter>
                     </div>
-                    <div v-if="card.layout == 'circle'">
+                    <div v-if="card.layout == 'circle'" class=" ">
                         <AlbumCardEmptyCircle
                             :card="card"
                             :availableCard="
@@ -152,7 +155,7 @@
                             @refreshAlbumPage="refreshAlbumPage"
                         ></AlbumCardEmptyCircle>
                     </div>
-                    <div v-if="card.layout == 'horizontal'">
+                    <div v-if="card.layout == 'horizontal'" class=" ">
                         <AlbumCardEmptyHorizontal
                             :card="card"
                             :availableCard="
@@ -161,7 +164,7 @@
                             @refreshAlbumPage="refreshAlbumPage"
                         ></AlbumCardEmptyHorizontal>
                     </div>
-                    <div v-if="card.layout == 'vertical'">
+                    <div v-if="card.layout == 'vertical'" class=" ">
                         <AlbumCardEmptyVertical
                             :card="card"
                             :availableCard="
