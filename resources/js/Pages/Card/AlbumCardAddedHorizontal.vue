@@ -1,8 +1,10 @@
 <template>
-    <div class="justify-center pl-12">
+    <div class="justify-center pl-10 pt-10">
         <div class="w-72 mb-1">
             <div class="w-6/12 inline-block">
-                <span v-for="n in card.rarity" :key="n" class="text-lg">⭐</span>
+                <span v-for="n in card.rarity" :key="n" class="text-lg"
+                    >⭐</span
+                >
             </div>
             <div class="w-6/12 inline-block text-right">
                 <span
@@ -12,10 +14,12 @@
                 >
             </div>
         </div>
-        <div class="w-72 bg-gradient-to-tr from bg-sky-500 via-lime-500 to-red-500">
+        <div
+            class="w-72 bg-gradient-to-tr from bg-sky-500 via-lime-500 to-red-500"
+        >
             <img :src="card.image" class="border-white border-8" />
         </div>
-        <div class="w-72 h-8 text-left text-amber-100 mt-1 text-sm">
+        <div class="w-72 h-8 text-left text-amber-100 mt-1 text-sm text-elite">
             {{ card.name }}
         </div>
     </div>

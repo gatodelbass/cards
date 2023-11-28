@@ -126,7 +126,7 @@ class LoginController extends Controller
 
     public function registerForm()
     {
-        return Inertia::render('Login/Register');
+        return Inertia::render('Login/RegisterForm');
     }
 
     public function registerUser(RegisterRequest $request)

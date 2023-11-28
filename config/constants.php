@@ -24,5 +24,7 @@ return [
     'top_filters' => [
         "top1.png", "top1_aqua.png", "top1_blue.png", "top1_dark.png", "top1_emerald.png", "top1_gold.png", "top1_green.png", "top1_orange.png", "top1_pink.png", "top1_purple.png", "top1_red.png", "top1_sky.png", "top1_violet.png", "top1_yellow.png", "top2.png", "top2_aqua.png", "top2_blue.png",
         "top2_dark.png", "top2_emerald.png", "top2_gold.png", "top2_green.png", "top2_orange.png", "top2_pink.png", "top2_purple.png", "top2_red.png", "top2_sky.png", "top2_violet.png", "top2_yellow.png",
-    ]
-];
+    ], 
+
+    'pagination_cards_per_page' => 30,
+];  

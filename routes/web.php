@@ -16,14 +16,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome');
 });
+Route::get('/', function () {
+    return Inertia::render('Welcome');
+});
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('index', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
-    
+
     Route::get('addCards/{collectionId}', [App\Http\Controllers\CollectionController::class, 'addCards'])->name('addCards');
     Route::post('addNewCard', [App\Http\Controllers\CollectionController::class, 'addNewCard'])->name('addNewCard');
 
@@ -66,14 +66,14 @@ Route::middleware('auth')->group(function () {
     Route::get('saveCardLayout/{cardId}/{cardLayout}', [App\Http\Controllers\AdminController::class, 'saveCardLayout'])->name('saveCardLayout');
 
 
-Route::get('cards/index/{collectionId}', [App\Http\Controllers\CardController::class, 'index'])->name('cards.index');
-Route::get('cards/create/{collectionId}', [App\Http\Controllers\CardController::class, 'create'])->name('cards.create');
-Route::post('cards/store', [App\Http\Controllers\CardController::class, 'store'])->name('cards.store');
-Route::get('cards/show/{contact}', [App\Http\Controllers\CardController::class, 'show'])->name('cards.show');
-Route::get('cards/edit/{contact}', [App\Http\Controllers\CardController::class, 'edit'])->name('cards.edit');
-Route::put('cards/update/{card}', [App\Http\Controllers\CardController::class, 'update'])->name('cards.update');
-Route::delete('cards/destroy/{contact}', [App\Http\Controllers\CardController::class, 'destroy'])->name('cards.destroy');
-Route::get('setFilter/{type}/{filter}/{cardId}', [App\Http\Controllers\CardController::class, 'setFilter'])->name('setFilter');
+    Route::get('cards/index/{collectionId}', [App\Http\Controllers\CardController::class, 'index'])->name('cards.index');
+    Route::get('cards/create/{collectionId}', [App\Http\Controllers\CardController::class, 'create'])->name('cards.create');
+    Route::post('cards/store', [App\Http\Controllers\CardController::class, 'store'])->name('cards.store');
+    Route::get('cards/show/{contact}', [App\Http\Controllers\CardController::class, 'show'])->name('cards.show');
+    Route::get('cards/edit/{contact}', [App\Http\Controllers\CardController::class, 'edit'])->name('cards.edit');
+    Route::put('cards/update/{card}', [App\Http\Controllers\CardController::class, 'update'])->name('cards.update');
+    Route::delete('cards/destroy/{contact}', [App\Http\Controllers\CardController::class, 'destroy'])->name('cards.destroy');
+    Route::get('setFilter/{type}/{filter}/{cardId}', [App\Http\Controllers\CardController::class, 'setFilter'])->name('setFilter');
 
 
     Route::get('redeemTickets', [App\Http\Controllers\RedeemController::class, 'redeemTickets'])->name('redeemTickets');
@@ -94,6 +94,10 @@ Route::get('setFilter/{type}/{filter}/{cardId}', [App\Http\Controllers\CardContr
     //PLAYER
     Route::get('playerProfile', [App\Http\Controllers\PlayerController::class, 'playerProfile'])->name('playerProfile');
     Route::get('playerCards', [App\Http\Controllers\PlayerController::class, 'playerCards'])->name('playerCards');
+    //Route::get('userCards', [App\Http\Controllers\PlayerController::class, 'userCards'])->name('userCards');
+    Route::post('filterPlayerCards', [App\Http\Controllers\PlayerController::class, 'filterPlayerCards'])->name('filterPlayerCards');
+
+
     Route::get('playerAvatars', [App\Http\Controllers\PlayerController::class, 'playerAvatars'])->name('playerAvatars');
     Route::get('selectAvatar/{userAvatarId}', [App\Http\Controllers\PlayerController::class, 'selectAvatar'])->name('selectAvatar');
     Route::get('sellUserAvatar/{userAvatarId}', [App\Http\Controllers\PlayerController::class, 'sellUserAvatar'])->name('sellUserAvatar');
@@ -114,9 +118,6 @@ Route::get('setFilter/{type}/{filter}/{cardId}', [App\Http\Controllers\CardContr
     Route::get('acceptExchange/{tradeId}', [App\Http\Controllers\ExchangeController::class, 'acceptExchange'])->name('acceptExchange');
     Route::get('rejectExchange/{tradeId}', [App\Http\Controllers\ExchangeController::class, 'rejectExchange'])->name('rejectExchange');
     Route::get('getExchangeCards/{filter}', [App\Http\Controllers\ExchangeController::class, 'getExchangeCards'])->name('getExchangeCards');
-
-
-
 });
 
 Route::get('help', [App\Http\Controllers\AdminController::class, 'help'])->name('help');
@@ -149,4 +150,4 @@ Route::get('emoji', [App\Http\Controllers\AdminController::class, 'emoji'])->nam
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

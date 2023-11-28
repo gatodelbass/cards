@@ -1,5 +1,5 @@
 <template>
-    <div class="justify-center pl-20">
+    <div class="justify-center pl-16 pt-10 text-gray-200">
         <div class="w-56 mb-1">
             <div class="w-6/12 inline-block">
                 <span
@@ -14,18 +14,24 @@
         </div>
 
         <div class="content-center relative">
-
-
             <div v-if="state.paste">
-                
-            <img class="w-10 absolute left-10 top-10 animate-ping1 " :src="'/images/partyAmber.svg'" />
-            <img class="w-12 absolute left-16 top-16 animate-ping2 " :src="'/images/partyBlue.svg'" />
-            <img class="w-14 absolute left-24 top-24 animate-ping3 " :src="'/images/partyGreen.svg'" />
-            <img class="w-16 absolute left-32 top-32 animate-ping4 " :src="'/images/partyRed.svg'" />
-            
+                <img
+                    class="w-10 absolute left-10 top-10 animate-ping1"
+                    :src="'/images/partyAmber.svg'"
+                />
+                <img
+                    class="w-12 absolute left-16 top-16 animate-ping2"
+                    :src="'/images/partyBlue.svg'"
+                />
+                <img
+                    class="w-14 absolute left-24 top-24 animate-ping3"
+                    :src="'/images/partyGreen.svg'"
+                />
+                <img
+                    class="w-16 absolute left-32 top-32 animate-ping4"
+                    :src="'/images/partyRed.svg'"
+                />
             </div>
-
-        
 
             <div
                 class="w-56 h-56 border-1 content-center items-center justify-center rounded-full"
@@ -40,14 +46,14 @@
                 </span>
                 <br /><br /><br />
                 <span
-                    class="border-1 rounded-full py-5 px-4 my-6 text-lobster text-2xl text-center text-gray-200"
+                    class="border-1 rounded-full py-5 px-4 my-6 text-lobster text-2xl text-center "
                 >
                     #{{ card.collection_id }} - {{ card.order }}
                 </span>
             </div>
         </div>
 
-        <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm">
+        <div class="w-56 h-8 text-left  mt-1 text-sm text-elite">
             {{ card.name }}
         </div>
     </div>
@@ -68,7 +74,7 @@ export default {
 
     setup(props, { emit }) {
         const state = reactive({
-            paste: false
+            paste: false,
         });
 
         onMounted(() => {});

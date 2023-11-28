@@ -39,10 +39,73 @@ class PlayerController extends Controller
     public function playerCards()
     {
 
-        $userCards = UserCard::where("user_id", Auth::user()->id)->whereIn("status", ["exchange", "protected"])->get();
+        $cardsPerPage = config('constants.pagination_cards_per_page');
+
+        $totalCards =   $userCards  = DB::table('cards')
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold')->get();
+
+
+        $userCards  = DB::table('cards')
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold')->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+
+        $totalPages = ceil(count($totalCards) / $cardsPerPage);
 
         return Inertia::render('Player/PlayerCards', [
-            'userCards' => $userCards->load("card.collection.category"),
+            'userCards' => $userCards,
+            'currentPage' => 1,
+            'totalPages' => $totalPages
+        ]);
+    }
+
+
+    public function filterPlayerCards(Request $request)
+    {
+        $cardsPerPage = config('constants.pagination_cards_per_page');
+        $skip = ($request->params["currentPage"] - 1) * $cardsPerPage;
+
+        $rarity =  [];
+        if ($request->params["star1"] == true) {
+            array_push($rarity, 1);
+        }
+        if ($request->params["star2"] == true) {
+            array_push($rarity, 2);
+        }
+        if ($request->params["star3"] == true) {
+            array_push($rarity, 3);
+        }
+        if ($request->params["star4"] == true) {
+            array_push($rarity, 4);
+        }
+        if ($request->params["star5"] == true) {
+            array_push($rarity, 5);
+        }
+
+        $totalCards =   $userCards  = DB::table('cards')
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold')
+            ->whereIn("rarity", $rarity)->get();
+
+
+        $userCards  = DB::table('cards')
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold');
+
+        $totalPages = ceil(count($totalCards) /  $cardsPerPage);
+
+        $userCards->whereIn("rarity", $rarity);
+        $userCards->skip($skip)->take($cardsPerPage);
+
+        return response()->json([
+            'userCards' => $userCards->orderBy('rarity', 'desc')->get(),
+            'currentPage' => $request->params["currentPage"],
+            'totalPages' => $totalPages
+
         ]);
     }
 
@@ -60,7 +123,7 @@ class PlayerController extends Controller
 
                 $userCard = new UserCard;
                 $rarity = Helper::getRandomWeightedElement();
-               
+
                 $status = "";
 
                 $user->tickets--;
@@ -104,7 +167,6 @@ class PlayerController extends Controller
                 $obtainedCard->exists =  $checkCard->count() == 0 ? false : true;
 
                 array_push($obtainedCards, $obtainedCard);
-               
             }
 
 
@@ -204,7 +266,7 @@ class PlayerController extends Controller
         return response()->noContent();
     }
 
-    public function filterUserCards(Request $request)
+    public function filterUserCardsa(Request $request)
     {
         $status = array();
         if ($request->params["exchange"] == true) {
@@ -247,10 +309,10 @@ class PlayerController extends Controller
         $collection = Collection::find($collectionId);
         $collectionCards = $collection->cards->pluck('id');
         $pastedUserCards = UserCard::where('user_id', Auth::user()->id)->where('status', 'pasted')->whereIn('card_id', $collectionCards)->get();
-        $pastedUserCardsArray = $pastedUserCards->pluck('card_id'); 
-        $availableUserCards = UserCard::where('user_id', Auth::user()->id)->whereNotIn('card_id',$pastedUserCardsArray)->whereIn('card_id', $collectionCards)->whereIn('status', ['protected'])->get();        
+        $pastedUserCardsArray = $pastedUserCards->pluck('card_id');
+        $availableUserCards = UserCard::where('user_id', Auth::user()->id)->whereNotIn('card_id', $pastedUserCardsArray)->whereIn('card_id', $collectionCards)->whereIn('status', ['protected'])->get();
         $availableUserCards = $availableUserCards->load("card")->unique('card.id')->sortBy('card.id')->pluck('card.id');
-       
+
         return Inertia::render('Album/Page', [
 
             'collection' => $collection->load(["cards", "category", "user"]),
@@ -308,8 +370,8 @@ class PlayerController extends Controller
         $collection = Collection::find($collectionId);
         $collectionCards = $collection->cards->pluck('id');
         $pastedUserCards = UserCard::where('user_id', Auth::user()->id)->where('status', 'pasted')->whereIn('card_id', $collectionCards)->get();
-        $pastedUserCardsArray = $pastedUserCards->pluck('card_id'); 
-        $availableUserCards = UserCard::where('user_id', Auth::user()->id)->whereNotIn('card_id',$pastedUserCardsArray)->whereIn('card_id', $collectionCards)->whereIn('status', ['protected'])->get();        
+        $pastedUserCardsArray = $pastedUserCards->pluck('card_id');
+        $availableUserCards = UserCard::where('user_id', Auth::user()->id)->whereNotIn('card_id', $pastedUserCardsArray)->whereIn('card_id', $collectionCards)->whereIn('status', ['protected'])->get();
         $availableUserCards = $availableUserCards->load("card")->unique('card.id')->sortBy('card.id')->pluck('card.id');
 
         return response()->json([

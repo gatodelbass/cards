@@ -95,84 +95,60 @@
             <div
                 :key="card.id"
                 v-for="card in state.collection.cards"
-                class="w-96 h-96 mx-0 my-0"
+                class="w-96 h-96 rotate-3"
             >
-                <div :id="card.id">&nbsp;</div>
-
                 <div
                     @click="showModal(card)"
                     v-if="state.pastedUserCards.includes(card.id)"
                 >
-                    <div v-if="card.layout == 'center'" class="cursor-pointer">
-                        <AlbumCardAddedCenter
-                            :card="card"
-                        ></AlbumCardAddedCenter>
-                    </div>
+                    <AlbumCardAddedCenter
+                        v-if="card.layout == 'center'"
+                        :card="card"
+                    ></AlbumCardAddedCenter>
 
-                    <div v-if="card.layout == 'circle'" class="cursor-pointer">
-                        <AlbumCardAddedCircle
-                            :card="card"
-                        ></AlbumCardAddedCircle>
-                    </div>
+                    <AlbumCardAddedCircle
+                        v-if="card.layout == 'circle'"
+                        :card="card"
+                    ></AlbumCardAddedCircle>
 
-                    <div
+                    <AlbumCardAddedHorizontal
                         v-if="card.layout == 'horizontal'"
-                        class="cursor-pointer"
-                    >
-                        >
-                        <AlbumCardAddedHorizontal
-                            :card="card"
-                        ></AlbumCardAddedHorizontal>
-                    </div>
+                        :card="card"
+                    ></AlbumCardAddedHorizontal>
 
-                    <div
+                    <AlbumCardAddedVertical
                         v-if="card.layout == 'vertical'"
-                        class="cursor-pointer"
-                    >
-                        > <br /><br /><br />
-                        <AlbumCardAddedVertical
-                            :card="card"
-                        ></AlbumCardAddedVertical>
-                        <br /><br /><br />
-                    </div>
+                        :card="card"
+                    ></AlbumCardAddedVertical>
                 </div>
                 <div v-else>
-                    <div v-if="card.layout == 'center'" class=" ">
-                        <AlbumCardEmptyCenter
-                            :card="card"
-                            :availableCard="
-                                availableUserCards.includes(card.id)
-                            "
-                            @refreshAlbumPage="refreshAlbumPage"
-                        ></AlbumCardEmptyCenter>
-                    </div>
-                    <div v-if="card.layout == 'circle'" class=" ">
-                        <AlbumCardEmptyCircle
-                            :card="card"
-                            :availableCard="
-                                availableUserCards.includes(card.id)
-                            "
-                            @refreshAlbumPage="refreshAlbumPage"
-                        ></AlbumCardEmptyCircle>
-                    </div>
-                    <div v-if="card.layout == 'horizontal'" class=" ">
-                        <AlbumCardEmptyHorizontal
-                            :card="card"
-                            :availableCard="
-                                availableUserCards.includes(card.id)
-                            "
-                            @refreshAlbumPage="refreshAlbumPage"
-                        ></AlbumCardEmptyHorizontal>
-                    </div>
-                    <div v-if="card.layout == 'vertical'" class=" ">
-                        <AlbumCardEmptyVertical
-                            :card="card"
-                            :availableCard="
-                                availableUserCards.includes(card.id)
-                            "
-                            @refreshAlbumPage="refreshAlbumPage"
-                        ></AlbumCardEmptyVertical>
-                    </div>
+                    <AlbumCardEmptyCenter
+                        v-if="card.layout == 'center'"
+                        :card="card"
+                        :availableCard="availableUserCards.includes(card.id)"
+                        @refreshAlbumPage="refreshAlbumPage"
+                    ></AlbumCardEmptyCenter>
+
+                    <AlbumCardEmptyCircle
+                        v-if="card.layout == 'circle'"
+                        :card="card"
+                        :availableCard="availableUserCards.includes(card.id)"
+                        @refreshAlbumPage="refreshAlbumPage"
+                    ></AlbumCardEmptyCircle>
+
+                    <AlbumCardEmptyHorizontal
+                        v-if="card.layout == 'horizontal'"
+                        :card="card"
+                        :availableCard="availableUserCards.includes(card.id)"
+                        @refreshAlbumPage="refreshAlbumPage"
+                    ></AlbumCardEmptyHorizontal>
+
+                    <AlbumCardEmptyVertical
+                        v-if="card.layout == 'vertical'"
+                        :card="card"
+                        :availableCard="availableUserCards.includes(card.id)"
+                        @refreshAlbumPage="refreshAlbumPage"
+                    ></AlbumCardEmptyVertical>
                 </div>
             </div>
         </div>

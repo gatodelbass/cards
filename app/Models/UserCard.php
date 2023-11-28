@@ -14,7 +14,7 @@ class UserCard extends Model
 
     public function card()
     {
-        return $this->belongsTo(Card::class);
+        return $this->belongsTo(Card::class)->orderBy('rarity', "desc");
     }
 
     public function user()

@@ -1,12 +1,12 @@
 <template>
     <div
-        class="w-44 h-60  mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
+        class="w-44 h-60 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
     >
         <div class="rounded-sm">
             <div
                 class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"
             >
-                ⭐
+                <span v-for="n in card.rarity" :key="n"> ⭐ </span>
             </div>
             <div
                 class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"

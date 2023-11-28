@@ -6,9 +6,7 @@
             <div
                 class="w-96 mx-auto bg-teal-400 hover:bg-teal-500 rounded shadow py-2 my-10 justify-center"
             >
-                <inertia-link :href="route('welcome')"
-                    >Go back to the landing page</inertia-link
-                >
+               
             </div>
             <div
                 class="w-96 mx-auto bg-gradient-to-br from-cyan-400 via-purple-400 to-cyan-400 rounded shadow py-2 my-10"
@@ -101,7 +99,7 @@
 import { onMounted, reactive } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import JetInputError from "@/Jetstream/InputError";
+import JetInputError from "@/Jetstream/InputError.vue";
 import Swal from "sweetalert2";
 
 export default {

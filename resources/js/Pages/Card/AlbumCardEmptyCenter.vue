@@ -1,5 +1,5 @@
 <template>
-    <div class="justify-center pl-20">
+    <div class="justify-center pl-16 pt-10 text-gray-200">
         <div class="w-56 mb-1">
             <div class="w-6/12 inline-block">
                 <span
@@ -27,14 +27,14 @@
                 </span>
                 <br /><br /><br />
                 <span
-                    class="border-1 rounded-full py-5 px-4 my-6 text-lobster text-2xl text-center text-gray-200"
+                    class="border-1 rounded-full py-5 px-4 my-6 text-lobster text-2xl text-center "
                 >
                     #{{ card.collection_id }} - {{ card.order }}
                 </span>
             </div>
         </div>
 
-        <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm">
+        <div class="w-56 h-8 text-left  mt-1 text-sm text-elite">
             {{ card.name }}
         </div>
     </div>

@@ -5,6 +5,158 @@
     >
         My cards
     </h1>
+
+    <div class="flex flex-wrap justify-center mt-2 text-jost">
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.exchange"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">in exchange</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.protected"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">protected</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.pasted"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">pasted</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.star1"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">1 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.star2"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">2 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.star3"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">3 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.star4"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">4 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterPlayerCards()"
+                v-model="state.filters.star5"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">5 star</span>
+        </label>
+    </div>
+
+    <div class="flex flex-wrap justify-center">
+        <div v-for="userCard in state.userCards" :key="userCard.id" class="">
+            <CardBasic
+                v-if="
+                    userCard.status == 'exchange' ||
+                    userCard.status == 'protected' ||
+                    userCard.status == 'pasted'
+                "
+                :card="userCard"
+                :exists="true"
+            >
+            </CardBasic>
+
+            <div class="justify-center flex">
+                <div v-if="userCard.status == 'exchange'" class="w-36 mb-1">
+                    <img
+                        @click="sellUserCard(userCard)"
+                        class="w-4 md:w-6 inline-block mx-1 cursor-pointer"
+                        :src="'/icons/banknote.svg'"
+                    />
+                    <img
+                        @click="changeStatusUserCard(userCard, 'exchange')"
+                        class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded cursor-pointer"
+                        :src="'/icons/backpack.svg'"
+                        :class="{
+                            'bg-amber-200': userCard.status == 'exchange',
+                        }"
+                    />
+                    <img
+                        @click="changeStatusUserCard(userCard, 'protected')"
+                        class="w-4 md:w-6 inline-block mx-1 cursor-pointer p-0.5"
+                        :src="'/icons/unlock.svg'"
+                    />
+                </div>
+
+                <div
+                    v-if="userCard.status == 'protected'"
+                    class="w-36 mx-auto p-1 mb-1"
+                >
+                    <img
+                        @click="changeStatusUserCard(userCard, 'exchange')"
+                        class="w-4 md:w-6 inline-block mx-1 cursor-pointer p-0.5 rounded bg-amber-200"
+                        :src="'/icons/lock.svg'"
+                    />
+                </div>
+
+                <div
+                    v-if="userCard.status == 'pasted'"
+                    class="w-36 mx-auto mb-1"
+                >
+                    <img
+                        class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded-full bg-teal-300"
+                        :src="'/icons/smiley.svg'"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap justify-center my-4">
+        <nav aria-label="Page navigation example">
+            <ul class="flex items-center -space-x-px h-8 text-sm">
+                <li v-for="n in totalPages" :key="n">
+                    <span
+                        @click="goToPage(n)"
+                        :class="{
+                            'bg-teal-300': state.filters.currentPage == n,
+                        }"
+                        class="flex items-center justify-center px-3 h-8 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
+                        >{{ n }}</span
+                    >
+                </li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="flex flex-wrap justify-center mt-4 text-jost">
         <button
             @click="sellCardsByStatus('exchange')"
@@ -21,87 +173,6 @@
             <span class="ml-2 mt-0">Sell all protected </span>
             <img class="w-5 inline-block" :src="'/icons/warning.svg'" />
         </button>
-    </div>
-
-    <div class="flex flex-wrap justify-center mt-2 text-jost">
-        <label class="inline-flex items-center m-3">
-            <input
-                @change="filterUserCards()"
-                v-model="state.filters.exchange"
-                type="checkbox"
-                class="rounded-sm form-checkbox h-6 w-6"
-                checked
-            /><span class="ml-2">cards in exchange</span>
-        </label>
-        <label class="inline-flex items-center m-3">
-            <input
-                @change="filterUserCards()"
-                v-model="state.filters.protected"
-                type="checkbox"
-                class="rounded-sm form-checkbox h-6 w-6"
-                checked
-            /><span class="ml-2">cards protected</span>
-        </label>
-        <label class="inline-flex items-center m-3">
-            <input
-                @change="filterUserCards()"
-                v-model="state.filters.pasted"
-                type="checkbox"
-                class="rounded-sm form-checkbox h-6 w-6"
-                checked
-            /><span class="ml-2">cards pasted</span>
-        </label>
-    </div>
-
-    <div class="flex flex-wrap justify-center">
-        <div v-for="userCard in state.userCards" :key="userCard.id" class="">
-            <CardBasic
-                v-if="
-                    userCard.status == 'exchange' ||
-                    userCard.status == 'protected' ||
-                    userCard.status == 'pasted'
-                "
-                :card="userCard.card"
-                :exists="true"
-            >
-            </CardBasic>
-
-            <div class="justify-center  flex ">
-            <div v-if="userCard.status == 'exchange'" class="w-36 mb-1 ">
-                <img
-                    @click="sellUserCard(userCard)"
-                    class="w-4 md:w-6 inline-block mx-1 cursor-pointer"
-                    :src="'/icons/banknote.svg'"
-                />
-                <img
-                    @click="changeStatusUserCard(userCard, 'exchange')"
-                    class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded cursor-pointer"
-                    :src="'/icons/backpack.svg'"
-                    :class="{ 'bg-amber-200': userCard.status == 'exchange' }"
-                />
-                <img
-                    @click="changeStatusUserCard(userCard, 'protected')"
-                    class="w-4 md:w-6 inline-block mx-1 cursor-pointer p-0.5"
-                    :src="'/icons/unlock.svg'"
-                />
-            </div>
-
-            <div v-if="userCard.status == 'protected'" class="w-36 mx-auto p-1 mb-1">
-                <img
-                    @click="changeStatusUserCard(userCard, 'exchange')"
-                    class="w-4 md:w-6 inline-block mx-1 cursor-pointer p-0.5 rounded bg-amber-200"
-                    :src="'/icons/lock.svg'"
-                />
-            </div>
-
-            <div v-if="userCard.status == 'pasted'" class="w-36 mx-auto mb-1">
-                <img
-                    class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded-full bg-teal-300"
-                    :src="'/icons/smiley.svg'"
-                />
-            </div>
-        </div>
-        </div>
     </div>
 </template>
 
@@ -128,6 +199,12 @@ export default {
             type: Object,
             default: {},
         },
+        currentPage: {
+            type: Number,
+        },
+        totalPages: {
+            type: Number,
+        },
     },
 
     setup(props, { emit }) {
@@ -137,12 +214,26 @@ export default {
                 exchange: true,
                 protected: true,
                 pasted: false,
+                currentPage: 1,
+                totalPages: 0,
+                star1: true,
+                star2: true,
+                star3: true,
+                star4: true,
+                star5: true,
             },
         });
 
         onMounted(() => {
             state.userCards = props.userCards;
+            state.filters.currentPage = props.currentPage;
+            state.filters.totalPages = props.totalPages;
         });
+
+        function goToPage(page) {
+            state.filters.currentPage = page;
+            filterPlayerCards();
+        }
 
         async function sellUserCard(userCard) {
             await axios
@@ -192,16 +283,14 @@ export default {
                 .catch(function (error) {});
         }
 
-        async function filterUserCards() {
-            await axios
-                .get(route("filterUserCards", { params: state.filters }))
+        function filterPlayerCards() {
+            axios
+                .post(route("filterPlayerCards", { params: state.filters }))
                 .then(function (response) {
-                    // alert(response.data.tickets);
+                    console.log(response.data.currentPage);
 
-                    //usePage().props.auth.user.gold = response.data.gold;
                     state.userCards = response.data.userCards;
-
-                    //state.userCollections.push(collectionId);
+                    state.filters.currentPage = response.data.currentPage;
                 })
                 .catch(function (error) {});
         }
@@ -231,8 +320,9 @@ export default {
         return {
             sellUserCard,
             changeStatusUserCard,
-            filterUserCards,
+            filterPlayerCards,
             sellCardsByStatus,
+            goToPage,
             state,
         };
     },

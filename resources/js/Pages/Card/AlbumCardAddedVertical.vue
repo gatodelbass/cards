@@ -14,12 +14,10 @@
                 >
             </div>
         </div>
-        <div
-            class="w-56  bg-gradient-to-tr from-sky-500 via-purple-500 to-rose-500"
-        >
-            <img :src="card.image" class="border-white border-8" />
+        <div class=" ">
+            <img :src="card.image" class="border-white border-8 h-78" />
         </div>
-        <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm">
+        <div class="w-56 h-8 text-left text-amber-100 mt-1 text-sm text-elite">
             {{ card.name }}
         </div>
     </div>

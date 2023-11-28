@@ -285,6 +285,15 @@ export default {
     src: local("Jost"),
         url(/fonts/Jost-VariableFont_wght.ttf) format("truetype");
 }
+@font-face {
+  font-family: "Elite";
+  src: local("Elite"), url(/fonts/SpecialElite-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "ZillaSlab";
+  src: local("ZillaSlab"), url(/fonts/ZillaSlab-Regular.ttf) format("truetype");
+}
 
 body {
     font-family: "Jost";
@@ -336,5 +345,12 @@ body {
 
 .text-salsa {
     font-family: "Bree";
+}
+
+.text-zilla {
+    font-family: "ZillaSlab";
+}
+.text-elite {
+    font-family: "Elite";
 }
 </style>
