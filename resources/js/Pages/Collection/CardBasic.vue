@@ -1,7 +1,24 @@
 <template>
     <div
-        class="w-44 h-60 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
+        class="w-44 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
     >
+        <div class="flex my-1">
+            <div class="w-3/10 mx-1 ml-2">
+                <img
+                    src="https://cdns.iconmonstr.com/wp-content/releases/preview/2018/96/iconmonstr-soccer-1.png"
+                    class="w-5 inline-block bg-yellow-200 p-0.5 rounded-full border-1 border-gray-100"
+                />
+                &nbsp;
+            </div>
+
+            <div class="w-4/10 mx-auto text-right text-lobster">
+                <span class="rounded-sm px-1 text-yellow-200 bg-gray-800"
+                    >#
+                    <span class="font-extrabold">{{ card.collection_id }}</span>
+                    - {{ card.order }}</span
+                >
+            </div>
+        </div>
         <div class="rounded-sm">
             <div
                 class="flex my-1 py-0.5 text-center items-center justify-center border-1 border-gray-400 mx-1 text-base bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900"

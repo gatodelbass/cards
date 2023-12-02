@@ -14,19 +14,17 @@ class CreateCardsTable extends Migration
     public function up()
     {
         Schema::create('cards', function (Blueprint $table) {
-            $table->id();  
-            $table->foreignId('collection_id')->constrained();        
+            $table->id();
+            $table->foreignId('collection_id')->constrained();
             $table->string('name');
             $table->text('image')->nullable();
             $table->tinyInteger('rarity')->nullable();
             $table->integer('order')->default(0);
             $table->integer('cost')->default(0);
-            $table->string('status')->default("inactive");
             $table->string('top_filter')->default("none");
             $table->string('bottom_filter')->default("none");
             $table->text('text')->nullable();
             $table->string('layout')->default("vertical");
-            
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,18 +4,18 @@
     >
         <div class="rounded-sm">
             <div class="flex my-1">
-                <div class="w-3/10 mx-1">
+                <div class="w-3/10 mx-1 ml-2">
                     <img
                         src="https://cdns.iconmonstr.com/wp-content/releases/preview/2018/96/iconmonstr-soccer-1.png"
-                        class="w-6 inline-block bg-yellow-200 p-0.5 rounded-full border-1 border-gray-100"
+                        class="w-5 inline-block bg-yellow-200 p-0.5 rounded-full border-1 border-gray-100"
                     />
                     &nbsp;
                 </div>
 
-                <div class="w-4/10 mx-auto text-right">
+                <div class="w-4/10 mx-auto text-right text-lobster">
                     <span class="rounded-sm px-1 text-yellow-200 bg-gray-800"
                         >#
-                        <span class="font-semibold">{{
+                        <span class="font-extrabold">{{
                             card.collection_id
                         }}</span>
                         - {{ card.order }}</span
@@ -29,9 +29,17 @@
             </div>
             <div
                 class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
-            >
+            >   
+            <div
+                    v-if="!exists"
+                    class="top-0 left-0 py-4 z-10 px-1 absolute w-full bg-amber-200 text-gray-700 text-xl animate-pulse text-lobster "
+                >
+                    New!
+                </div>
+
+
                 <img
-                    class="max-h-full min-h-full object-contain mx-auto rounded-sm"
+                    class="max-h-full min-h-full object-contain mx-auto rounded-sm z-0"
                     alt="img"
                     :src="card.image"
                 />
@@ -75,6 +83,10 @@ export default {
         card: {
             type: Object,
             default: {},
+        },
+        exists: {
+            type: String,
+            default: "",
         },
     },
 

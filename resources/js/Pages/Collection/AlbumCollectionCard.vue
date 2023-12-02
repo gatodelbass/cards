@@ -21,7 +21,7 @@
                 <div class="mt-4"> <span class="text-emerald-300 mt-4">
                     <img
                         :src="'/icons/' + collection.category.icon"
-                        class="w-10 inline-block mx-1 bg-amber-200 p-1 rounded-full"
+                        class="w-8 inline-block mx-1 bg-amber-200 p-1 rounded-full"
                     />
                 </span>
                 &nbsp;
@@ -52,21 +52,21 @@
                     v-if="pasted.includes(card.id)"
                     class="bg-emerald-300 border-emerald-500 px-0.5 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3"
                 >
-                    {{ card.id }}
+                    {{ card.order }}
                 </div>
 
                 <div
                     v-else-if="available.includes(card.id)"
                     class="bg-amber-200 border-amber-500 px-0.5 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3 animate-pulse"
                 >
-                    {{ card.id }}
+                    {{ card.order }}
                 </div>
 
                 <div
                     v-else
                     class="bg-gray-400 border-gray-500 px-0.5 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3"
                 >
-                    {{ card.id }}
+                    {{ card.order }}
                 </div>
             </div>
         </div>

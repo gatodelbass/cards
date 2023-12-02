@@ -28,15 +28,6 @@
         <label class="inline-flex items-center m-3">
             <input
                 @change="filterPlayerCards()"
-                v-model="state.filters.pasted"
-                type="checkbox"
-                class="rounded-sm form-checkbox h-6 w-6"
-                checked
-            /><span class="ml-2">pasted</span>
-        </label>
-        <label class="inline-flex items-center m-3">
-            <input
-                @change="filterPlayerCards()"
                 v-model="state.filters.star1"
                 type="checkbox"
                 class="rounded-sm form-checkbox h-6 w-6"
@@ -81,6 +72,27 @@
         </label>
     </div>
 
+    <div class="flex flex-wrap justify-center mt-4 text-jost">
+        <button
+            @click="sellSelectedCards()"
+            class="px-4 bg-teal-300 py-2 hover:bg-teal-400 mx-1"
+        >
+            Sell all selected cards
+        </button>
+    </div>
+    <div class="flex flex-wrap justify-center my-4">
+        <span
+            v-for="n in state.filters.totalPages"
+            :key="n"
+            @click="goToPage(n)"
+            :class="{
+                'bg-teal-300': state.filters.currentPage == n,
+            }"
+            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
+            >{{ n }}</span
+        >
+    </div>
+
     <div class="flex flex-wrap justify-center">
         <div v-for="userCard in state.userCards" :key="userCard.id" class="">
             <CardBasic
@@ -118,7 +130,7 @@
 
                 <div
                     v-if="userCard.status == 'protected'"
-                    class="w-36 mx-auto p-1 mb-1"
+                    class="w-36 mx-auto p-0.5 mb-1"
                 >
                     <img
                         @click="changeStatusUserCard(userCard, 'exchange')"
@@ -139,40 +151,25 @@
             </div>
         </div>
     </div>
-
-    <div class="flex flex-wrap justify-center my-4">
-        <nav aria-label="Page navigation example">
-            <ul class="flex items-center -space-x-px h-8 text-sm">
-                <li v-for="n in totalPages" :key="n">
-                    <span
-                        @click="goToPage(n)"
-                        :class="{
-                            'bg-teal-300': state.filters.currentPage == n,
-                        }"
-                        class="flex items-center justify-center px-3 h-8 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
-                        >{{ n }}</span
-                    >
-                </li>
-            </ul>
-        </nav>
-    </div>
-
     <div class="flex flex-wrap justify-center mt-4 text-jost">
         <button
-            @click="sellCardsByStatus('exchange')"
+            @click="sellSelectedCards()"
             class="px-4 bg-teal-300 py-2 hover:bg-teal-400 mx-1"
         >
-            Sell all in exchange
+            Sell all selected cards
         </button>
-
-        <button
-            @click="sellCardsByStatus('protected')"
-            class="px-4 bg-teal-300 py-2 hover:bg-teal-400 mx-1"
+    </div>
+    <div class="flex flex-wrap justify-center my-4">
+        <span
+            v-for="n in state.filters.totalPages"
+            :key="n"
+            @click="goToPage(n)"
+            :class="{
+                'bg-teal-300': state.filters.currentPage == n,
+            }"
+            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
+            >{{ n }}</span
         >
-            <img class="w-5 inline-block" :src="'/icons/warning.svg'" />
-            <span class="ml-2 mt-0">Sell all protected </span>
-            <img class="w-5 inline-block" :src="'/icons/warning.svg'" />
-        </button>
     </div>
 </template>
 
@@ -287,10 +284,9 @@ export default {
             axios
                 .post(route("filterPlayerCards", { params: state.filters }))
                 .then(function (response) {
-                    console.log(response.data.currentPage);
-
                     state.userCards = response.data.userCards;
                     state.filters.currentPage = response.data.currentPage;
+                    state.filters.totalPages = response.data.totalPages;
                 })
                 .catch(function (error) {});
         }
