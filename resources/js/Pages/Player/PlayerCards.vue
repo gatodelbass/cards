@@ -256,9 +256,12 @@ export default {
                 .catch(function (error) {});
         }
 
-        async function sellCardsByStatus(status) {
+        async function sellSelectedCards() {
+
+            alert("call");
+
             await axios
-                .get(route("sellCardsByStatus", status))
+                .get(route("sellSelectedCards", { params: state.filters }))
                 .then(function (response) {
                     usePage().props.auth.user.gold =
                         usePage().props.auth.user.gold +
@@ -317,7 +320,7 @@ export default {
             sellUserCard,
             changeStatusUserCard,
             filterPlayerCards,
-            sellCardsByStatus,
+            sellSelectedCards,
             goToPage,
             state,
         };

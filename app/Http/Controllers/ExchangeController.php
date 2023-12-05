@@ -26,10 +26,33 @@ class ExchangeController extends Controller
 {
     public function exchangeBag()
     {
-        $bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->get();
+        $cardsPerPage = config('constants.pagination_cards_per_page');
+        //$bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+
+
+        $bagCards  = DB::table('cards')
+        ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+        ->join('users', 'user_cards.user_id', '=',  'users.id')
+        ->join('collections', 'cards.collection_id', '=',  'collections.id')
+        ->join('categories', 'collections.category_id', '=',  'categories.id')
+        ->where('user_cards.user_id', '!=', Auth::user()->id)
+        ->where('user_cards.status', 'exchange')
+        ->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+
+
+        $totalBagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->get();
+        $totalPages = ceil(count($totalBagCards) / $cardsPerPage);
 
         return Inertia::render('Exchange/Bag', [
-            'bagCards' => $bagCards->load(["card.collection.category", "user"]),
+            'bagCards' => $bagCards,
+            'currentPage' => 1,
+            'totalPages' => $totalPages
+        ]);
+
+        return Inertia::render('Player/PlayerCards', [
+            'bagCards' => $bagCards,
+            'currentPage' => 1,
+            'totalPages' => $totalPages
         ]);
     }
 

@@ -28,23 +28,20 @@
             <div class="">
                 <div class="justify-center flex flex-wrap bg p-1">
                     <div v-if="state.playerCard">
-                        <card-small
-                            :card="state.playerCard.card"
-                            :exists="true"
-                        >
-                        </card-small>
+                        <CardBasic :card="state.playerCard.card" :exists="true">
+                        </CardBasic>
                     </div>
                     <button
                         @click="makeOffer(state.playerCard.id, state.myCard.id)"
                         v-if="state.playerCard && state.myCard"
-                        class="bg-teal-400 mt-20 py-5 md:py-10 align-middle mx-1 px-2 rounded-sm text-sm md:text-xl hover:bg-amber-400 animate-bounce"
+                        class="bg-teal-400 mt-20 py-5 md:py-10 align-middle mx-1 px-2 rounded-sm text-sm md:text-xl hover:bg-amber-400 animate-pulse"
                     >
                         Make offer!
                     </button>
 
                     <div v-if="state.myCard">
-                        <card-small :card="state.myCard.card" :exists="true">
-                        </card-small>
+                        <CardBasic :card="state.myCard.card" :exists="true">
+                        </CardBasic>
                     </div>
                 </div>
 
@@ -72,12 +69,12 @@
                                 class="w-6 inline-block mx-1 p-0.5 rounded-full bg-teal-300"
                                 :src="'/icons/smiley.svg'"
                         /></span>
-                        <card-small
+                        <CardBasic
                             @click="offerCard(cardx)"
                             :card="cardx.card"
                             :exists="true"
                         >
-                        </card-small>
+                        </CardBasic>
                     </div>
                 </div>
 
@@ -116,18 +113,14 @@
     </div>
 
     <div class="flex flex-wrap justify-center">
-        <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="m-1">
-            <div class="text-xs bg-amber-200 pt-0.5">
-                <img class="w-5 inline-block p-0.5" :src="'/icons/user.svg'" />
-                {{ bagCard.user.nickname }}
-            </div>
-
-            <card-small
+        <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">
+            <CardBag
                 @click="showTradeModal(bagCard)"
-                :card="bagCard.card"
+                :card="bagCard"
                 :exists="true"
+                :owner="bagCard.nickname"
             >
-            </card-small>
+            </CardBag>
         </div>
     </div>
 </template>
@@ -136,14 +129,16 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
 
-import CardSmall from "../Card/CardSmall.vue";
+import CardBag from "../Card/CardBag.vue";
+import CardBasic from "../Collection/CardBasic.vue";
 import Swal from "sweetalert2";
 
 export default {
     name: "OperatorIndex",
     components: {
         AppLayout,
-        CardSmall,
+        CardBag,
+        CardBasic,
     },
 
     props: {
@@ -230,7 +225,7 @@ export default {
                     state.bagCards = response.data.bagCards;
                 })
                 .catch(function (error) {
-                    console.log(error)
+                    console.log(error);
                 });
         }
 

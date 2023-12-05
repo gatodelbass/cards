@@ -102,9 +102,6 @@ class PlayerController extends Controller
             ->whereIn("status", $status)
             ->whereIn("rarity", $rarity)->get();
 
-        
-
-
         $userCards  = DB::table('cards')
             ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
             ->where('user_cards.user_id', '=', Auth::user()->id)
@@ -124,6 +121,63 @@ class PlayerController extends Controller
             'totalPages' => $totalPages
 
         ]);
+    }
+
+
+    public function sellSelectedCards(Request $request)
+    {
+        $rarity = [];
+        if ($request->params["star1"] == true) {
+            array_push($rarity, 1);
+        }
+        if ($request->params["star2"] == true) {
+            array_push($rarity, 2);
+        }
+        if ($request->params["star3"] == true) {
+            array_push($rarity, 3);
+        }
+        if ($request->params["star4"] == true) {
+            array_push($rarity, 4);
+        }
+        if ($request->params["star5"] == true) {
+            array_push($rarity, 5);
+        }
+
+        $status = [];
+        if ($request->params["exchange"] == true) {
+            array_push($status, "exchange");
+        }
+        if ($request->params["protected"] == true) {
+            array_push($status, "protected");
+        }      
+
+        $userCards  = DB::table('cards')
+        ->select("user_cards.id")
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold')
+            ->whereIn("rarity", $rarity)->whereIn("status", $status)->get();
+
+            $goldObtained = 0;
+
+            foreach ($userCards as $userCard) {
+
+                dd($userCards);
+
+                $bottomLimit = $userCard->card->cost * 25 / 100;
+                $topLimit = $userCard->card->cost * 75 / 100;
+                $goldObtained = $goldObtained + rand($bottomLimit, $topLimit);
+    
+                $userCard->status = "sold";
+                $userCard->save();
+    
+                $trades = Trade::where("owner_card_id", $userCard->id)->orWhere("player_card_id", $userCard->id);
+                $trades->delete();
+    
+                $userCard->delete();
+            }
+
+        
     }
 
 

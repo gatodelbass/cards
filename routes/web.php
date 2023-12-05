@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('sellUserCard/{userCardId}', [App\Http\Controllers\PlayerController::class, 'sellUserCard'])->name('sellUserCard');
+    Route::get('sellSelectedCards', [App\Http\Controllers\PlayerController::class, 'sellSelectedCards'])->name('sellSelectedCards');
     Route::get('changeStatusUserCard/{userCardId}/{statusToChange}', [App\Http\Controllers\PlayerController::class, 'changeStatusUserCard'])->name('changeStatusUserCard');
     Route::get('filterUserCards', [App\Http\Controllers\PlayerController::class, 'filterUserCards'])->name('filterUserCards');
     Route::get('sellCardsByStatus/{statusToSell}', [App\Http\Controllers\PlayerController::class, 'sellCardsByStatus'])->name('sellCardsByStatus');
