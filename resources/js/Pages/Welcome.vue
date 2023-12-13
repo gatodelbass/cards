@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="flex w-1/2 justify-end text-sm md:text-base">
-                        <inertia-link :href="route('help')"
+                        <Link :href="route('help')"
                             ><button
                                 type="button"
                                 class="hover:bg-cyan-900 py-1 px-2 flex text-cyan-500 rounded-full m-1"
@@ -34,9 +34,9 @@
                                 aria-haspopup="true"
                             >
                                 Help
-                            </button></inertia-link
+                            </button></Link
                         >
-                        <inertia-link
+                        <Link
                             v-if="$page.props.user == null"
                             :href="route('loginForm')"
                             ><button
@@ -47,9 +47,9 @@
                                 aria-haspopup="true"
                             >
                                 Login
-                            </button></inertia-link
+                            </button></Link
                         >
-                        <inertia-link
+                        <Link
                             v-if="$page.props.user == null"
                             :href="route('registerForm')"
                             ><button
@@ -60,7 +60,7 @@
                                 aria-haspopup="true"
                             >
                                 Register
-                            </button></inertia-link
+                            </button></Link
                         >
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                         own collections too!
                     </p>
 
-                    <inertia-link :href="route('loginForm')">
+                    <Link :href="route('loginForm')">
                         <div class="m-4">
                             <div
                                 class="bg-gradient-to-r from-gray-800 to-teal-500 p-4 rounded-l-full rounded-r-full"
@@ -98,9 +98,9 @@
                                 </h2>
                             </div>
                         </div>
-                    </inertia-link>
+                    </Link>
 
-                    <inertia-link :href="route('registerForm')">
+                    <Link :href="route('registerForm')">
                         <div class="m-4">
                             <div
                                 class="bg-gradient-to-r from-gray-800 to-sky-500 p-4 rounded-l-full rounded-r-full"
@@ -110,7 +110,7 @@
                                 </h2>
                             </div>
                         </div>
-                    </inertia-link>
+                    </Link>
                 </div>
 
                 <!--Right Col-->

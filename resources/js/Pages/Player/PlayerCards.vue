@@ -257,9 +257,6 @@ export default {
         }
 
         async function sellSelectedCards() {
-
-            alert("call");
-
             await axios
                 .get(route("sellSelectedCards", { params: state.filters }))
                 .then(function (response) {

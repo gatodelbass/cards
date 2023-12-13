@@ -55,10 +55,10 @@
                         </div>
 
                         <div class="mb-4 mt-4">
-                            <inertia-link
+                            <Link
                                 class="mx-3 cursor-pointer"
                                 :href="route('forgotPassword')"
-                                >Forgot my password</inertia-link
+                                >Forgot my password</Link
                             >
                         </div>
                     </div>

@@ -28,13 +28,13 @@
                 Number of cards: {{ collection.cards.length }}
             </p>
 
-            <inertia-link :href="route('previewAlbum', collection.id)">
+            <Link :href="route('previewAlbum', collection.id)">
                 <button
                     class="px-4 py-1 my-1 shadow w-full bg-emerald-200 text-gray-700 hover:bg-emerald-300"
                 >
                     Preview
                 </button>
-            </inertia-link>
+            </Link>
 
             <div class="flex">
                 <div class="w-1/3 mx-1">

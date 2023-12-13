@@ -21,22 +21,22 @@
             <p class="text-justify">Active since:</p>
             <p class="text-justify"># cards:</p>
 
-            <inertia-link :href="route('manageCollection', collection.id)">
+            <Link :href="route('manageCollection', collection.id)">
 
             <button
                 class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
             >
                 Manage collection
             </button>
-            </inertia-link>
+            </Link>
 
-            <inertia-link :href="route('manageCards', collection.id)">
+            <Link :href="route('manageCards', collection.id)">
                 <button
                     class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                 >
                     Manage cards
                 </button>
-            </inertia-link>
+            </Link>
         </div>
     </div>
 </template>

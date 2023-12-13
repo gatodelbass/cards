@@ -24,55 +24,93 @@ use App\Models\Trade;
 
 class ExchangeController extends Controller
 {
-    public function exchangeBag()
+    public function exchangeBag(Request $request)
     {
+
+        $bagCards = null;
+        $totalPages = 0;
+        $currentPage = 1;
         $cardsPerPage = config('constants.pagination_cards_per_page');
-        //$bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+        $skip = 0;
 
+        if (!is_null($request->params) && array_key_exists("currentPage", $request->params)) {
+            $myCards = UserCard::select("card_id")->where("user_id", Auth::user()->id)->distinct();
+            $skip = ($request->params["currentPage"] - 1) * $cardsPerPage;
 
-        $bagCards  = DB::table('cards')
-        ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
-        ->join('users', 'user_cards.user_id', '=',  'users.id')
-        ->join('collections', 'cards.collection_id', '=',  'collections.id')
-        ->join('categories', 'collections.category_id', '=',  'categories.id')
-        ->where('user_cards.user_id', '!=', Auth::user()->id)
-        ->where('user_cards.status', 'exchange')
-        ->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+            $rarity = [];
+            if ($request->params["star1"] == true) {
+                array_push($rarity, 1);
+            }
+            if ($request->params["star2"] == true) {
+                array_push($rarity, 2);
+            }
+            if ($request->params["star3"] == true) {
+                array_push($rarity, 3);
+            }
+            if ($request->params["star4"] == true) {
+                array_push($rarity, 4);
+            }
+            if ($request->params["star5"] == true) {
+                array_push($rarity, 5);
+            }
 
+            $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.user_id")
+                ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+                ->join('users', 'user_cards.user_id', '=',  'users.id')
+                ->join('collections', 'cards.collection_id', '=',  'collections.id')
+                ->join('categories', 'collections.category_id', '=',  'categories.id')
+                ->where('user_cards.user_id', '!=', Auth::user()->id)
+                ->where('user_cards.status', 'exchange');
 
-        $totalBagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->get();
-        $totalPages = ceil(count($totalBagCards) / $cardsPerPage);
+            if ($request->params["filter"] == "missing") {
+                $bagCards->whereNotIn("card_id",  $myCards);
+            }
 
-        return Inertia::render('Exchange/Bag', [
-            'bagCards' => $bagCards,
-            'currentPage' => 1,
-            'totalPages' => $totalPages
-        ]);
-
-        return Inertia::render('Player/PlayerCards', [
-            'bagCards' => $bagCards,
-            'currentPage' => 1,
-            'totalPages' => $totalPages
-        ]);
-    }
-
-    public function getExchangeCards($filter)
-    {
-
-        if ($filter == "missing") {
-            $myCards = UserCard::select("card_id")->where("user_id", Auth::user()->id);
-            $bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->whereNotIn("card_id",  $myCards)->get();
+            $bagCards->whereIn("rarity", $rarity);
+            $bagCards2 = $bagCards->clone();
+            $totalPages = ceil($bagCards2->count() / $cardsPerPage);
 
             return response()->json([
-                'bagCards' => $bagCards->load(["card.collection.category", "user"]),
+                'bagCards' => $bagCards->skip($skip)->take($cardsPerPage)->orderBy("rarity", "DESC")->get(),
+                'currentPage' => $currentPage,
+                'totalPages' => $totalPages    
             ]);
         } else {
-            $bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->get();
-            return response()->json([
-                'bagCards' => $bagCards->load(["card.collection.category", "user"]),
+            $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.id")
+                ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+                ->join('users', 'user_cards.user_id', '=',  'users.id')
+                ->join('collections', 'cards.collection_id', '=',  'collections.id')
+                ->join('categories', 'collections.category_id', '=',  'categories.id')
+                ->where('user_cards.user_id', '!=', Auth::user()->id)
+                ->where('user_cards.status', 'exchange');
+
+            $totalPages = ceil($bagCards->count() / $cardsPerPage);
+
+            return Inertia::render('Exchange/Bag', [
+                'bagCards' => $bagCards->skip($skip)->take($cardsPerPage)->orderBy("rarity", "DESC")->get(),
+                'currentPage' => $currentPage,
+                'totalPages' => $totalPages
             ]);
-        }
+        }      
     }
+
+    // public function getExchangeCards($filter)
+    // {
+
+    //     if ($filter == "missing") {
+    //         $myCards = UserCard::select("card_id")->where("user_id", Auth::user()->id);
+    //         $bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->whereNotIn("card_id",  $myCards)->get();
+
+    //         return response()->json([
+    //             'bagCards' => $bagCards->load(["card.collection.category", "user"]),
+    //         ]);
+    //     } else {
+    //         $bagCards = UserCard::where("user_id", "!=", Auth::user()->id)->where("status", "exchange")->get();
+    //         return response()->json([
+    //             'bagCards' => $bagCards->load(["card.collection.category", "user"]),
+    //         ]);
+    //     }
+    // }
 
 
     public function redeemCards($quantity)
@@ -191,7 +229,11 @@ class ExchangeController extends Controller
     public function getAvailableCards($ownerCardId)
     {
 
-        $ownerCard = UserCard::find($ownerCardId)->load("card");
+    
+        $ownerCard = UserCard::find($ownerCardId);
+        //dd($ownerCard);
+
+
         $rarity = $ownerCard->card->rarity;
 
         $owner = $ownerCard->user;

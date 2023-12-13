@@ -7,7 +7,7 @@
     </h1>
     <div class="flex flex-wrap justify-center">
         <div v-for="userCollection in userCollections" :key="userCollection.id">
-            <inertia-link
+            <Link
                 :href="route('albumPage', userCollection.collection.id)"
             >
                 <album-collection-card
@@ -16,7 +16,7 @@
                     :pasted="pastedUserCards"
                 >
                 </album-collection-card>
-            </inertia-link>
+            </Link>
         </div>
     </div>
 </template>

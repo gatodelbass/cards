@@ -7,12 +7,12 @@
     </h1>
 
     <div v-if="$page.props.auth.user.role == 'admin'" class="my-4">
-        <inertia-link
+        <Link
             :href="route('collections.create')"
             class="px-4 bg-emerald-400 py-2 hover:bg-teal-400 text-jost"
         >
             Create new collection
-        </inertia-link>
+        </Link>
     </div>
 
     <div class="flex flex-wrap justify-center">

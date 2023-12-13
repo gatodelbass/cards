@@ -8,7 +8,7 @@
             <div v-if="state.passwordOk == true" class="w-96 mx-auto  rounded shadow">
                 <div class="py-4 px-8 text-jost">
                     <label class="mb-4 block text-xl text-jost text-gray-700">Perfect! You changed your password succesfully</label>
-                    <inertia-link :href="route('loginForm')"
+                    <Link :href="route('loginForm')"
                         ><button
                             type="button"
                             class="text-jost hover:text-emerald-400 py-1 px-3 flex text-xl text-gray-700 rounded-full border-amber-300 bg-amber-200"
@@ -17,7 +17,7 @@
                             aria-haspopup="true"
                         >
                             Go to login
-                        </button></inertia-link
+                        </button></Link
                     >
                 </div>
             </div>

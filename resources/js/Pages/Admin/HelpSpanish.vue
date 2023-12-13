@@ -5,9 +5,9 @@
         <p class="my-4">
             Go to the
             <span class="text-sky-600 font-semibold tracking-wider">
-                <inertia-link :href="route('help')"
+                <Link :href="route('help')"
                     >english version
-                </inertia-link></span
+                </Link></span
             >
         </p>
         <p class="my-4">

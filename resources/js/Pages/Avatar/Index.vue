@@ -4,7 +4,7 @@
     <div class="justify-center flex flex-wrap px-5 m-2 text-sm md:text-base">
         <h1 class="w-full">avatars</h1>
 
-        <inertia-link v-if="$page.props.auth.user.role == 'admin'" :href="route('avatars.create')">
+        <Link v-if="$page.props.auth.user.role == 'admin'" :href="route('avatars.create')">
             <button
                 
                 class="bg-teal-300 m-2 px-2 py-1 border-1 border-teal-400 shadow text-jost"
@@ -12,7 +12,7 @@
                 <span class="w-full">Create new avatar</span>
                
             </button>
-        </inertia-link>
+        </Link>
     </div>
 
     <div class="justify-center flex flex-wrap px-5 m-2 text-sm md:text-base">

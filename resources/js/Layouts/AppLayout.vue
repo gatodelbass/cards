@@ -8,38 +8,38 @@
                     class="flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0"
                 >
                     <li>
-                        <inertia-link
+                        <Link
                             class="inline-block mx-2"
                             :href="route('help')"
                             ><img
                                 class="w-8 inline-block"
                                 src="/icons/karta.svg"
                             />
-                        </inertia-link>
+                        </Link>
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('login.index')"
                             class="inline-block mx-2"
                         >
                             <span class="text-teal-300">Home</span>
-                        </inertia-link>
-                        <inertia-link
+                        </Link>
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('help')"
                             class="inline-block mx-2"
                         >
                             <span class="text-teal-300">Help</span>
-                        </inertia-link>
-                        <inertia-link
+                        </Link>
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('helpSpanish')"
                             class="inline-block mx-2"
                         >
                             <span class="text-teal-300">Ayuda</span>
-                        </inertia-link>
+                        </Link>
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('redeemBoxes')"
                             class="inline-block mx-2"
@@ -51,9 +51,9 @@
                             <span class="text-teal-300 text-lobster">
                                 x{{ $page.props.auth.user.boxes }}</span
                             >
-                        </inertia-link>
+                        </Link>
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('redeemTickets')"
                             class="inline-block mx-2"
@@ -65,9 +65,9 @@
                             <span class="text-teal-300 text-lobster">
                                 x{{ $page.props.auth.user.tickets }}</span
                             >
-                        </inertia-link>
+                        </Link>
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('redeemGold')"
                             class="inline-block mx-2"
@@ -78,7 +78,7 @@
                             />
                             <span class="text-teal-300 text-lobster">{{
                                 $page.props.auth.user.gold
-                            }}</span></inertia-link
+                            }}</span></Link
                         >
                     </li>
                 </ul>
@@ -89,7 +89,7 @@
                     class="flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0"
                 >
                     <li>
-                        <inertia-link
+                        <Link
                             :href="route('playerAvatars')"
                             class="inline-block mx-1"
                         >
@@ -106,9 +106,9 @@
                                     :src="'/storage/' + $page.props.auth.user.avatar"
                                 />
                             </div>
-                        </inertia-link>
+                        </Link>
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.user == null"
                             :href="route('loginForm')"
                             class="inline-block mx-1"
@@ -120,10 +120,10 @@
                                 aria-haspopup="true"
                             >
                                 Login
-                            </button></inertia-link
+                            </button></Link
                         >
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('playerProfile')"
                             class="inline-block mx-1"
@@ -135,10 +135,10 @@
                                 aria-haspopup="true"
                             >
                                 {{ $page.props.auth.user.nickname }}
-                            </button></inertia-link
+                            </button></Link
                         >
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user != null"
                             :href="route('logoutUser')"
                             class="inline-block mx-1"
@@ -150,10 +150,10 @@
                                 aria-haspopup="true"
                             >
                                 Logout
-                            </button></inertia-link
+                            </button></Link
                         >
 
-                        <inertia-link
+                        <Link
                             v-if="$page.props.auth.user == null"
                             :href="route('registerForm')"
                             class="inline-block mx-1"
@@ -165,7 +165,7 @@
                                 aria-haspopup="true"
                             >
                                 Register
-                            </button></inertia-link
+                            </button></Link
                         >
                     </li>
                 </ul>

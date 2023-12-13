@@ -82,12 +82,12 @@
     </div>
 
     <div class="my-4 text-base">
-        <inertia-link
+        <Link
             :href="route('collections.index')"
             class="bg-orange-400 hover:bg-teal-400 rounded-sm shadow-xl px-4 py-2 text-jost m-1"
         >
             Go back
-        </inertia-link>
+        </Link>
         <button
             v-if="
                 collection.status == 'created' &&
@@ -102,12 +102,12 @@
         >
             Submit collection
         </button>
-        <inertia-link
+        <Link
             :href="route('previewAlbum', collection.id)"
             class="bg-emerald-400 hover:bg-emerald-500 rounded-sm shadow-xl px-4 py-2 text-jost m-1"
         >
             Preview album
-        </inertia-link>
+        </Link>
     </div>
 
     <div class="flex flex-wrap justify-center">

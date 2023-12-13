@@ -31,13 +31,13 @@
           </div>
 
           <div class="mb-4 mt-6">
-            <inertia-link :href="route('loginForm')"
+            <Link :href="route('loginForm')"
               ><button
                 type="button"
                 class="bg-gradient-to-r from-blue-100 to-blue-200 hover:border-1 py-2 px-4 mt-2 rounded-full"
               >
                 Go to login
-              </button></inertia-link
+              </button></Link
             >
           </div>
         </div>

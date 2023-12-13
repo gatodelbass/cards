@@ -5,9 +5,9 @@
         <p class="my-4 text-xl">
             Hola!, también está disponible la
             <span class="text-sky-600 font-semibold tracking-wider">
-                <inertia-link :href="route('helpSpanish')"
+                <Link :href="route('helpSpanish')"
                     >Guia del juego - versión en español
-                </inertia-link></span
+                </Link></span
             >
         </p>
 

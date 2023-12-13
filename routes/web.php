@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function () {
 
     //EXCHANGES
     Route::get('exchangeBag', [App\Http\Controllers\ExchangeController::class, 'exchangeBag'])->name('exchangeBag');
+    Route::post('exchangeBag', [App\Http\Controllers\ExchangeController::class, 'exchangeBag'])->name('exchangeBag');
     Route::get('getAvailableCards/{playerCardId}', [App\Http\Controllers\ExchangeController::class, 'getAvailableCards'])->name('getAvailableCards');
     Route::get('createTrade/{ownerCardId}/{playerCardId}', [App\Http\Controllers\ExchangeController::class, 'createTrade'])->name('createTrade');
     Route::get('incomingExchanges', [App\Http\Controllers\ExchangeController::class, 'incomingExchanges'])->name('incomingExchanges');

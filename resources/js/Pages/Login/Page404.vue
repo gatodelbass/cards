@@ -2,7 +2,7 @@
     <app-layout> </app-layout>
 
     <div class="flex flex-wrap justify-center  bg-gradient-to-tr from-gray-900 via-gray-700 to bg-gray-800 h-screen">
-        <inertia-link :href="route('welcome')">
+        <Link :href="route('welcome')">
             <div
                 class="w-full md:w-96 p-1 bg-gradient-to-r from-gray-900 to-gray-600 rounded cursor-pointer m-2 md:m-10"
             >
@@ -39,7 +39,7 @@
                     <b>404 Not found</b>
                 </div>
             </div>
-        </inertia-link>
+        </Link>
     </div>
 </template>
 

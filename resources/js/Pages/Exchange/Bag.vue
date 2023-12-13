@@ -92,28 +92,74 @@
 
     <div class="my-4 text-jost">
         <input
-            @change="getExchangeCards()"
+            @change="filterBagCards()"
             class="ml-5 mr-2"
             type="radio"
             id="all"
             value="all"
-            v-model="state.filter"
+            v-model="state.filters.filter"
         />
         <label for="all">All cards</label>
 
         <input
-            @change="getExchangeCards()"
+            @change="filterBagCards()"
             class="ml-5 mr-2"
             type="radio"
             id="missing"
             value="missing"
-            v-model="state.filter"
+            v-model="state.filters.filter"
         />
         <label for="missing">Only the missing ones</label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterBagCards()"
+                v-model="state.filters.star1"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">1 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterBagCards()"
+                v-model="state.filters.star2"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">2 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterBagCards()"
+                v-model="state.filters.star3"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">3 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterBagCards()"
+                v-model="state.filters.star4"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">4 star</span>
+        </label>
+        <label class="inline-flex items-center m-3">
+            <input
+                @change="filterBagCards()"
+                v-model="state.filters.star5"
+                type="checkbox"
+                class="rounded-sm form-checkbox h-6 w-6"
+                checked
+            /><span class="ml-2">5 star</span>
+        </label>
     </div>
 
     <div class="flex flex-wrap justify-center">
         <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">
+            {{ bagCard.user_id }}
             <CardBag
                 @click="showTradeModal(bagCard)"
                 :card="bagCard"
@@ -123,12 +169,23 @@
             </CardBag>
         </div>
     </div>
+    <div class="flex flex-wrap justify-center my-4">
+        <span
+            v-for="n in state.filters.totalPages"
+            :key="n"
+            @click="goToPage(n)"
+            :class="{
+                'bg-teal-300': state.filters.currentPage == n,
+            }"
+            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
+            >{{ n }}</span
+        >
+    </div>
 </template>
 
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
-
 import CardBag from "../Card/CardBag.vue";
 import CardBasic from "../Collection/CardBasic.vue";
 import Swal from "sweetalert2";
@@ -146,6 +203,12 @@ export default {
             type: Object,
             default: {},
         },
+        currentPage: {
+            type: Number,
+        },
+        totalPages: {
+            type: Number,
+        },
     },
 
     setup(props, { emit }) {
@@ -157,22 +220,31 @@ export default {
             availableCards: null,
             ownerCards: null,
             showModal: false,
-            filter: "all",
+            filters: {
+                filter: "all",
+                currentPage: 1,
+                totalPages: 0,
+                star1: true,
+                star2: true,
+                star3: true,
+                star4: true,
+                star5: true,
+            },
         });
 
         onMounted(() => {
             state.bagCards = props.bagCards;
+
+            state.filters.currentPage = props.currentPage;
+            state.filters.totalPages = props.totalPages;
         });
 
-        function showTradeModal(playerCard) {
+        function showTradeModal(bagCard) {
             state.playerCard = null;
             state.myCard = null;
             state.availableCards = null;
-
             state.showModal = true;
-
-            getAvailableCards(playerCard);
-
+            getAvailableCards(bagCard.id);
             state.playerCard = playerCard;
             state.showCardDetail = true;
         }
@@ -181,9 +253,12 @@ export default {
             state.myCard = myCard;
         }
 
-        async function getAvailableCards(playerCard) {
+        async function getAvailableCards(playerCardId) {
+
+            alert(playerCardId);
+
             await axios
-                .get(route("getAvailableCards", playerCard.id))
+                .get(route("getAvailableCards", playerCardId))
                 .then(function (response) {
                     state.availableCards = response.data.availableCards;
                     state.ownerCards = response.data.ownerCards;
@@ -229,6 +304,22 @@ export default {
                 });
         }
 
+        function filterBagCards() {
+            axios
+                .post(route("exchangeBag", { params: state.filters }))
+                .then(function (response) {
+                    state.bagCards = response.data.bagCards;
+                    state.filters.currentPage = response.data.currentPage;
+                    state.filters.totalPages = response.data.totalPages;
+                })
+                .catch(function (error) {});
+        }
+
+        function goToPage(page) {
+            state.filters.currentPage = page;
+            filterBagCards();
+        }
+
         return {
             state,
             showTradeModal,
@@ -237,6 +328,8 @@ export default {
             closeModal,
             makeOffer,
             getExchangeCards,
+            filterBagCards,
+            goToPage,
         };
     },
 };

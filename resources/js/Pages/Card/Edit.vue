@@ -197,12 +197,12 @@
                     <div
                         class="flex items-center justify-center px-0 my-4 md:gap-8 gap-4 text-white text-lg"
                     >
-                        <inertia-link
+                        <Link
                             :href="route('collections.index')"
                             class="w-auto bg-orange-500 hover:bg-orange-600 rounded-sm shadow-xl px-4 py-2"
                         >
                             Go back
-                        </inertia-link>
+                        </Link>
 
                         <button
                             @click="edit()"

@@ -8,12 +8,12 @@
     </h1>
 
     <div class="my-4">
-        <inertia-link
+        <Link
             :href="route('collections.index')"
             class="px-4 bg-orange-400 py-2 hover:bg-teal-400 text-jost mx-1"
         >
             Go back
-        </inertia-link>
+        </Link>
     </div>
 
     <draggable :list="state.cards" @change="saveCardOrder(state.cards)">

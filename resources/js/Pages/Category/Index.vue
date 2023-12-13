@@ -6,12 +6,12 @@
             <h1 class="w-full">CATEGORIES</h1>
             
            
-            <inertia-link               
+            <Link               
                 :href="route('categories.create')"
                 class="px-4 bg-lightBlue-500 py-2 rounded-sm hover:bg-lightBlue-600 my-4 text-white  mx-2"
             >
                 Create new category
-            </inertia-link>
+            </Link>
 
             <table class="min-w-full table-auto">
                 <thead class="justify-between">
@@ -55,7 +55,7 @@
                         
                         
                         <td class="px-4 py-1">
-                            <inertia-link
+                            <Link
                                 :href="route('categories.show', category.id)"
                                 
                             >
@@ -65,9 +65,9 @@
                                     data-bs-toggle="tooltip"
                                     title="Ver detalle"
                                 />
-                            </inertia-link>
+                            </Link>
 
-                            <inertia-link
+                            <Link
                                 :href="route('categories.edit', category.id)"
                                 
                             >
@@ -77,7 +77,7 @@
                                     data-bs-toggle="tooltip"
                                     title="Editar operario"
                                 />
-                            </inertia-link>                            
+                            </Link>                            
 
                            
                         </td>

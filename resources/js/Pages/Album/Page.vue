@@ -25,14 +25,14 @@
         >
             <div v-if="state.nextCard" class="flex w-full text-gray-700">
                 <div class="w-2/3 text-left">
-                    <inertia-link :href="route('albumIndex')">
+                    <Link :href="route('albumIndex')">
                         <button
                             @click="closeModal"
                             class="mb-2 md:mb-0 bg-teal-400 px-4 py-4 text-lg text-jost shadow-sm w-full text-gray-700 rounded-sm hover:shadow-lg hover:bg-amber-400"
                         >
                             Go back
                         </button>
-                    </inertia-link>
+                    </Link>
                 </div>
                 <div class="w-1/3 text-right">
                     <button
@@ -51,27 +51,27 @@
 
             <div v-else class="flex w-full text-gray-700">
                 <div class="w-full text-center">
-                    <inertia-link :href="route('albumIndex')">
+                    <Link :href="route('albumIndex')">
                         <button
                             @click="closeModal"
                             class="mb-2 md:mb-0 bg-teal-400 px-4 py-4 text-lg text-jost shadow-sm w-full text-gray-700 rounded-sm hover:shadow-lg hover:bg-amber-400"
                         >
                             Go back
                         </button>
-                    </inertia-link>
+                    </Link>
                 </div>
             </div>
         </div>
 
         <div class="mb-2 text-center space-x-4 w-full hidden md:block">
-            <inertia-link :href="route('albumIndex')">
+            <Link :href="route('albumIndex')">
                 <button
                     @click="closeModal"
                     class="mb-2 md:mb-0 bg-teal-400 px-5 py-4 text-xl text-jost shadow-sm w-full text-gray-700 rounded-sm hover:shadow-lg hover:bg-amber-400"
                 >
                     Go back
                 </button>
-            </inertia-link>
+            </Link>
         </div>
         <div
             class="text-amber-200 text-center text-6xl w-full text-lobster mb-2"
@@ -153,14 +153,14 @@
             </div>
         </div>
         <div class="mt-8 text-center space-x-4 md:block w-full">
-            <inertia-link :href="route('albumIndex')">
+            <Link :href="route('albumIndex')">
                 <button
                     @click="closeModal"
                     class="mb-2 md:mb-0 bg-teal-400 px-5 py-4 text-xl text-jost shadow-sm w-full text-gray-700 rounded-sm hover:shadow-lg hover:bg-amber-400"
                 >
                     Go back
                 </button>
-            </inertia-link>
+            </Link>
         </div>
     </div>
 </template>

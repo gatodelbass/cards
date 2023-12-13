@@ -6,23 +6,23 @@
             class="container flex flex-wrap mx-auto text-blueGray-800 p-2 md:p-10 text-sm md:text-base justify-center"
         >   
             
-             <inertia-link :href="route('submittedCollections')">
+             <Link :href="route('submittedCollections')">
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
                 >
                     <img class="w-10 mx-auto" :src="'/icons/list.svg'" />
                     <p class="my-2">Submitted collections</p>
                 </div>
-            </inertia-link>
+            </Link>
 
-            <inertia-link :href="route('categories.index')">
+            <Link :href="route('categories.index')">
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
                 >
                     <img class="w-10 mx-auto" :src="'/icons/book.svg'" />
                     <p class="my-2">categories</p>
                 </div>
-            </inertia-link>
+            </Link>
 
             <div
                 class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
@@ -31,23 +31,23 @@
                 <p class="my-2">users</p>
             </div>
 
-            <inertia-link :href="route('avatars.index')">
+            <Link :href="route('avatars.index')">
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
                 >
                     <img class="w-10 mx-auto" :src="'/icons/user.svg'" />
                     <p class="my-2">avatars</p>
                 </div>
-            </inertia-link>
+            </Link>
 
-             <inertia-link :href="route('emoji')">
+             <Link :href="route('emoji')">
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
                 >
                     <img class="w-10 mx-auto" :src="'/icons/emoji.svg'" />
                     <p class="my-2">emoji</p>
                 </div>
-            </inertia-link>
+            </Link>
         </div>
     </div>
 </template>

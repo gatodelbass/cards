@@ -1,11 +1,11 @@
 <template>
     <div
         class="w-44 h-78 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
-    >   
-        <div class="text-xs bg-amber-200 ">
-                <img class="w-5 inline-block p-0.5" :src="'/icons/user.svg'" />
-                {{ owner }}
-            </div>
+    >
+        <div class="text-xs bg-amber-200">
+            <img class="w-5 inline-block p-0.5" :src="'/icons/user.svg'" />
+            {{ owner }}
+        </div>
 
         <div class="rounded-sm">
             <div class="flex my-1">
@@ -34,14 +34,13 @@
             </div>
             <div
                 class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
-            >   
-            <div
+            >
+                <div
                     v-if="!exists"
-                    class="top-0 left-0 py-4 z-10 px-1 absolute w-full bg-amber-200 text-gray-700 text-xl animate-pulse text-lobster "
+                    class="top-0 left-0 py-4 z-10 px-1 absolute w-full bg-amber-200 text-gray-700 text-xl animate-pulse text-lobster"
                 >
                     New!
                 </div>
-
 
                 <img
                     class="max-h-full min-h-full object-contain mx-auto rounded-sm z-0"
