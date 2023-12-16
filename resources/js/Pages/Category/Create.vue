@@ -183,7 +183,7 @@
 </template>
 
 <script>
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import { reactive } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import JetInput from "@/Jetstream/Input";

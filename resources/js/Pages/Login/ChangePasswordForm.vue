@@ -46,7 +46,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
 
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import JetInputError from "@/Jetstream/InputError";
 
 export default {

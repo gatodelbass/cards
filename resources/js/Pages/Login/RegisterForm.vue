@@ -97,7 +97,7 @@
 
 <script>
 import { onMounted, reactive } from "vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import JetInputError from "@/Jetstream/InputError.vue";
 import Swal from "sweetalert2";

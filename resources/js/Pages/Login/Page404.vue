@@ -46,7 +46,7 @@
 <script>
 import { reactive } from "vue";
 import Swal from "sweetalert2";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CardBig from "../Card/CardBig.vue";
 

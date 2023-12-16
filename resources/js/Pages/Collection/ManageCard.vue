@@ -89,7 +89,7 @@ import { reactive, onMounted } from "vue";
 import JetInput from "@/Jetstream/Input.vue";
 import draggable from "vuedraggable";
 
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 
 export default {
     name: "OperatorIndex",

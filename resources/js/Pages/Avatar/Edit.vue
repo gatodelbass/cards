@@ -207,7 +207,7 @@
 <script>
 import { onMounted } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import { reactive } from "vue";
 import JetInputError from "@/Jetstream/InputError";
 import Swal from "sweetalert2";

@@ -61,7 +61,7 @@ import JetInput from "@/Jetstream/Input.vue";
 import CardBasic from "./CardBasic.vue";
 import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {

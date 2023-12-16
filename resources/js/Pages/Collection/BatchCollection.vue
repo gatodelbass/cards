@@ -63,7 +63,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import CollectionCard from "./CollectionCard.vue";
 import { onMounted, reactive } from "vue";
 import Swal from "sweetalert2";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import JetInput from "@/Jetstream/Input";
 
 export default {
