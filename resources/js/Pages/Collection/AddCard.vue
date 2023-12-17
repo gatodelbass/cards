@@ -128,38 +128,12 @@ export default {
             });
         }
 
-        async function addCardx() {
-            await axios
-                .get(
-                    route("addNewCard", [
-                        props.collection.id,
-                        state.cardName,
-                        state.cardImage,
-                    ])
-                )
-                .then(function (response) {
-                    state.cards = response.data.cards;
-                    state.cardName = "";
-                    state.cardImage = "";
-
-                    Swal.fire({
-                        toast: true,
-                        title: '<p class="text-xl text-blueGray-300">Done!</p>',
-                        showClass: { popup: "" },
-                        position: "top-end",
-                        showConfirmButton: false,
-                        icon: "success",
-                        background: "#334155",
-                        timer: 1500,
-                    });
-                })
-                .catch(function (error) {});
-        }
+       
 
         function addCard() {
-            form.post(route("addNewCard"), {
+            form.get(route("addNewCard"), {
                 onSuccess: (response) => {
-                    state.cards = response.data.cards;
+                    //state.cards = response.data.cards;
                     state.cardName = "";
                     state.cardImage = "";
                 },
@@ -170,8 +144,7 @@ export default {
         return {
             remove,
             state,
-            addCard,
-            addCardx,
+            addCard,           
             form,
         };
     },

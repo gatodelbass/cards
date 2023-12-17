@@ -165,8 +165,6 @@ class CollectionController extends Controller
     {
 
         $maxOrder = Card::where('collection_id', $request->collectionId)->max('order');
-
-
         $card = new Card();
         $card->collection_id = $request->collectionId;
         $card->name = $request->cardName;
@@ -177,6 +175,14 @@ class CollectionController extends Controller
         $cards = Card::where('collection_id', $request->collectionId)->orderby("order")->get();
 
         return back();
+
+        return Inertia::render('Collection/AddCard', [
+            'cards' => $cards,
+            'collection' => $request->collectionId,
+        ]);
+
+
+       
 
 
         return response()->json([
