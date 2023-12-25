@@ -84,8 +84,8 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
 
-import JetInput from "@/Jetstream/Input";
-import JetLabel from "@/Jetstream/Label";
+import JetInput from "@/Jetstream/Input.vue";
+import JetLabel from "@/Jetstream/Label.vue";
 
 
 import { reactive } from "vue";

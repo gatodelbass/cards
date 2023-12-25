@@ -221,11 +221,11 @@
 import { useForm } from "@inertiajs/vue3";
 import { reactive, onMounted } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import JetInput from "@/Jetstream/Input";
-import JetInputError from "@/Jetstream/InputError";
-import JetLabel from "@/Jetstream/Label";
-import JetSelect from "@/Jetstream/Select";
-import JetTextArea from "@/Jetstream/Textarea";
+import JetInput from "@/Jetstream/Input.vue";
+import JetInputError from "@/Jetstream/InputError.vue";
+import JetLabel from "@/Jetstream/Label.vue";
+import JetSelect from "@/Jetstream/Select.vue";
+import JetTextArea from "@/Jetstream/Textarea.vue";
 import Swal from "sweetalert2";
 import { usePage } from '@inertiajs/vue3'
 import CardBig from "../Card/CardBig.vue";

@@ -64,7 +64,7 @@ import CollectionCard from "./CollectionCard.vue";
 import { onMounted, reactive } from "vue";
 import Swal from "sweetalert2";
 import { useForm } from "@inertiajs/vue3";
-import JetInput from "@/Jetstream/Input";
+import JetInput from "@/Jetstream/Input.vue";
 
 export default {
     name: "OperatorIndex",

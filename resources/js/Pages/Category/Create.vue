@@ -186,9 +186,9 @@
 import { useForm } from "@inertiajs/vue3";
 import { reactive } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import JetInput from "@/Jetstream/Input";
-import JetInputError from "@/Jetstream/InputError";
-import JetLabel from "@/Jetstream/Label";
+import JetInput from "@/Jetstream/Input.vue";
+import JetInputError from "@/Jetstream/InputError.vue";
+import JetLabel from "@/Jetstream/Label.vue";
 
 
 import Swal from "sweetalert2";

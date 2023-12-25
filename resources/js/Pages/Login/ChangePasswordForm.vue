@@ -47,7 +47,7 @@ import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
 
 import { useForm } from "@inertiajs/vue3";
-import JetInputError from "@/Jetstream/InputError";
+import JetInputError from "@/Jetstream/InputError.vue";
 
 export default {
     name: "ProductCard",
