@@ -27,13 +27,13 @@
             </div>
             <div class="">
                 <div class="justify-center flex flex-wrap bg p-1">
-                    <div v-if="state.playerCard">
-                        <CardBasic :card="state.playerCard.card" :exists="true">
+                    <div v-if="state.wantedCard">
+                        <CardBasic :card="state.wantedCard" :exists="true">
                         </CardBasic>
                     </div>
                     <button
-                        @click="makeOffer(state.playerCard.id, state.myCard.id)"
-                        v-if="state.playerCard && state.myCard"
+                        @click="makeOffer(state.wantedCard.id, state.myCard.id)"
+                        v-if="state.wantedCard && state.myCard"
                         class="bg-teal-400 mt-20 py-5 md:py-10 align-middle mx-1 px-2 rounded-sm text-sm md:text-xl hover:bg-amber-400 animate-pulse"
                     >
                         Make offer!
@@ -158,8 +158,7 @@
     </div>
 
     <div class="flex flex-wrap justify-center">
-        <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">
-            {{ bagCard.user_id }}
+        <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">           
             <CardBag
                 @click="showTradeModal(bagCard)"
                 :card="bagCard"
@@ -215,7 +214,7 @@ export default {
         const state = reactive({
             bagCards: {},
             showCardDetail: false,
-            playerCard: null,
+            wantedCard: null,
             myCard: null,
             availableCards: null,
             ownerCards: null,
@@ -234,18 +233,17 @@ export default {
 
         onMounted(() => {
             state.bagCards = props.bagCards;
-
             state.filters.currentPage = props.currentPage;
             state.filters.totalPages = props.totalPages;
         });
 
         function showTradeModal(bagCard) {
-            state.playerCard = null;
+            state.wantedCard = null;
             state.myCard = null;
             state.availableCards = null;
             state.showModal = true;
             getAvailableCards(bagCard.id);
-            state.playerCard = playerCard;
+            state.wantedCard = bagCard;
             state.showCardDetail = true;
         }
 
@@ -253,12 +251,9 @@ export default {
             state.myCard = myCard;
         }
 
-        async function getAvailableCards(playerCardId) {
-
-            alert(playerCardId);
-
+        async function getAvailableCards(wantedCardId) {
             await axios
-                .get(route("getAvailableCards", playerCardId))
+                .get(route("getAvailableCards", wantedCardId))
                 .then(function (response) {
                     state.availableCards = response.data.availableCards;
                     state.ownerCards = response.data.ownerCards;
@@ -273,7 +268,7 @@ export default {
         async function makeOffer() {
             await axios
                 .get(
-                    route("createTrade", [state.playerCard.id, state.myCard.id])
+                    route("createTrade", [state.wantedCard.id, state.myCard.id])
                 )
                 .then(function (response) {
                     state.showModal = false;
@@ -295,7 +290,7 @@ export default {
 
         async function getExchangeCards() {
             await axios
-                .get(route("getExchangeCards", state.filter))
+                .get(route("getExchangeCards", state.filters))
                 .then(function (response) {
                     state.bagCards = response.data.bagCards;
                 })

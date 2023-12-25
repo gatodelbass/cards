@@ -14,27 +14,27 @@
                     class="flex flex-wrap m-1 mb-0.5 md:m-2 bg-amber-100 p-1 md:p-2 border-1 border-gray-800 rounded-sm"
                 >
                     <div class="mx-0.5">
-                        <div class="text-xs bg-amber-200 pt-0.5">
+                        <div class="text-xs bg-amber-200 py-0.5 mx-2 w-44 truncate ...">
                             <img
                                 class="w-5 inline-block p-0.5"
                                 :src="'/icons/user.svg'"
                             />
                             {{ trade.ownercard.user.nickname }}
                         </div>
-                        <CardSmall :card="trade.ownercard.card" :exists="true">
-                        </CardSmall>
+                        <CardBasic :card="trade.ownercard.card" :exists="true">
+                        </CardBasic>
                     </div>
 
-                    <div class="mx-0.5">
-                        <div class="text-xs bg-amber-200 pt-0.5">
+                    <div class="mx-1">
+                        <div class="text-xs bg-amber-200 py-0.5 mx-2 w-44 truncate ...">
                             <img
-                                class="w-5 inline-block p-0.5"
+                                class="w-5 inline-block px-0.5"
                                 :src="'/icons/user.svg'"
                             />
                             {{ trade.playercard.user.nickname }}
                         </div>
-                        <CardSmall :card="trade.playercard.card" :exists="true">
-                        </CardSmall>
+                        <CardBasic :card="trade.playercard.card" :exists="true">
+                        </CardBasic>
                     </div>
                 </div>
 
@@ -73,7 +73,8 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
 
-import CardSmall from "../Card/CardSmall.vue";
+import CardBag from "../Card/CardBag.vue";
+import CardBasic from "../Collection/CardBasic.vue";
 import Button from "../../Jetstream/Button.vue";
 import Swal from "sweetalert2";
 
@@ -81,7 +82,7 @@ export default {
     name: "OperatorIndex",
     components: {
         AppLayout,
-        CardSmall,
+        CardBasic,
     },
 
     props: {

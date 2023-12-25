@@ -14,8 +14,8 @@
         >
 
             <div v-if="trade.status == 'offered'" class="flex flex-wrap m-1 md:m-2 bg-gray-600 p-0.5 md:p-2 border-1 border-gray-800 rounded-sm">
-                  <card-small :card="trade.ownercard.card" :exists="true">
-            </card-small>
+                  <CardBasic :card="trade.ownercard.card" :exists="true">
+            </CardBasic>
 
             <div class="align-top inline-block pt-16">
                
@@ -28,8 +28,8 @@
                 </button>
             </div>
 
-            <card-small :card="trade.playercard.card" :exists="true">
-            </card-small>
+            <CardBasic :card="trade.playercard.card" :exists="true">
+            </CardBasic>
             </div>
 
             <div v-else class="flex flex-wrap   p-4 md:p-2  rounded-sm w-60 h-60 md:w-80 md:h-80 justify-center ">
@@ -47,7 +47,8 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
 
-import CardSmall from "../Card/CardSmall.vue";
+import CardBag from "../Card/CardBag.vue";
+import CardBasic from "../Collection/CardBasic.vue";
 import Button from "../../Jetstream/Button.vue";
 import Swal from "sweetalert2";
 
@@ -55,7 +56,8 @@ export default {
     name: "OperatorIndex",
     components: {
         AppLayout,
-        CardSmall,
+         CardBag,
+        CardBasic,
     },
 
     props: {

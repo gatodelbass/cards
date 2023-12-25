@@ -131,7 +131,6 @@ class LoginController extends Controller
 
     public function registerUser(RegisterRequest $request)
     {
-
         $validated = $request->validated();
 
         $errors = [];

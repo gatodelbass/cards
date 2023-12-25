@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\UserPrize;
 use App\Models\Prize;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\Trade;
 
 
@@ -27,6 +27,8 @@ class ExchangeController extends Controller
     public function exchangeBag(Request $request)
     {
 
+       
+
         $bagCards = null;
         $totalPages = 0;
         $currentPage = 1;
@@ -34,7 +36,14 @@ class ExchangeController extends Controller
         $skip = 0;
 
         if (!is_null($request->params) && array_key_exists("currentPage", $request->params)) {
-            $myCards = UserCard::select("card_id")->where("user_id", Auth::user()->id)->distinct();
+
+            $currentPage = $request->params["currentPage"];
+
+            Log::debug("yes params");
+            Log::debug("yes params" . $request->params["currentPage"]);
+            
+
+            
             $skip = ($request->params["currentPage"] - 1) * $cardsPerPage;
 
             $rarity = [];
@@ -54,7 +63,7 @@ class ExchangeController extends Controller
                 array_push($rarity, 5);
             }
 
-            $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.user_id")
+            $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.*")
                 ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
                 ->join('users', 'user_cards.user_id', '=',  'users.id')
                 ->join('collections', 'cards.collection_id', '=',  'collections.id')
@@ -63,6 +72,7 @@ class ExchangeController extends Controller
                 ->where('user_cards.status', 'exchange');
 
             if ($request->params["filter"] == "missing") {
+                $myCards = UserCard::select("card_id")->where("user_id", Auth::user()->id)->distinct();
                 $bagCards->whereNotIn("card_id",  $myCards);
             }
 
@@ -70,12 +80,17 @@ class ExchangeController extends Controller
             $bagCards2 = $bagCards->clone();
             $totalPages = ceil($bagCards2->count() / $cardsPerPage);
 
+            Log::debug("te current page is " . $currentPage);
+
             return response()->json([
                 'bagCards' => $bagCards->skip($skip)->take($cardsPerPage)->orderBy("rarity", "DESC")->get(),
                 'currentPage' => $currentPage,
                 'totalPages' => $totalPages    
             ]);
         } else {
+
+            Log::debug("no params");
+
             $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.id")
                 ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
                 ->join('users', 'user_cards.user_id', '=',  'users.id')
@@ -228,13 +243,9 @@ class ExchangeController extends Controller
 
     public function getAvailableCards($ownerCardId)
     {
-
-    
         $ownerCard = UserCard::find($ownerCardId);
-        //dd($ownerCard);
-
-
-        $rarity = $ownerCard->card->rarity;
+        $wantedCard = $ownerCard->card;
+       
 
         $owner = $ownerCard->user;
 
@@ -246,20 +257,31 @@ class ExchangeController extends Controller
         $excludeTrades = DB::table('user_cards')
             ->join('trades', 'user_cards.id', '=',  'trades.player_card_id')
             ->where('user_cards.user_id', '=', Auth::id())
-            ->where('trades.status', '=', 'offered')->pluck('user_cards.id');
+            ->where('trades.status', '=', 'offered')->pluck('user_cards.id');       
 
-        $availableCards = UserCard::where("card_id", "!=", $ownerCardId)
+          $availableCardsIds = DB::table('user_cards')
+            ->select("user_cards.id")
+            ->join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where("user_id", Auth::user()->id)
-            ->whereNotIn("id",  $excludeTrades)
-            ->where("status", "exchange")->get()->load("card.collection.category");
+            ->where("status", "exchange")
+            ->where("cards.rarity", $wantedCard->rarity)
+            ->whereNotIn("cards.id",  $excludeTrades)
+            ->where("cards.id", "!=", $wantedCard->id)->pluck('user_cards.id');
+
+           // dd($availableCardsIds);
+           
+
+            $availableCards = UserCard::whereIn("id",  $availableCardsIds)
+            ->get()->load("card.collection.category");
+                 //dd($availableCards);
 
 
-        $availableCards =  $availableCards->filter(function ($userCard) use ($rarity) {
+        // $availableCards =  $availableCards->filter(function ($userCard) use ($rarity) {
 
-            if ($userCard->card->rarity == $rarity) {
-                return $userCard;
-            }
-        });
+        //     if ($userCard->card->rarity == $rarity) {
+        //         return $userCard;
+        //     }
+        // });
 
         return response()->json([
             'availableCards' => $availableCards,
