@@ -17,17 +17,17 @@
 
           <div class="mb-4 text-left text-xl">
             <img class="w-10 inline-block mx-1" :src="'/icons/box.svg'" />Boxes
-            x2
+            {{ user.boxes }}
           </div>
           <div class="mb-4 text-left text-xl">
             <img
               class="w-10 inline-block mx-1"
               :src="'/icons/ticket.svg'"
-            />Tickets x10
+            />Tickets x{{ user.tickets }}
           </div>
           <div class="mb-4 text-left text-xl">
             <img class="w-10 inline-block mx-1" :src="'/icons/coin.svg'" /> Gold
-            100.000
+            {{ user.gold }}
           </div>
 
           <div class="mb-4 mt-6">

@@ -157,6 +157,7 @@ class LoginController extends Controller
         $user->nickname = $request->nickname;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->remember_code = sha1(time());
         $user->role = "user";
         $user->status = "created";
 
@@ -183,13 +184,12 @@ class LoginController extends Controller
         ]);
     }
 
-    public function registerVerify($id)
+    public function registerVerify($rememberCode)
     {
-        $user = User::find($id);
+        $user = User::where("remember_code", $rememberCode)->first();
 
-        if ($user->status = "created") {
+        if (!is_null($user) && $user->status = "created") {
             $user->status = "active";
-
             $user->gold = 200000;
             $user->status = "active";
             $user->tickets = 20;
@@ -213,22 +213,25 @@ class LoginController extends Controller
                 //throw $th;
             }
 
-
             $user->save();
 
             $log = new Log;
             $log->user_id = $user->id;
             $log->event = "Verify";
-            $log->message = $user->nickname . " ha verificado su cuenta";
+            $log->message = $user->nickname . " account verified";
             $log->save();
+
+            return Inertia::render('Login/Activate', [
+                'user' => $user
+            ]);
+
+        } else {
+            return response()->noContent();
         }
 
-        return Inertia::render('Login/Activate', [
+        
 
-            'user' => $user
-        ]);
-
-        return response()->noContent();
+        
     }
 
 

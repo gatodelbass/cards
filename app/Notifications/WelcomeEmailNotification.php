@@ -45,9 +45,9 @@ class WelcomeEmailNotification extends Notification
         $env = env('APP_URL');       
         return (new MailMessage)
 
-                  ->subject('Karta - activate your user')                   
+                  ->subject('Cards - activate your user')                   
                     ->line('Hello ' . $this->user->name . '. Finish your registry and activate your user, please click on the button.')                   
-                    ->action('Complete registry', url($env . '/registerVerify/'.$this->user->id))
+                    ->action('Complete registry', url($env . '/registerVerify/' . $this->user->remember_code))
                     ->line('Once activated you can enter with your email and password');
     }
 
