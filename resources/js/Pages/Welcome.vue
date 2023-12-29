@@ -11,24 +11,26 @@
                 <div class="w-full flex items-center justify-between pt-2">
                     <div class="w-1/2">
                         <span
-                            class="flex items-center text-orange-400 no-underline hover:no-underline font-semibold text-3xl lg:text-4xl mx-2"
+                            class="flex items-center text-teal-400 font-semibold text-3xl lg:text-4xl mx-2"
                             href="#"
                         >
                             <img
                                 class="h-12 w-12 object-cover object-center mx-2"
-                                :src="'/icons/karta.svg'"
+                                :src="'/images/cardsteal.png'"
                                 alt="photo"
                             />
 
-                            Karta
+                            Cards by el gato
                         </span>
                     </div>
 
-                    <div class="flex w-1/2 justify-end text-sm md:text-base">
+                    <div
+                        class="flex w-1/2 justify-end text-sm md:text-base text-teal-400"
+                    >
                         <Link :href="route('help')"
                             ><button
                                 type="button"
-                                class="hover:bg-cyan-900 py-1 px-2 flex text-cyan-500 rounded-full m-1"
+                                class="hover:bg-cyan-900 py-1 px-2 flex rounded-full m-1"
                                 id="user-menu-button"
                                 aria-expanded="false"
                                 aria-haspopup="true"
@@ -41,7 +43,7 @@
                             :href="route('loginForm')"
                             ><button
                                 type="button"
-                                class="hover:bg-cyan-900 py-1 px-2 flex text-cyan-500 rounded-full m-1"
+                                class="hover:bg-cyan-900 py-1 px-2 flex rounded-full m-1"
                                 id="user-menu-button"
                                 aria-expanded="false"
                                 aria-haspopup="true"
@@ -54,7 +56,7 @@
                             :href="route('registerForm')"
                             ><button
                                 type="button"
-                                class="hover:bg-cyan-900 py-1 px-2 flex text-cyan-500 rounded-full m-1"
+                                class="hover:bg-cyan-900 py-1 px-2 flex rounded-full m-1"
                                 id="user-menu-button"
                                 aria-expanded="false"
                                 aria-haspopup="true"
@@ -77,11 +79,12 @@
                     <h1
                         class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold text-center md:text-left"
                     >
-                        Welcome to <span class="text-cyan-500"> Karta</span>, a
+                        Welcome to
+                        <span class="text-teal-500"> Cards by el gato</span>, a
                         free card collector and trading game
                     </h1>
                     <p
-                        class="leading-normal text-base md:text-2xl my-8 mx-4 text-center text-violet-300 md:text-left"
+                        class="leading-normal text-base md:text-2xl my-8 mx-4 text-center text-teal-300 md:text-left"
                     >
                         Here you can exchange your cards and collect from many
                         other collections. Or you can create and publish your
@@ -189,7 +192,7 @@
                     </div>
                 </div>
 
-                <div class="w-full p-2 lg:w-1/4 md:w-1/2 mt-4">
+                <!-- <div class="w-full p-2 lg:w-1/4 md:w-1/2 mt-4">
                     <div
                         class="opacity-75 flex flex-col p-4 overflow-hidden rounded-xl shadow-lg duration-300 hover:shadow-2xl group hover:opacity-95 hover:border-1 hover:border-teal-500"
                     >
@@ -219,9 +222,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="w-full p-2 lg:w-1/4 md:w-1/2 mt-4">
+                <!-- <div class="w-full p-2 lg:w-1/4 md:w-1/2 mt-4">
                     <div
                         class="opacity-75 flex flex-col p-4 overflow-hidden rounded-xl shadow-lg duration-300 hover:shadow-2xl group hover:opacity-95 hover:border-1 hover:border-teal-500"
                     >
@@ -315,7 +318,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="w-full justify-center flex flex-wrap p-5 lg:mt-5">
                     <div
@@ -405,6 +408,12 @@
                 <div
                     class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in"
                 >
+                    <div>
+                        <img
+                            class="w-96 mx-auto"
+                            :src="'/images/cardsteal.png'"
+                        />
+                    </div>
                     <p class="text-gray-400">
                         Contact at
                         <span class="text-violet-400">
@@ -418,7 +427,7 @@
                             href="https://www.facebook.com/Karta-Card-Trading-Game-105780995533698"
                             class="text-sky-600 font-semibold tracking-wider"
                         >
-                            Karta Facebook page
+                            Cards Facebook page
                         </a>
                     </p>
                 </div>
