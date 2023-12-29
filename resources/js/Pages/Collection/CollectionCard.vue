@@ -12,7 +12,7 @@
             }"
             class="w-full mb-2 py-1 text-gray-800"
         >
-            {{ collection.status }}
+            {{ collection.status }} (Id {{collection.id}})
         </div>
 
         <div
@@ -39,7 +39,7 @@
             </div>
 
             <div
-                class="px-6 py-2 w-2/3 bg-gradient-to-tl from-black via-gray-800 to-gray-700 ml-4 rounded"
+                class="px-6 py-2 w-2/3 bg-gradient-to-tl from-black via-gray-800 to-gray-700 ml-4 rounded text-sm"
             >
                 <h4 class="my-2 font-semibold">{{ collection.name }}</h4>
                 <p class="text-justify text-emerald-300">
@@ -54,12 +54,12 @@
                 </p>
                 <p class="text-justify">Active since:</p>
                 <p class="text-justify">
-                    Number of cards: {{ collection.cards.length }}
+                    Number of cards: <span class="text-teal-400 font-semibold">{{ collection.cards.length }}</span>
                 </p>
 
                 <Link :href="route('addCards', collection.id)">
                     <button
-                        class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
+                        class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                     >
                         Add cards
                     </button>
@@ -67,7 +67,7 @@
 
                 <Link :href="route('manageCards', collection.id)">
                     <button
-                        class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
+                        class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                     >
                         Manage cards
                     </button>
@@ -75,9 +75,16 @@
 
                 <Link :href="route('manageCollection', collection.id)">
                     <button
-                        class="px-4 py-1 my-1 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
+                        class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
                     >
                         Manage collection rarity
+                    </button>
+                </Link>
+                <Link :href="route('createFromDirectory', collection.id)">
+                    <button
+                        class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
+                    >
+                        Create from directory
                     </button>
                 </Link>
             </div>

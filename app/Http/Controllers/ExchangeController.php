@@ -26,9 +26,6 @@ class ExchangeController extends Controller
 {
     public function exchangeBag(Request $request)
     {
-
-       
-
         $bagCards = null;
         $totalPages = 0;
         $currentPage = 1;
@@ -38,12 +35,6 @@ class ExchangeController extends Controller
         if (!is_null($request->params) && array_key_exists("currentPage", $request->params)) {
 
             $currentPage = $request->params["currentPage"];
-
-            Log::debug("yes params");
-            Log::debug("yes params" . $request->params["currentPage"]);
-            
-
-            
             $skip = ($request->params["currentPage"] - 1) * $cardsPerPage;
 
             $rarity = [];
@@ -78,9 +69,7 @@ class ExchangeController extends Controller
 
             $bagCards->whereIn("rarity", $rarity);
             $bagCards2 = $bagCards->clone();
-            $totalPages = ceil($bagCards2->count() / $cardsPerPage);
-
-            Log::debug("te current page is " . $currentPage);
+            $totalPages = ceil($bagCards2->count() / $cardsPerPage);           
 
             return response()->json([
                 'bagCards' => $bagCards->skip($skip)->take($cardsPerPage)->orderBy("rarity", "DESC")->get(),
@@ -88,9 +77,6 @@ class ExchangeController extends Controller
                 'totalPages' => $totalPages    
             ]);
         } else {
-
-            Log::debug("no params");
-
             $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.id")
                 ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
                 ->join('users', 'user_cards.user_id', '=',  'users.id')

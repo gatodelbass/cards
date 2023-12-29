@@ -108,12 +108,9 @@ class PlayerController extends Controller
             ->where('user_cards.status', '!=', 'sold');
 
         $totalPages = ceil(count($totalCards) /  $cardsPerPage);
-        
+
         $userCards->whereIn("rarity", $rarity)->whereIn("status", $status);
         $userCards->skip($skip)->take($cardsPerPage);
-
-        Log::debug(count($totalCards));
-        Log::debug(($totalPages));
 
         return response()->json([
             'userCards' => $userCards->orderBy('rarity', 'desc')->get(),
@@ -149,35 +146,53 @@ class PlayerController extends Controller
         }
         if ($request->params["protected"] == true) {
             array_push($status, "protected");
-        }      
+        }
 
         $userCards  = DB::table('cards')
-        ->select("user_cards.id")
+            ->select("user_cards.id")
             ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
             ->where('user_cards.user_id', '=', Auth::user()->id)
             ->where('user_cards.status', '!=', 'sold')
-            ->whereIn("rarity", $rarity)->whereIn("status", $status)->get();
+            ->whereIn("rarity", $rarity)->whereIn("status", $status)->pluck('user_cards.id');
 
-            $goldObtained = 0;
+            $selectedCardsSell = UserCard::whereIn("id",  $userCards)->get()->load("card.collection.category");
 
-            foreach ($userCards as $userCard) {
 
-                dd($userCards);
 
-                $bottomLimit = $userCard->card->cost * 25 / 100;
-                $topLimit = $userCard->card->cost * 75 / 100;
-                $goldObtained = $goldObtained + rand($bottomLimit, $topLimit);
-    
-                $userCard->status = "sold";
-                $userCard->save();
-    
-                $trades = Trade::where("owner_card_id", $userCard->id)->orWhere("player_card_id", $userCard->id);
-                $trades->delete();
-    
-                $userCard->delete();
-            }
+        $goldObtained = 0;
 
-        
+        foreach ($selectedCardsSell as $userCard) {
+          
+            $bottomLimit = $userCard->card->cost * 25 / 100;
+            $topLimit = $userCard->card->cost * 75 / 100;
+            $goldObtained = $goldObtained + rand($bottomLimit, $topLimit);
+            $userCard->status = "sold";
+            $userCard->save();
+            $trades = Trade::where("owner_card_id", $userCard->id)->orWhere("player_card_id", $userCard->id);
+            $trades->delete();
+            $userCard->delete();
+
+           
+        }
+
+        $user = User::find(Auth::id());
+        $userData = json_decode($user->data);
+        $userData->gold_obtained = $userData->gold_obtained + $goldObtained;
+        $user->data = json_encode($userData);
+
+        $user->gold += $goldObtained;
+        $user->save();
+
+        $userCards = UserCard::where("user_id", Auth::user()->id)->whereIn("status", ["exchange", "protected"])->get();
+
+        return response()->json([
+            'goldObtained' => $goldObtained,
+            'userCards' => $userCards->load("card.collection.category"),
+
+        ]);
+
+
+
     }
 
 

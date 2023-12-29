@@ -1,6 +1,8 @@
 <template>
     <app-layout></app-layout>
 
+    {{state.nextCard}}
+
     <div
         v-if="state.showModal"
         id="overlay"
@@ -43,7 +45,7 @@
                             v-if="state.nextCard"
                             :href="'#' + state.nextCard"
                             class=""
-                            >Next</a
+                            >Next sdf</a
                         >
                     </button>
                 </div>
@@ -73,12 +75,10 @@
                 </button>
             </Link>
         </div>
-        <div
-            class="text-amber-200 text-center text-6xl w-full text-lobster mb-2"
-        >
-            <p class="text-2xl md:text-6xl">{{ collection.name }}</p>
+        <div class="text-amber-200 text-center w-full text-jost mb-2">
+            <p class="text-3xl">{{ collection.name }}</p>
 
-            <p class="text-sm md:text-2xl text-teal-400 mt-0">
+            <p class="text-2xl text-teal-400 mt-0">
                 <img
                     :src="'/icons/' + collection.category.icon"
                     class="w-6 inline-block m-1 bg-teal-400 p-0.5 rounded-full"
@@ -86,8 +86,8 @@
                 {{ collection.category.name }}
             </p>
 
-            <p class="text-sm md:text-base text-gray-300 text-jost">
-                Created by: {{ collection.user.nickname }}
+            <p class="text-sm text-gray-300 text-jost">
+                Added: {{ collection.user.nickname }}
             </p>
         </div>
 
@@ -96,7 +96,7 @@
                 :key="card.id"
                 v-for="card in state.collection.cards"
                 class="w-96 h-96 rotate-3"
-            >
+            >   <div :id="card.id">&nbsp;</div>
                 <div
                     @click="showModal(card)"
                     v-if="state.pastedUserCards.includes(card.id)"
@@ -231,7 +231,6 @@ export default {
                     state.collection = response.data.collection;
                     state.availableUserCards = response.data.availableUserCards;
                     state.pastedUserCards = response.data.pastedUserCards;
-
                     state.nextCard = state.availableUserCards[0];
                 })
                 .catch(function (error) {});

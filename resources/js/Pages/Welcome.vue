@@ -9,13 +9,13 @@
             <!--Nav-->
             <div class="w-full container mx-auto">
                 <div class="w-full flex items-center justify-between pt-2">
-                    <div class="w-1/2">
+                    <div class="w-1/2 my-4">
                         <span
                             class="flex items-center text-teal-400 font-semibold text-3xl lg:text-4xl mx-2"
                             href="#"
                         >
                             <img
-                                class="h-12 w-12 object-cover object-center mx-2"
+                                class="h-16 w-16 object-cover object-center mx-2"
                                 :src="'/images/cardsteal.png'"
                                 alt="photo"
                             />

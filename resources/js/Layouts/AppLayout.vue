@@ -12,8 +12,8 @@
                             class="inline-block mx-2"
                             :href="route('help')"
                             ><img
-                                class="w-8 inline-block"
-                                src="/icons/karta.svg"
+                                class="w-6 inline-block"
+                                :src="'/images/cardsteal2.png'"
                             />
                         </Link>
 
