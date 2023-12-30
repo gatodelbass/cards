@@ -60,7 +60,7 @@ class CollectionController extends Controller
     public function store(CollectionRequest $request)
     {
 
-        $collection = Collection::create($request->validated());      
+        $collection = Collection::create($request->validated());
         Storage::makeDirectory("/public/collections/{$collection->id}");
         return Redirect::route('collections.index');
     }
@@ -176,7 +176,7 @@ class CollectionController extends Controller
         ]);
 
 
-       
+
 
 
         return response()->json([
@@ -427,15 +427,12 @@ class CollectionController extends Controller
 
     public function saveCardOrder(Request $request)
     {
-
         $collectionId = $request->collection_id;
         $cards = $request->cards;
 
         $order = 1;
 
         foreach ($cards as $key => $card) {
-
-
             $card = Card::find($card["id"]);
             $card->order = $order;
             $card->save();
@@ -446,37 +443,36 @@ class CollectionController extends Controller
         return redirect()->back();
     }
 
-    public function createFromDirectory($collectionId){
+    public function changeAllLayout($collectionId, $layout)
+    {
+        $collection = Collection::find($collectionId);
+        $cards = Card::where("collection_id", $collectionId)->get();
+        foreach ($cards as $key => $card) {
+            $card->layout = $layout;
+            $card->save();
+        }
 
-        $files = Storage::disk('public')->files("collections/" . $collectionId);
+        $cards = Card::where('collection_id', $collectionId)->orderBy('order')->get();
 
-        $maxOrder = 1;
-
-     
-
-        foreach ($files as $key => $file) {
-
-            // dd(Str::of( $file)->basename());
- 
-          //  dd( url(''));
- 
-             
-             $card = new Card();
-             $card->collection_id = $collectionId;
-             $card->name = Str::of( $file)->basename();
-             $card->image = url('') . "/storage/" . $file;
-             $card->order = $maxOrder;
-             $card->save();
- 
-             $maxOrder++;
- 
- 
- 
-             # code...
-         }
-
-       
+        return response()->json([
+            'cards' => $cards,
+            'collection' => $collection,
+        ]);
     }
 
-    
+    public function createFromDirectory($collectionId)
+    {
+
+        $files = Storage::disk('public')->files("collections/" . $collectionId);
+        $maxOrder = 1;
+        foreach ($files as $key => $file) {
+            $card = new Card();
+            $card->collection_id = $collectionId;
+            $card->name = Str::of($file)->basename();
+            $card->image = url('') . "/storage/" . $file;
+            $card->order = $maxOrder;
+            $card->save();
+            $maxOrder++;
+        }
+    }
 }

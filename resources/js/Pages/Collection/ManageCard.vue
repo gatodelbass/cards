@@ -16,6 +16,52 @@
         </Link>
     </div>
 
+    <div class="flex flex-wrap justify-center text-jost">
+        <button
+            @click="changeAllLayout('center')"
+            class="bg-yellow-200 py-0 px-2 h-10 mx-1"
+        >
+            Change all to
+            <img
+                :src="'/images/image-center.png'"
+                class="w-6 inline-block p-0.5 border-2"
+            />
+        </button>
+
+        <button
+            @click="changeAllLayout('circle')"
+            class="bg-yellow-200 py-0 px-2 h-10 mx-1"
+        >
+            Change all to
+            <img
+                :src="'/images/image-circle.png'"
+                class="w-6 inline-block p-0.5 border-2"
+            />
+        </button>
+
+        <button
+            @click="changeAllLayout('horizontal')"
+            class="bg-yellow-200 py-0 px-2 h-10 mx-1"
+        >
+            Change all to
+            <img
+                :src="'/images/image-horizontal.png'"
+                class="w-6 inline-block p-0.5 border-2"
+            />
+        </button>
+
+        <button
+            @click="changeAllLayout('vertical')"
+            class="bg-yellow-200 py-0 px-2 h-10 mx-1"
+        >
+            Change all to
+            <img
+                :src="'/images/image-vertical.png'"
+                class="w-6 inline-block p-0.5 border-2"
+            />
+        </button>
+    </div>
+
     <draggable :list="state.cards" @change="saveCardOrder(state.cards)">
         <template #item="{ element: card }">
             <div class="max-w-5xl mx-auto cursor-move">
@@ -113,6 +159,18 @@ export default {
     setup(props, { emit }) {
         const state = reactive({
             cards: [],
+            layouts: {
+                exchange: true,
+                protected: true,
+                pasted: false,
+                currentPage: 1,
+                totalPages: 0,
+                star1: true,
+                star2: true,
+                star3: true,
+                star4: true,
+                star5: true,
+            },
         });
 
         onMounted(() => {
@@ -163,8 +221,16 @@ export default {
 
         async function saveCardOrder() {
             form.cards = state.cards;
-
             form.post(route("saveCardOrder"), {});
+        }
+
+        async function changeAllLayout(layout) {
+            await axios
+                .get(route("changeAllLayout", [props.collection.id, layout]))
+                .then(function (response) {
+                    state.cards = response.data.cards;
+                })
+                .catch(function (error) {});
         }
 
         return {
@@ -173,6 +239,7 @@ export default {
             saveCardLayout,
             state,
             saveCardOrder,
+            changeAllLayout,
         };
     },
 };

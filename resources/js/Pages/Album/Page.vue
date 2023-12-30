@@ -1,8 +1,5 @@
 <template>
     <app-layout></app-layout>
-
-    {{state.nextCard}}
-
     <div
         v-if="state.showModal"
         id="overlay"
@@ -45,7 +42,7 @@
                             v-if="state.nextCard"
                             :href="'#' + state.nextCard"
                             class=""
-                            >Next sdf</a
+                            >Next</a
                         >
                     </button>
                 </div>

@@ -155,14 +155,14 @@ class PlayerController extends Controller
             ->where('user_cards.status', '!=', 'sold')
             ->whereIn("rarity", $rarity)->whereIn("status", $status)->pluck('user_cards.id');
 
-            $selectedCardsSell = UserCard::whereIn("id",  $userCards)->get()->load("card.collection.category");
+        $selectedCardsSell = UserCard::whereIn("id",  $userCards)->get()->load("card.collection.category");
 
 
 
         $goldObtained = 0;
 
         foreach ($selectedCardsSell as $userCard) {
-          
+
             $bottomLimit = $userCard->card->cost * 25 / 100;
             $topLimit = $userCard->card->cost * 75 / 100;
             $goldObtained = $goldObtained + rand($bottomLimit, $topLimit);
@@ -171,8 +171,6 @@ class PlayerController extends Controller
             $trades = Trade::where("owner_card_id", $userCard->id)->orWhere("player_card_id", $userCard->id);
             $trades->delete();
             $userCard->delete();
-
-           
         }
 
         $user = User::find(Auth::id());
@@ -183,16 +181,30 @@ class PlayerController extends Controller
         $user->gold += $goldObtained;
         $user->save();
 
-        $userCards = UserCard::where("user_id", Auth::user()->id)->whereIn("status", ["exchange", "protected"])->get();
+        $cardsPerPage = config('constants.pagination_cards_per_page');
+
+        $totalCards =   $userCards  = DB::table('cards')
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold')
+            ->where('user_cards.status', '!=', 'pasted')->get();
+
+
+        $userCards  = DB::table('cards')
+            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+            ->where('user_cards.user_id', '=', Auth::user()->id)
+            ->where('user_cards.status', '!=', 'sold')
+            ->where('user_cards.status', '!=', 'pasted')->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+
+        $totalPages = ceil(count($totalCards) / $cardsPerPage);
 
         return response()->json([
             'goldObtained' => $goldObtained,
-            'userCards' => $userCards->load("card.collection.category"),
+            'userCards' => $userCards,
+            'currentPage' => 1,
+            'totalPages' => $totalPages
 
         ]);
-
-
-
     }
 
 

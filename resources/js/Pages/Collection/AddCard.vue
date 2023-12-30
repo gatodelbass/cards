@@ -13,38 +13,34 @@
     >
         <div class="py-3 mx-auto sm:px-6 lg:px-8">
             <div class="mx-auto mt-0 bg-gray-50">
-            
-                    <div class="flex flex-wrap">
-                        <div class="w-5/12">
-                            <jet-input
-                                
-                                type="text"
-                                class="w-full  mx-2"
-                                v-model="form.cardName"
-                            />
-                        </div>
+                <div class="flex flex-wrap">
+                    <div class="w-5/12">
+                        <jet-input
+                            type="text"
+                            class="w-full mx-2"
+                            v-model="form.cardName"
+                        />
+                    </div>
 
-                        <div class="w-5/12">
-                            <jet-input
-                               
-                                type="text"
-                                class="w-full  mx-4"
-                                v-model="form.cardImage"
-                            />
-                        </div>
+                    <div class="w-5/12">
+                        <jet-input
+                            type="text"
+                            class="w-full mx-4"
+                            v-model="form.cardImage"
+                        />
+                    </div>
 
-                        <div class="w-2/12 mt-1">
-                            <button
-                                @click="addCard()"
-                                class=" bg-sky-400 hover:bg-sky-500 px-2 py-1"
-                            >
-                                Create
-                            </button>
-                        </div>
+                    <div class="w-2/12 mt-1">
+                        <button
+                            @click="addCard()"
+                            class="bg-sky-400 hover:bg-sky-500 px-2 py-1"
+                        >
+                            Create
+                        </button>
                     </div>
                 </div>
             </div>
-      
+        </div>
     </div>
 
     <div class="flex flex-wrap justify-center">
@@ -128,12 +124,9 @@ export default {
             });
         }
 
-       
-
         function addCard() {
             form.get(route("addNewCard"), {
                 onSuccess: (response) => {
-                    //state.cards = response.data.cards;
                     state.cardName = "";
                     state.cardImage = "";
                 },
@@ -144,7 +137,7 @@ export default {
         return {
             remove,
             state,
-            addCard,           
+            addCard,
             form,
         };
     },

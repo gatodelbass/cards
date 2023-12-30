@@ -16,12 +16,19 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome');
-});
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-});
+
+Route::get('/welcome', [App\Http\Controllers\LoginController::class, 'welcome'])->name('welcome');
+Route::get('/', [App\Http\Controllers\LoginController::class, 'welcome'])->name('welcome');
+
+// Route::get('/welcome', function () {
+
+//     Route::get('addCards/{collectionId}', [App\Http\Controllers\CollectionController::class, 'addCards'])->name('addCards');
+
+//     return Inertia::render('Welcome');
+// });
+// Route::get('/', function () {
+//     return Inertia::render('Welcome');
+// });
 
 
 
@@ -47,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('saveCardName/{cardId}/{cardName}', [App\Http\Controllers\CollectionController::class, 'saveCardName'])->name('saveCardName');
     Route::post('saveCardImage', [App\Http\Controllers\CollectionController::class, 'saveCardImage'])->name('saveCardImage');
     Route::get('saveCardLayout/{cardId}/{cardLayout}', [App\Http\Controllers\CollectionController::class, 'saveCardLayout'])->name('saveCardLayout');
+    Route::get('changeAllLayout/{collectionId}/{layout}', [App\Http\Controllers\CollectionController::class, 'changeAllLayout'])->name('changeAllLayout');
     Route::post('saveCardOrder', [App\Http\Controllers\CollectionController::class, 'saveCardOrder'])->name('saveCardOrder');
 
     Route::post('submitCollection', [App\Http\Controllers\CollectionController::class, 'submitCollection'])->name('submitCollection');

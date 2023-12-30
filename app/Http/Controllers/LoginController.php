@@ -60,7 +60,7 @@ class LoginController extends Controller
         $totalCollections = DB::table("collections")->where("status", "active")->count();
 
         return Inertia::render('Welcome', [
-            'randomCards' => $randomCards,
+            'randomCards' => $randomCards->load(["collection.category"]),
             'randomCollections' => $randomCollections->load(["cards", "category", "user"]),
             'chartData' => $chartData,
             'totalUserCardsObtained' => $totalUserCardsObtained,
@@ -95,7 +95,7 @@ class LoginController extends Controller
         } else {
             $hasIncomingExchanges = true;
         }
-        
+
 
         return Inertia::render('Login/Index', [
             'hasIncomingExchanges' => $hasIncomingExchanges
@@ -224,14 +224,9 @@ class LoginController extends Controller
             return Inertia::render('Login/Activate', [
                 'user' => $user
             ]);
-
         } else {
             return response()->noContent();
         }
-
-        
-
-        
     }
 
 
@@ -328,10 +323,9 @@ class LoginController extends Controller
         ]);
     }
 
-    public function fallback(){
+    public function fallback()
+    {
 
-        return Inertia::render('Login/Page404', [
-           
-        ]);
+        return Inertia::render('Login/Page404', []);
     }
 }

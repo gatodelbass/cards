@@ -227,6 +227,19 @@ export default {
             state.filters.totalPages = props.totalPages;
         });
 
+        function resetFilters() {
+            state.filters.exchange = true;
+            state.filters.protected = true;
+            state.filters.pasted = false;
+
+            state.filters.currentPage = 1;
+            state.filters.star1 = true;
+            state.filters.star2 = true;
+            state.filters.star3 = true;
+            state.filters.star4 = true;
+            state.filters.star5 = true;
+        }
+
         function goToPage(page) {
             state.filters.currentPage = page;
             filterPlayerCards();
@@ -265,6 +278,9 @@ export default {
                         response.data.goldObtained;
 
                     state.userCards = response.data.userCards;
+                    resetFilters();
+                    state.filters.currentPage = response.data.currentPage;
+                    state.filters.totalPages = response.data.totalPages;
 
                     Swal.fire({
                         toast: true,
@@ -319,6 +335,7 @@ export default {
             filterPlayerCards,
             sellSelectedCards,
             goToPage,
+            resetFilters,
             state,
         };
     },

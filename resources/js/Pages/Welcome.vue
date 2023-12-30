@@ -16,7 +16,7 @@
                         >
                             <img
                                 class="h-16 w-16 object-cover object-center mx-2"
-                                :src="'/images/cardsteal.png'"
+                                :src="'/images/cardsteallogo.png'"
                                 alt="photo"
                             />
 
@@ -125,45 +125,7 @@
                         :key="card.id"
                         class="transform -rotate-3"
                     >
-                        <div
-                            class="w-44 p-1 bg-gradient-to-r from-gray-900 to-gray-600 rounded transform rotate-0 m-5"
-                        >
-                            <span
-                                class="bg-amber-200 rounded-sm px-2 py-0 mx-0 text-base text-lobster text-gray-700"
-                                >card #{{ card.id }}</span
-                            >
-                            <div
-                                class="bg-gradient-to-r from-cyan-900 via-cyan-700 to-cyan-500 rounded align-middle text-center p-1 w-full h-8 m-0 text-hueso-500"
-                            >
-                                <span v-for="n in card.rarity" :key="n">
-                                    <img
-                                        class="inline-block align-middle w-4 m-1"
-                                        :src="'/icons/starHueso.svg'"
-                                    />
-                                </span>
-                            </div>
-                            <div
-                                class="relative h-56 bg-lightBlue-300 mx-1 mt-2 mb-6"
-                            >
-                                <img
-                                    :src="'/storage/' + card.image"
-                                    class="z-0 absolute border-white border-4"
-                                />
-                            </div>
-                            <div
-                                class="bg-gradient-to-r from-cyan-900 via-cyan-700 to-cyan-500 rounded align-middle text-center p-2 w-full text-amber-100"
-                            >
-                                <b>{{ card.name }}</b>
-                            </div>
-                            <div class="align-middle text-center text-cyan-200">
-                                <img
-                                    :src="coinCyan"
-                                    class="w-4 inline-block"
-                                /><b class="inline-block ml-1 align-middle">{{
-                                    card.cost
-                                }}</b>
-                            </div>
-                        </div>
+                        <CardBasic :card="card"> </CardBasic>
                     </div>
                 </div>
 
@@ -440,11 +402,12 @@
 import { onMounted, reactive } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CollectionBox from "./Collection/CollectionBox.vue";
+import CardBasic from "./Collection/CardBasic.vue";
 
 export default {
     name: "Welcome",
 
-    components: { AppLayout, CollectionBox },
+    components: { AppLayout, CollectionBox, CardBasic },
 
     props: {
         randomCards: {

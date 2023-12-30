@@ -8,11 +8,9 @@
                     class="flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0"
                 >
                     <li>
-                        <Link
-                            class="inline-block mx-2"
-                            :href="route('help')"
+                        <Link class="inline-block mx-2" :href="route('help')"
                             ><img
-                                class="w-6 inline-block"
+                                class="w-4 inline-block"
                                 :src="'/images/cardsteal2.png'"
                             />
                         </Link>
@@ -95,7 +93,9 @@
                         >
                             <div v-if="$page.props.auth.user != null">
                                 <img
-                                    v-if="$page.props.auth.user.avatar == 'none'"
+                                    v-if="
+                                        $page.props.auth.user.avatar == 'none'
+                                    "
                                     class="w-12 inline-block rounded-full border-gray-300 border-1"
                                     :src="'storage/avatars/user.svg'"
                                 />
@@ -103,7 +103,10 @@
                                 <img
                                     v-else
                                     class="w-12 inline-block rounded-full border-teal-300 border-1"
-                                    :src="'/storage/' + $page.props.auth.user.avatar"
+                                    :src="
+                                        '/storage/' +
+                                        $page.props.auth.user.avatar
+                                    "
                                 />
                             </div>
                         </Link>
@@ -286,13 +289,14 @@ export default {
         url(/fonts/Jost-VariableFont_wght.ttf) format("truetype");
 }
 @font-face {
-  font-family: "Elite";
-  src: local("Elite"), url(/fonts/SpecialElite-Regular.ttf) format("truetype");
+    font-family: "Elite";
+    src: local("Elite"), url(/fonts/SpecialElite-Regular.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: "ZillaSlab";
-  src: local("ZillaSlab"), url(/fonts/ZillaSlab-Regular.ttf) format("truetype");
+    font-family: "ZillaSlab";
+    src: local("ZillaSlab"),
+        url(/fonts/ZillaSlab-Regular.ttf) format("truetype");
 }
 
 body {

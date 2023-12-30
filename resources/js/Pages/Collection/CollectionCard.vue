@@ -12,7 +12,7 @@
             }"
             class="w-full mb-2 py-1 text-gray-800"
         >
-            {{ collection.status }} (Id {{collection.id}})
+            {{ collection.status }} (Id {{ collection.id }})
         </div>
 
         <div
@@ -54,7 +54,10 @@
                 </p>
                 <p class="text-justify">Active since:</p>
                 <p class="text-justify">
-                    Number of cards: <span class="text-teal-400 font-semibold">{{ collection.cards.length }}</span>
+                    Number of cards:
+                    <span class="text-teal-400 font-semibold">{{
+                        collection.cards.length
+                    }}</span>
                 </p>
 
                 <Link :href="route('addCards', collection.id)">
