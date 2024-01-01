@@ -7,9 +7,7 @@
     </h1>
     <div class="flex flex-wrap justify-center">
         <div v-for="userCollection in userCollections" :key="userCollection.id">
-            <Link
-                :href="route('albumPage', userCollection.collection.id)"
-            >
+            <Link :href="route('albumPage', userCollection.collection.id)">
                 <album-collection-card
                     :collection="userCollection.collection"
                     :available="availableUserCards"

@@ -101,7 +101,7 @@
                     userCard.status == 'protected' ||
                     userCard.status == 'pasted'
                 "
-                :card="userCard"
+                :card="userCard.card"
                 :exists="true"
             >
             </CardBasic>
@@ -297,6 +297,8 @@ export default {
         }
 
         function filterPlayerCards() {
+            state.userCards = {};
+
             axios
                 .post(route("filterPlayerCards", { params: state.filters }))
                 .then(function (response) {

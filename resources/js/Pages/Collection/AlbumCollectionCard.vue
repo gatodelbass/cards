@@ -11,32 +11,35 @@
                 />
             </div>
             <div class="w-2/3 mt-2">
-                <span class=" text text-amber-200 text-lg ">
+                <span class="text text-amber-200 text-lg">
                     {{ collection.name }}
                 </span>
-              
-              
 
-                <br>
-                <div class="mt-4"> <span class="text-emerald-300 mt-4">
-                    <img
-                        :src="'/icons/' + collection.category.icon"
-                        class="w-8 inline-block mx-1 bg-amber-200 p-1 rounded-full"
-                    />
-                </span>
-                &nbsp;
-                <span
-                    class="text-gray-700  bg-amber-200 rounded-full px-2 py-1 inline-block"
-                >
-                    {{ collection.cards.length }} cards
-                </span>
+                <br />
+                <div class="mt-4">
+                    <span class="text-emerald-300 mt-4">
+                        <img
+                            :src="'/icons/' + collection.category.icon"
+                            class="w-8 inline-block mx-1 bg-amber-200 p-1 rounded-full"
+                        />
+                    </span>
+                    &nbsp;
+                     <span
+                        class="text-gray-700 bg-amber-200 rounded-full px-2 py-1 inline-block text-lobster"
+                    >
+                       #{{ collection.id }} 
+                    </span>
+                     &nbsp;
+                    <span
+                        class="text-gray-700 bg-amber-200 rounded-full px-2 py-1 inline-block"
+                    >
+                        {{ collection.cards.length }} cards
+                    </span>
 
-                <p class="text-amber-200 mb-2">
-                    {{ collection.category.name }}
-                </p></div>
-               
-
-               
+                    <p class="text-amber-200 mb-2">
+                        {{ collection.category.name }}
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -50,23 +53,23 @@
             >
                 <div
                     v-if="pasted.includes(card.id)"
-                    class="bg-emerald-300 border-emerald-500 px-0.5 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3"
+                    class="bg-emerald-300 border-emerald-500 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3"
                 >
-                    {{ card.order }}
+                    {{ card.collection_id }}-{{ card.order }}
                 </div>
 
                 <div
                     v-else-if="available.includes(card.id)"
-                    class="bg-amber-200 border-amber-500 px-0.5 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3 animate-pulse"
+                    class="bg-amber-200 border-amber-500 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3 animate-pulse"
                 >
-                    {{ card.order }}
+                    {{ card.collection_id }}-{{ card.order }}
                 </div>
 
                 <div
                     v-else
-                    class="bg-gray-400 border-gray-500 px-0.5 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3"
+                    class="bg-gray-400 border-gray-500 pt-2 w-10 h-10 rounded-sm border-b-3 border-l-3"
                 >
-                    {{ card.order }}
+                    {{ card.collection_id }}-{{ card.order }}
                 </div>
             </div>
         </div>

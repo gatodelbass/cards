@@ -39,26 +39,22 @@ class PlayerController extends Controller
 
     public function playerCards()
     {
-
         $cardsPerPage = config('constants.pagination_cards_per_page');
 
-        $totalCards =   $userCards  = DB::table('cards')
-            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+        $totalCards = UserCard::join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where('user_cards.user_id', '=', Auth::user()->id)
             ->where('user_cards.status', '!=', 'sold')
             ->where('user_cards.status', '!=', 'pasted')->get();
 
-
-        $userCards  = DB::table('cards')
-            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+        $userCards = UserCard::join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where('user_cards.user_id', '=', Auth::user()->id)
             ->where('user_cards.status', '!=', 'sold')
-            ->where('user_cards.status', '!=', 'pasted')->orderBy("rarity", "DESC")->take($cardsPerPage)->get();
+            ->where('user_cards.status', '!=', 'pasted')->take($cardsPerPage)->orderBy("rarity", "DESC")->orderBy("order", "ASC")->get();
 
         $totalPages = ceil(count($totalCards) / $cardsPerPage);
 
         return Inertia::render('Player/PlayerCards', [
-            'userCards' => $userCards,
+            'userCards' => $userCards->load(["card.collection.category"]),
             'currentPage' => 1,
             'totalPages' => $totalPages
         ]);
@@ -95,28 +91,24 @@ class PlayerController extends Controller
             array_push($status, "protected");
         }
 
-        $totalCards =   $userCards  = DB::table('cards')
-            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+        $totalCards = UserCard::join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where('user_cards.user_id', '=', Auth::user()->id)
             ->where('user_cards.status', '!=', 'sold')
-            ->whereIn("status", $status)
-            ->whereIn("rarity", $rarity)->get();
+            ->where('user_cards.status', '!=', 'pasted')->get();
 
-        $userCards  = DB::table('cards')
-            ->join('user_cards', 'cards.id', '=',  'user_cards.card_id')
+        $userCards = UserCard::join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where('user_cards.user_id', '=', Auth::user()->id)
-            ->where('user_cards.status', '!=', 'sold');
+            ->where('user_cards.status', '!=', 'sold')
+            ->where('user_cards.status', '!=', 'pasted')
+            ->whereIn("rarity", $rarity)->whereIn("status", $status)
+            ->skip($skip)->take($cardsPerPage)->orderBy("rarity", "DESC")->orderBy("order", "ASC")->get();
 
-        $totalPages = ceil(count($totalCards) /  $cardsPerPage);
-
-        $userCards->whereIn("rarity", $rarity)->whereIn("status", $status);
-        $userCards->skip($skip)->take($cardsPerPage);
+        $totalPages = ceil(count($totalCards) / $cardsPerPage);
 
         return response()->json([
-            'userCards' => $userCards->orderBy('rarity', 'desc')->get(),
+            'userCards' => $userCards->load(["card.collection.category"]),
             'currentPage' => $request->params["currentPage"],
             'totalPages' => $totalPages
-
         ]);
     }
 
@@ -155,14 +147,11 @@ class PlayerController extends Controller
             ->where('user_cards.status', '!=', 'sold')
             ->whereIn("rarity", $rarity)->whereIn("status", $status)->pluck('user_cards.id');
 
-        $selectedCardsSell = UserCard::whereIn("id",  $userCards)->get()->load("card.collection.category");
-
-
+        $selectedCardsSell = UserCard::whereIn("id",  $userCards)->get();
 
         $goldObtained = 0;
 
         foreach ($selectedCardsSell as $userCard) {
-
             $bottomLimit = $userCard->card->cost * 25 / 100;
             $topLimit = $userCard->card->cost * 75 / 100;
             $goldObtained = $goldObtained + rand($bottomLimit, $topLimit);
