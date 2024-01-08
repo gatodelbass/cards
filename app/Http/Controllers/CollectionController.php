@@ -150,13 +150,16 @@ class CollectionController extends Controller
         $cards = Card::where('collection_id', $collectionId)->orderby("order")->get();
 
         return Inertia::render('Collection/AddCard', [
-            'cards' => $cards,
+            'cards' => $cards->load(["collection.category"]),
             'collection' => $collection,
         ]);
     }
 
     public function addNewCard(Request $request)
     {
+
+
+      //  dd("sdf");
 
         $maxOrder = Card::where('collection_id', $request->collectionId)->max('order');
         $card = new Card();
@@ -171,7 +174,7 @@ class CollectionController extends Controller
         return back();
 
         return Inertia::render('Collection/AddCard', [
-            'cards' => $cards,
+            'cards' => $cards->load(["collection.category"]),
             'collection' => $request->collectionId,
         ]);
 
