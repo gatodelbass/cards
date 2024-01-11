@@ -3,7 +3,7 @@
 
     <div
         v-if="state.showModal"
-        class="text-xl text-jost min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover p-1 md:p-10"
+        class="text-base text-jost min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover p-1 md:p-10"
     >
         <div
             @click="closeModal"
@@ -35,7 +35,7 @@
                             @click="vote(state.firstCardModal)"
                             class="w-full bg-teal-300 hover:bg-teal-400 p-0 border-1 border-gray-500"
                         >
-                            vote {{ state.firstCardModal.votes }}
+                            votes {{ state.firstCardModal.votes }}
                         </button>
                     </div>
                     <div class="w-1/2">
@@ -43,7 +43,7 @@
                             @click="vote(state.secondCardModal)"
                             class="w-full bg-teal-300 hover:bg-teal-400 p-0 border-1 border-gray-500"
                         >
-                            vote {{ state.secondCardModal.votes }}
+                            votes {{ state.secondCardModal.votes }}
                         </button>
                     </div>
                 </div>

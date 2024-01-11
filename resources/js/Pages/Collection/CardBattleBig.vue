@@ -19,7 +19,7 @@
             <div
                 class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
             >
-                <p class="px-1 py-0.5 truncate ...">{{ card.name }}</p>
+                <p class=" text-2xl px-1 py-0.5 truncate ...">{{ card.name }}</p>
             </div>
         </div>
     </div>
