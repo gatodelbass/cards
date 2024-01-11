@@ -3,7 +3,7 @@
 
     <div
         v-if="state.showModal"
-        class=" text-xl text-jost min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover p-1 md:p-10"
+        class="text-xl text-jost min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover p-1 md:p-10"
     >
         <div
             @click="closeModal"
@@ -29,7 +29,7 @@
                     </CardBattleBig>
                 </div>
 
-                <div class="flex flex-wrap ">
+                <div class="flex flex-wrap">
                     <div class="w-1/2">
                         <button
                             @click="vote(state.firstCardModal)"
@@ -67,14 +67,23 @@
     </h1>
 
     <div v-if="$page.props.auth.user.role == 'admin'" class="my-4">
-
-        <button @click="nextRound" class="px-4 bg-emerald-400 py-2 hover:bg-teal-400 text-jost">
-             Next round {{state.matches.length}}
+        <button
+            @click="nextRound"
+            class="px-4 bg-emerald-400 py-2 hover:bg-teal-400 text-jost"
+        >
+            Next round
         </button>
-      
     </div>
 
     <div class="flex flex-wrap justify-center">
+        <div v-if="state.qualifiedOddCard" class="mx-0.5">
+            <div
+                class="flex flex-wrap m-1 mb-0.5 md:m-2 bg-teal-400 p-1 md:p-2 border-1 border-gray-800 rounded-sm"
+            >
+                <CardBattle :card="state.qualifiedOddCard"> </CardBattle>
+            </div>
+        </div>
+
         <div v-for="match in state.matches" :key="match" class="">
             <div
                 @click="showModal(match)"
@@ -124,8 +133,7 @@ export default {
             showModal: false,
             cards: [],
             matches: [],
-            qualified: [],
-            
+            qualifiedOddCard: null,
             firstCardModal: {},
             secondCardModal: {},
         });
@@ -145,20 +153,23 @@ export default {
         });
 
         function setMatches() {
-
             state.matches = [];
             for (let i = 0; i < state.cards.length; i += 2) {
                 let aux = i;
 
-                let match = {
-                    firstCard: state.cards[aux],
-                    secondCard: state.cards[aux + 1],
-                };
+                if (state.cards[aux + 1]) {
+                    let match = {
+                        firstCard: state.cards[aux],
+                        secondCard: state.cards[aux + 1],
+                    };
 
-                state.matches.push(match);
+                    state.matches.push(match);
+                } else {
+                    state.qualifiedOddCard = state.cards[aux];
+                }
             }
 
-           // alert(state.matches.length);
+            // alert(state.matches.length);
         }
 
         function showModal(match) {
@@ -172,34 +183,42 @@ export default {
             state.showModal = false;
         }
 
-        function vote(card){
+        function vote(card) {
             card.votes += 1;
         }
 
-        function nextRound(){
-
+        function nextRound() {
+            state.cards.splice(0);
             state.cards = [];
 
-            for (let i = 0; i < state.matches.length; i++) {    
-                
-                console.log(state.matches[i].firstCard.votes + " vs " + state.matches[i].secondCard.votes);
-
-                if( state.matches[i].firstCard.votes == state.matches[i].secondCard.votes){
-                     state.cards.push(state.matches[i].firstCard);
-                      state.cards.push(state.matches[i].secondCard);
-
-                      
-                     
-                }
-
-                else if( state.matches[i].firstCard.votes > state.matches[i].secondCard.votes){
-                     state.cards.push(state.matches[i].firstCard);
-                     
+            for (let i = 0; i < state.matches.length; i++) {
+                if (
+                    state.matches[i].firstCard.votes ==
+                    state.matches[i].secondCard.votes
+                ) {
+                    state.matches[i].firstCard.votes = 0;
+                    state.matches[i].secondCard.votes = 0;
+                    state.cards.push(state.matches[i].firstCard);
+                    state.cards.push(state.matches[i].secondCard);
+                } else if (
+                    state.matches[i].firstCard.votes >
+                    state.matches[i].secondCard.votes
+                ) {
+                    state.matches[i].firstCard.votes = 0;
+                    state.cards.push(state.matches[i].firstCard);
                 } else {
-                         state.cards.push(state.matches[i].secondCard);
-                }               
+                    state.matches[i].secondCard.votes = 0;
+                    state.cards.push(state.matches[i].secondCard);
+                }
             }
-            
+
+            if (state.qualifiedOddCard) {
+                state.cards.push(state.qualifiedOddCard);
+            }
+
+            state.qualifiedOddCard = null;
+
+            state.matches.splice(0);
             state.matches = [];
             setMatches();
         }
