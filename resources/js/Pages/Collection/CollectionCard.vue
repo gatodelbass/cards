@@ -30,11 +30,13 @@
         <div class="flex">
             <div class="w-1/3">
                 <div class="border-4 border-white">
-                    <img
-                        class="border-gray-900 border-4"
-                        :src="collection.cover_card"
-                        alt="image"
-                    />
+                    <Link :href="route('battle', collection.id)" class="">
+                        <img
+                            class="border-gray-900 border-4"
+                            :src="collection.cover_card"
+                            alt="image"
+                        />
+                    </Link>
                 </div>
             </div>
 

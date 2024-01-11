@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('batchCollection/{collectionId}', [App\Http\Controllers\AdminController::class, 'batchCollection'])->name('batchCollection');
     Route::get('saveCardName/{cardId}/{cardName}', [App\Http\Controllers\AdminController::class, 'saveCardName'])->name('saveCardName');
     Route::get('saveCardLayout/{cardId}/{cardLayout}', [App\Http\Controllers\AdminController::class, 'saveCardLayout'])->name('saveCardLayout');
+    Route::get('battle/{collectionId}', [App\Http\Controllers\CollectionController::class, 'battle'])->name('battle');
 
 
     Route::get('cards/index/{collectionId}', [App\Http\Controllers\CardController::class, 'index'])->name('cards.index');

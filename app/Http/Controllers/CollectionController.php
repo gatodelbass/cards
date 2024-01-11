@@ -478,4 +478,16 @@ class CollectionController extends Controller
             $maxOrder++;
         }
     }
+
+    public function battle($collectionId)
+    {
+
+        $collection = Collection::find($collectionId);
+        $cards = Card::where('collection_id', $collectionId)->inRandomOrder()->get();
+
+        return Inertia::render('Collection/Battle', [
+            'cards' => $cards->load(["collection.category"]),
+            'collection' => $collection,
+        ]);
+    }
 }
