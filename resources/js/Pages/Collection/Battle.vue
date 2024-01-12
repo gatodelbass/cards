@@ -220,7 +220,25 @@ export default {
 
             state.matches.splice(0);
             state.matches = [];
+
+            state.cards = shuffle(state.cards);
+
             setMatches();
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length,
+                randomIndex;
+
+            while (currentIndex > 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex],
+                    array[currentIndex],
+                ];
+            }
+            return array;
         }
 
         return {
@@ -230,6 +248,7 @@ export default {
             setMatches,
             vote,
             nextRound,
+            shuffle,
         };
     },
 };
