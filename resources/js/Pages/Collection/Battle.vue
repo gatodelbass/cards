@@ -12,14 +12,6 @@
         <div
             class="w-full p-1 relative mx-auto my-auto rounded shadow-lg bg-gray-800 opacity-80"
         >
-            <div class="p-2 mt-2 text-center space-x-4 md:block">
-                <button
-                    @click="closeModal"
-                    class="mb-2 md:mb-0 bg-teal-400 px-5 py-2 text-sm shadow-sm w-full text-blueGray-600 rounded-sm hover:shadow-lg hover:bg-amber-400"
-                >
-                    Close
-                </button>
-            </div>
             <div class="">
                 <div class="justify-center flex flex-wrap bg p-1">
                     <CardBattleBig :card="state.firstCardModal">
@@ -33,17 +25,33 @@
                     <div class="w-1/2">
                         <button
                             @click="vote(state.firstCardModal)"
-                            class="w-full bg-teal-300 hover:bg-teal-400 p-0 border-1 border-gray-500"
+                            class="w-full bg-gray-200 hover:bg-teal-400 p-0 border-1 border-gray-500"
                         >
-                            votes {{ state.firstCardModal.votes }}
+                            <span v-if="state.firstCardModal.votes == 0"
+                                >vote here</span
+                            >
+                            <span
+                                v-for="n in state.firstCardModal.votes"
+                                :key="n"
+                                class="text-lg"
+                                >😍</span
+                            >
                         </button>
                     </div>
                     <div class="w-1/2">
                         <button
                             @click="vote(state.secondCardModal)"
-                            class="w-full bg-teal-300 hover:bg-teal-400 p-0 border-1 border-gray-500"
+                            class="w-full bg-gray-200 hover:bg-teal-400 p-0 border-1 border-gray-500"
                         >
-                            votes {{ state.secondCardModal.votes }}
+                            <span v-if="state.secondCardModal.votes == 0"
+                                >vote here</span
+                            >
+                            <span
+                                v-for="n in state.secondCardModal.votes"
+                                :key="n"
+                                class="text-lg"
+                                >😍</span
+                            >
                         </button>
                     </div>
                 </div>
@@ -51,7 +59,7 @@
                 <div class="p-2 mt-2 text-center space-x-4 md:block">
                     <button
                         @click="closeModal"
-                        class="mb-2 md:mb-0 bg-teal-400 px-5 py-2 text-sm shadow-sm w-full text-blueGray-600 rounded-sm hover:shadow-lg hover:bg-amber-400"
+                        class="mb-2 md:mb-0 bg-gray-400 px-5 py-2 text-sm shadow-sm w-full text-blueGray-600 rounded-sm hover:shadow-lg hover:bg-amber-400"
                     >
                         Close
                     </button>
@@ -87,13 +95,28 @@
         <div v-for="match in state.matches" :key="match" class="">
             <div
                 @click="showModal(match)"
-                class="flex flex-wrap m-1 mb-0.5 md:m-2 bg-amber-100 p-1 md:p-2 border-1 border-gray-800 rounded-sm"
+                class="flex flex-wrap m-1 mb-0.5 md:m-2 bg-gray-900 p-1 md:p-2 border-1 border-gray-800 rounded-sm"
             >
-                <div class="mx-0.5">
+                <div
+                    class="mx-0 p-1"
+                    v-bind:class="{
+                        'bg-gray-900':
+                            match.firstCard.votes == match.secondCard.votes,
+                        'bg-teal-400':
+                            match.firstCard.votes > match.secondCard.votes,
+                    }"
+                >
                     <CardBattle :card="match.firstCard"> </CardBattle>
                 </div>
-
-                <div class="mx-1">
+                <div
+                    class="mx-0 p-1"
+                    v-bind:class="{
+                        'bg-gray-900':
+                            match.firstCard.votes == match.secondCard.votes,
+                        'bg-teal-400':
+                            match.secondCard.votes > match.firstCard.votes,
+                    }"
+                >
                     <CardBattle :card="match.secondCard"> </CardBattle>
                 </div>
             </div>
