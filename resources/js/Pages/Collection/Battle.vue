@@ -83,7 +83,104 @@
         </button>
     </div>
 
-    <div class="flex flex-wrap justify-center">
+    <div v-if="state.winnerCard" class="flex flex-wrap justify-center">
+        <div
+            class="w-150 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
+        >
+            <div class="rounded-sm">
+                <div
+                    class="relative p-1 h-150 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
+                >
+                    <img
+                        class="w-10 absolute left-10 top-10 animate-ping1"
+                        :src="'/images/partyAmber.svg'"
+                    />
+                    <img
+                        class="w-12 absolute left-16 top-16 animate-ping2"
+                        :src="'/images/partyBlue.svg'"
+                    />
+                    <img
+                        class="w-14 absolute left-52 top-10 animate-ping3"
+                        :src="'/images/partyGreen.svg'"
+                    />
+                    <img
+                        class="w-16 absolute left-32 top-4 animate-ping4"
+                        :src="'/images/partyRed.svg'"
+                    />
+
+                    <img
+                        class="w-10 absolute right-10 top-10 animate-ping1"
+                        :src="'/images/partyGreen.svg'"
+                    />
+                    <img
+                        class="w-12 absolute right-16 top-16 animate-ping2"
+                        :src="'/images/partyRed.svg'"
+                    />
+                    <img
+                        class="w-14 absolute right-24 top-4 animate-ping3"
+                        :src="'/images/partyAmber.svg'"
+                    />
+                    <img
+                        class="w-16 absolute right-52 top-10 animate-ping4"
+                        :src="'/images/partyBlue.svg'"
+                    />
+
+                    <img
+                        class="w-10 absolute left-10 bottom-10 animate-ping1"
+                        :src="'/images/partyAmber.svg'"
+                    />
+                    <img
+                        class="w-12 absolute left-16 bottom-16 animate-ping2"
+                        :src="'/images/partyBlue.svg'"
+                    />
+                    <img
+                        class="w-14 absolute left-52 bottom-10 animate-ping3"
+                        :src="'/images/partyGreen.svg'"
+                    />
+                    <img
+                        class="w-16 absolute left-32 bottom-4 animate-ping4"
+                        :src="'/images/partyRed.svg'"
+                    />
+
+                    <img
+                        class="w-10 absolute right-10 bottom-10 animate-ping1"
+                        :src="'/images/partyGreen.svg'"
+                    />
+                    <img
+                        class="w-12 absolute right-16 bottom-16 animate-ping2"
+                        :src="'/images/partyRed.svg'"
+                    />
+                    <img
+                        class="w-14 absolute right-24 bottom-4 animate-ping3"
+                        :src="'/images/partyAmber.svg'"
+                    />
+                    <img
+                        class="w-16 absolute right-52 bottom-10 animate-ping4"
+                        :src="'/images/partyBlue.svg'"
+                    />
+
+                    <img
+                        class="max-h-full min-h-full object-contain mx-auto rounded-sm"
+                        alt="img"
+                        :src="state.winnerCard.image"
+                    />
+                    <p
+                        v-if="true"
+                        class="z-10 absolute bottom-1 left-1 bg-yellow-200 text-gray-700 md:font-semibold px-1 rounded-sm truncate ... mx-auto"
+                    ></p>
+                </div>
+                <div
+                    class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
+                >
+                    <p class="text-2xl px-1 py-0.5 truncate ...">
+                        {{ state.winnerCard.name }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-else class="flex flex-wrap justify-center">
         <div v-if="state.qualifiedOddCard" class="mx-0.5">
             <div
                 class="flex flex-wrap m-1 mb-0.5 md:m-2 bg-teal-400 p-1 md:p-2 border-1 border-gray-800 rounded-sm"
@@ -159,6 +256,7 @@ export default {
             qualifiedOddCard: null,
             firstCardModal: {},
             secondCardModal: {},
+            winnerCard: null,
         });
 
         onMounted(() => {
@@ -171,28 +269,28 @@ export default {
                 };
                 state.cards.push(card);
             });
-
             setMatches();
         });
 
         function setMatches() {
+            if (state.cards.length == 1) {
+                state.winnerCard = state.cards[0];
+                return;
+            }
+
             state.matches = [];
             for (let i = 0; i < state.cards.length; i += 2) {
                 let aux = i;
-
                 if (state.cards[aux + 1]) {
                     let match = {
                         firstCard: state.cards[aux],
                         secondCard: state.cards[aux + 1],
                     };
-
                     state.matches.push(match);
                 } else {
                     state.qualifiedOddCard = state.cards[aux];
                 }
             }
-
-            // alert(state.matches.length);
         }
 
         function showModal(match) {

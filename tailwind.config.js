@@ -10,7 +10,6 @@ module.exports = {
     ],
 
     theme: {
-
         borderWidth: {
             DEFAULT: '1px',
             '0': '0',
@@ -21,10 +20,6 @@ module.exports = {
            '6': '6px',
            '8': '8px',
           },
-
-
-        
-
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
@@ -37,7 +32,7 @@ module.exports = {
               },
 
               animation: {
-                'ping1': 'ping 0.8s cubic-bezier(0, 0, 0.2, 1) ',
+                'ping1': 'ping 0.8s cubic-bezier(0, 0, 0.2, 1) infinite',
                 'ping2': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
                 'ping3': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
                 'ping4': 'ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite',
