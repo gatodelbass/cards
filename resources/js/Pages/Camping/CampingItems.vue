@@ -132,118 +132,118 @@
 </template>
 
 <script>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import CollectionCard from "./CollectionCard.vue";
-import { reactive, onMounted } from "vue";
-import JetInput from "@/Jetstream/Input.vue";
-import draggable from "vuedraggable";
+// import AppLayout from "@/Layouts/AppLayout.vue";
+// import CollectionCard from "./CollectionCard.vue";
+// import { reactive, onMounted } from "vue";
+// import JetInput from "@/Jetstream/Input.vue";
+// import draggable from "vuedraggable";
 
-import { useForm } from "@inertiajs/vue3";
+// import { useForm } from "@inertiajs/vue3";
 
-export default {
-    name: "OperatorIndex",
-    components: {
-        AppLayout,
-        CollectionCard,
-        JetInput,
-        draggable,
-    },
-    props: {
-        cards: {
-            type: Object,
-            default: {},
-        },
-        collection: {
-            type: Object,
-            default: {},
-        },
-    },
+// export default {
+//     name: "OperatorIndex",
+//     components: {
+//         AppLayout,
+//         CollectionCard,
+//         JetInput,
+//         draggable,
+//     },
+//     props: {
+//         cards: {
+//             type: Object,
+//             default: {},
+//         },
+//         collection: {
+//             type: Object,
+//             default: {},
+//         },
+//     },
 
-    setup(props, { emit }) {
-        const state = reactive({
-            cards: [],
-            layouts: {
-                exchange: true,
-                protected: true,
-                pasted: false,
-                currentPage: 1,
-                totalPages: 0,
-                star1: true,
-                star2: true,
-                star3: true,
-                star4: true,
-                star5: true,
-            },
-        });
+//     setup(props, { emit }) {
+//         const state = reactive({
+//             cards: [],
+//             layouts: {
+//                 exchange: true,
+//                 protected: true,
+//                 pasted: false,
+//                 currentPage: 1,
+//                 totalPages: 0,
+//                 star1: true,
+//                 star2: true,
+//                 star3: true,
+//                 star4: true,
+//                 star5: true,
+//             },
+//         });
 
-        onMounted(() => {
-            props.cards.forEach((element) => {
-                let card = {
-                    id: element.id,
+//         onMounted(() => {
+//             props.cards.forEach((element) => {
+//                 let card = {
+//                     id: element.id,
                   
-                    name: element.name,
-                    image: element.image,
-                    cost: element.cost,
-                    category: element.category,
-                };
-                state.cards.push(card);
-            });
-        });
+//                     name: element.name,
+//                     image: element.image,
+//                     cost: element.cost,
+//                     category: element.category,
+//                 };
+//                 state.cards.push(card);
+//             });
+//         });
 
-        const form = useForm({
-            collection_id: props.collection.id,
-            cards: null,
-        });
+//         const form = useForm({
+//             collection_id: props.collection.id,
+//             cards: null,
+//         });
 
-        async function saveCardName(card) {
-            await axios
-                .get(route("saveCardName", [card.id, card.name]))
-                .then(function (response) {
-                    card = response.data.card;
-                })
-                .catch(function (error) {});
-        }
+//         async function saveCardName(card) {
+//             await axios
+//                 .get(route("saveCardName", [card.id, card.name]))
+//                 .then(function (response) {
+//                     card = response.data.card;
+//                 })
+//                 .catch(function (error) {});
+//         }
 
-        async function saveCardImage(card) {
-            await axios
-                .post(route("saveCardImage", card))
-                .then(function (response) {
-                    card = response.data.card;
-                })
-                .catch(function (error) {});
-        }
+//         async function saveCardImage(card) {
+//             await axios
+//                 .post(route("saveCardImage", card))
+//                 .then(function (response) {
+//                     card = response.data.card;
+//                 })
+//                 .catch(function (error) {});
+//         }
 
-        async function saveCardLayout(card, layout) {
-            await axios
-                .get(route("saveCardLayout", [card.id, layout]))
-                .then(function (response) {
-                    card.layout = layout;
-                })
-                .catch(function (error) {});
-        }
+//         async function saveCardLayout(card, layout) {
+//             await axios
+//                 .get(route("saveCardLayout", [card.id, layout]))
+//                 .then(function (response) {
+//                     card.layout = layout;
+//                 })
+//                 .catch(function (error) {});
+//         }
 
-        async function saveCardOrder() {
-            form.cards = state.cards;
-            form.post(route("saveCardOrder"), {});
-        }
+//         async function saveCardOrder() {
+//             form.cards = state.cards;
+//             form.post(route("saveCardOrder"), {});
+//         }
 
-        async function changeAllLayout(layout) {
-            await axios
-                .get(route("changeAllLayout", [props.collection.id, layout]))
-                .then(function (response) {
-                    state.cards = response.data.cards;
-                })
-                .catch(function (error) {});
-        }
+//         async function changeAllLayout(layout) {
+//             await axios
+//                 .get(route("changeAllLayout", [props.collection.id, layout]))
+//                 .then(function (response) {
+//                     state.cards = response.data.cards;
+//                 })
+//                 .catch(function (error) {});
+//         }
 
-        return {
-            saveCardName,
-            saveCardImage,
-            saveCardLayout,
-            state,
-            saveCardOrder,
-            changeAllLayout,
-        };
-    },
-};
+//         return {
+//             saveCardName,
+//             saveCardImage,
+//             saveCardLayout,
+//             state,
+//             saveCardOrder,
+//             changeAllLayout,
+//         };
+//     },
+// };
 </script>
