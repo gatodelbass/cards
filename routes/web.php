@@ -130,6 +130,13 @@ Route::middleware('auth')->group(function () {
     Route::get('acceptExchange/{tradeId}', [App\Http\Controllers\ExchangeController::class, 'acceptExchange'])->name('acceptExchange');
     Route::get('rejectExchange/{tradeId}', [App\Http\Controllers\ExchangeController::class, 'rejectExchange'])->name('rejectExchange');
     Route::get('getExchangeCards/{filter}', [App\Http\Controllers\ExchangeController::class, 'getExchangeCards'])->name('getExchangeCards');
+
+    //CAMPING
+    Route::get('campingIndex', [App\Http\Controllers\CampingController::class, 'campingIndex'])->name('campingIndex');
+    Route::get('campingItems', [App\Http\Controllers\CampingController::class, 'campingItems'])->name('campingItems');
+
+
+
 });
 
 Route::get('help', [App\Http\Controllers\AdminController::class, 'help'])->name('help');
