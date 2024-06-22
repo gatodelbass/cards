@@ -319,8 +319,8 @@ export default {
                 ) {
                     state.matches[i].firstCard.votes = 0;
                     state.matches[i].secondCard.votes = 0;
-                    state.cards.push(state.matches[i].firstCard);
-                    state.cards.push(state.matches[i].secondCard);
+                    //state.cards.push(state.matches[i].firstCard);
+                    //state.cards.push(state.matches[i].secondCard);
                 } else if (
                     state.matches[i].firstCard.votes >
                     state.matches[i].secondCard.votes
