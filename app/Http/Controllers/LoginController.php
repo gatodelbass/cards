@@ -29,44 +29,44 @@ class LoginController extends Controller
 {
     public function welcome()
     {
-        $cards = DB::table('cards')->selectRaw('count(id) as number')
-            ->where('rarity', '!=', null)
-            ->groupBy('rarity')
-            ->get()->toArray();
+        // $cards = DB::table('cards')->selectRaw('count(id) as number')
+        //     ->where('rarity', '!=', null)
+        //     ->groupBy('rarity')
+        //     ->get()->toArray();
 
-        $rarities = ['', '1 star', '2 stars', '3 stars', '4 stars', '5 stars'];
+        // $rarities = ['', '1 star', '2 stars', '3 stars', '4 stars', '5 stars'];
 
-        //chart headings
-        $chartData[0] = ['card', 'rarity'];
+        // //chart headings
+        // $chartData[0] = ['card', 'rarity'];
 
-        for ($i = 1; $i <= 5; $i++) {
-            $chartData[$i] = [$rarities[$i], $cards[$i - 1]->number];
-        }
+        // for ($i = 1; $i <= 5; $i++) {
+        //     $chartData[$i] = [$rarities[$i], $cards[$i - 1]->number];
+        // }
 
 
-        $randomCards = null;
-        $randomCollections = null;
+        // $randomCards = null;
+        // $randomCollections = null;
 
-        try {
-            $randomCards = Card::all()->random(3);
-            $randomCollections = Collection::all()->random(3);
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        // try {
+        //     $randomCards = Card::all()->random(3);
+        //     $randomCollections = Collection::all()->random(3);
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
 
-        $totalUserCardsObtained = DB::table("user_cards")->count();
-        $totalUserCardsPasted = DB::table("user_cards")->where("status", "pasted")->count();
-        $totalExchangesAccepted = DB::table("trades")->where("status", "accepted")->count();
-        $totalCollections = DB::table("collections")->where("status", "active")->count();
+        // $totalUserCardsObtained = DB::table("user_cards")->count();
+        // $totalUserCardsPasted = DB::table("user_cards")->where("status", "pasted")->count();
+        // $totalExchangesAccepted = DB::table("trades")->where("status", "accepted")->count();
+        // $totalCollections = DB::table("collections")->where("status", "active")->count();
 
         return Inertia::render('Welcome', [
-            'randomCards' => $randomCards->load(["collection.category"]),
-            'randomCollections' => $randomCollections->load(["cards", "category", "user"]),
-            'chartData' => $chartData,
-            'totalUserCardsObtained' => $totalUserCardsObtained,
-            'totalUserCardsPasted' => $totalUserCardsPasted,
-            'totalExchangesAccepted' => $totalExchangesAccepted,
-            'totalCollections' => $totalCollections,
+            // 'randomCards' => $randomCards->load(["collection.category"]),
+            // 'randomCollections' => $randomCollections->load(["cards", "category", "user"]),
+            // 'chartData' => $chartData,
+            // 'totalUserCardsObtained' => $totalUserCardsObtained,
+            // 'totalUserCardsPasted' => $totalUserCardsPasted,
+            // 'totalExchangesAccepted' => $totalExchangesAccepted,
+            // 'totalCollections' => $totalCollections,
         ]);
     }
 
