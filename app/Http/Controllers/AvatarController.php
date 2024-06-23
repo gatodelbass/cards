@@ -11,6 +11,7 @@ use App\Http\Requests\AvatarRequest;
 
 use Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 
 class AvatarController extends Controller
@@ -36,9 +37,7 @@ class AvatarController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Avatar/Create', [
-           
-        ]);
+        return Inertia::render('Avatar/Create', []);
     }
 
     /**
@@ -48,20 +47,16 @@ class AvatarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {      
-       
+    {
+
 
         if ($request->image != null) {
-
-
-
-
             $path = Storage::disk('public')->put('avatars', $request->image);
 
             $avatar = new Avatar();
             $avatar->image = $path;
             $avatar->save();
-        }       
+        }
 
         return Redirect::route('avatars.index');
     }
@@ -106,60 +101,28 @@ class AvatarController extends Controller
     }
 
 
-    public function update(StoreAvatarRequest $request, Avatar $Avatar)
+    public function update(Request $request, $id)
     {
 
-        if ($request->hasFile('image')) {
-            $now = Carbon\Carbon::now();
-            $now->toDateTimeString();
-            $imgName = $now->format('Y-m-d') . "_" . $now->format('his') . ".png";
-            $request->image->storeAs('public/images/Avatars/', $imgName);
+
+        if ($request->image != null) {
+
+            Log::debug("pasa1" . $request->image);
+
+            $path = Storage::disk('public')->put('avatars', $request->image);
+
+            $avatar = Avatar::find($id);
+            $avatar->image = $path;
+            $avatar->save();
         } else {
-            $imgName = $Avatar->image;
-        }
-
-        if ($request->has('id')) {
-
-            switch ($request->rarity) {
-                case '1':
-                    $power = rand(100, 499);
-                    break;
-                case '2':
-                    $power = rand(500, 999);
-                    break;
-                case '3':
-                    $power = rand(1000, 4999);
-                    break;
-                case '4':
-                    $power = rand(5000, 9999);
-                    break;
-                case '5':
-                    $power = rand(10000, 49999);
-                    break;
-                case '6':
-                    $power = rand(50000, 99999);
-                    break;
-                case '7':
-                    $power = rand(100000, 499999);
-                    break;
-                default:
-                    $power = 100;
-                    break;
-            }
-
-            $power = $power * 100;
-
-
-
-            Avatar::find($request->input('id'))->update($request->validated() + [
-                'image' => $imgName,
-                'power' => $power,
-
-            ]);
+            Log::debug("paila");
         }
 
 
-        return Redirect::route('Avatars.index');
+
+
+
+        return Redirect::route('avatars.index');
     }
 
     /**

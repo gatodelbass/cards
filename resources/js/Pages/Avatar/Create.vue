@@ -1,7 +1,10 @@
 <template>
     <app-layout> </app-layout>
 
-    <div v-if="$page.props.auth.user.role == 'admin'" class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base">
+    <div
+        v-if="$page.props.auth.user.role == 'admin'"
+        class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base"
+    >
         <div class="py-3 mx-auto sm:px-6 lg:px-8">
             <div class="bg-emerald-300">
                 <div
@@ -18,9 +21,7 @@
             <div class="mx-auto mt-0 bg-gray-50">
                 <div class="py-3 mx-auto sm:px-6 lg:px-8">
                     <div class="flex flex-wrap">
-                     
-
-                        <div class="w-full  mb-4 px-2">
+                        <div class="w-full mb-4 px-2">
                             <jet-label for="name">Image: </jet-label>
                             <div
                                 class="flex items-center justify-center w-full mt-1"
@@ -33,7 +34,7 @@
                                     >
                                         <img
                                             :src="'/icons/imageIcon.svg'"
-                                            class="w-8 rounded px-0 mx-2 "
+                                            class="w-8 rounded px-0 mx-2"
                                         />
 
                                         <p
@@ -55,26 +56,15 @@
                                 class="mt-2"
                             />
                         </div>
-
-                       
                     </div>
 
-                    <div
-                        v-if="form.image"
-                        class="w-64 mx-auto  p-2"
-                    >
-                       
-
-                        <div class="w-full m-auto p-2 ">
-                           
-                                <img
-                                    :src="showImage(form.image)"
-                                    class=" border-teal-500 border-4 rounded-full"
-                                />
-                           
+                    <div v-if="form.image" class="w-64 mx-auto p-2">
+                        <div class="w-full m-auto p-2">
+                            <img
+                                :src="showImage(form.image)"
+                                class="border-teal-500 border-4 rounded-full"
+                            />
                         </div>
-
-                       
                     </div>
 
                     <div
@@ -111,8 +101,8 @@ export default {
     name: "OperatorCreate",
     components: {
         AppLayout,
-       
-        JetLabel,       
+
+        JetLabel,
     },
     props: {
         collectionId: {
@@ -122,11 +112,9 @@ export default {
     },
 
     setup(props, { emit }) {
-        const state = reactive({
-          
-        });
+        const state = reactive({});
 
-        const form = useForm({           
+        const form = useForm({
             image: null,
         });
 
