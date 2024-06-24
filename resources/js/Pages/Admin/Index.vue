@@ -24,6 +24,15 @@
                 </div>
             </Link>
 
+            <Link :href="route('tags.index')">
+                <div
+                    class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
+                >
+                    <img class="w-10 mx-auto" :src="'/icons/tag.svg'" />
+                    <p class="my-2">tags</p>
+                </div>
+            </Link>
+
             <div
                 class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
             >

@@ -157,10 +157,6 @@ class CollectionController extends Controller
 
     public function addNewCard(Request $request)
     {
-
-
-      //  dd("sdf");
-
         $maxOrder = Card::where('collection_id', $request->collectionId)->max('order');
         $card = new Card();
         $card->collection_id = $request->collectionId;
@@ -177,10 +173,6 @@ class CollectionController extends Controller
             'cards' => $cards->load(["collection.category"]),
             'collection' => $request->collectionId,
         ]);
-
-
-
-
 
         return response()->json([
             'cards' => $cards,

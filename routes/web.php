@@ -70,6 +70,14 @@ Route::middleware('auth')->group(function () {
     Route::get('errorsCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'errorsCollection'])->name('errorsCollection');
     Route::resource('collections', App\Http\Controllers\CollectionController::class);
     Route::resource('avatars', App\Http\Controllers\AvatarController::class);
+
+
+    Route::get('addNewTag', [App\Http\Controllers\TagController::class, 'addNewTag'])->name('addNewTag');
+
+    Route::resource('tags', App\Http\Controllers\TagController::class);
+
+
+
     Route::get('batchCollection/{collectionId}', [App\Http\Controllers\AdminController::class, 'batchCollection'])->name('batchCollection');
     Route::get('saveCardName/{cardId}/{cardName}', [App\Http\Controllers\AdminController::class, 'saveCardName'])->name('saveCardName');
     Route::get('saveCardLayout/{cardId}/{cardLayout}', [App\Http\Controllers\AdminController::class, 'saveCardLayout'])->name('saveCardLayout');
