@@ -13,6 +13,7 @@
                 <div class="flex flex-wrap">
                     <div class="w-10/12">
                         <jet-input
+                            @keyup="filterTags"
                             type="text"
                             class="w-full mx-2"
                             v-model="form.name"
@@ -31,15 +32,16 @@
             </div>
         </div>
 
-        <div class="m-2">
+       
+    </div>
+    <div class="m-2">
             <span
-                v-for="tag in tags"
+                v-for="tag in state.tags"
                 :key="tag.id"
                 class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg"
                 >{{ tag.name }}</span
             >
         </div>
-    </div>
 </template>
 
 <script>
@@ -48,7 +50,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -67,11 +69,27 @@ export default {
     },
 
     setup(props, { emit }) {
-        const state = reactive({});
+        const state = reactive({
+            tags: null,
+        });
 
         const form = useForm({
-            name: null,
+            name: "",
         });
+
+        onMounted(() => {
+            state.tags = props.tags;
+        });
+
+        function filterTags() {
+            if (form.name != "") {
+                axios.get(route("filterTags", form.name)).then((response) => {
+                    state.tags = response.data.tags;
+                });
+            } else {
+                state.tags = props.tags;
+            }
+        }
 
         function addTag() {
             form.get(route("addNewTag"), {
@@ -84,6 +102,7 @@ export default {
             state,
             addTag,
             form,
+            filterTags,
         };
     },
 };

@@ -30,28 +30,34 @@ class TagController extends Controller
         ]);
     }
 
+    public function filterTags($name)
+    {
+
+        $tags = Tag::where("name",  'like', '%' . $name . '%')->get();
+
+
+        return response()->json([
+            'tags' => $tags,
+        ]);
+    }
+
 
 
     public function addNewTag(Request $request)
     {
 
-        $tag = new Tag();
-        $tag->name = $request->name;
-        $tag->save();
+        $tagExists = Tag::where("name", $request->name)->first();
+
+        if (!$tagExists) {
+
+            $tag = new Tag();
+            $tag->name = $request->name;
+            $tag->save();
+        }
+
 
         $tags = Tag::orderBy("name")->get();
 
         return back();
-
-        return Inertia::render('Collection/AddTag', [
-            'tags' => $tags->load(["collection.category"]),
-            'collection' => $request->collectionId,
-        ]);
-
-        return response()->json([
-            'tags' => $tags,
-        ]);
-
-        return response()->noContent();
     }
 }
