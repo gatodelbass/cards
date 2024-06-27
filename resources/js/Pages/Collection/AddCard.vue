@@ -45,7 +45,9 @@
 
     <div class="flex flex-wrap justify-center">
         <div v-for="card in state.cards" :key="card.id" class="m-1">
-            <card-basic :card="card"> </card-basic>
+            <Link :href="route('manageTags', card.id)">
+                <CardBasic :card="card"> </CardBasic>
+            </Link>
         </div>
     </div>
 </template>

@@ -82,7 +82,11 @@ Route::middleware('auth')->group(function () {
     Route::get('batchCollection/{collectionId}', [App\Http\Controllers\AdminController::class, 'batchCollection'])->name('batchCollection');
     Route::get('saveCardName/{cardId}/{cardName}', [App\Http\Controllers\AdminController::class, 'saveCardName'])->name('saveCardName');
     Route::get('saveCardLayout/{cardId}/{cardLayout}', [App\Http\Controllers\AdminController::class, 'saveCardLayout'])->name('saveCardLayout');
+
+    Route::get('manageTags/{cardId}', [App\Http\Controllers\CollectionController::class, 'manageTags'])->name('manageTags');
+    Route::get('setCardTag/{cardId}/{tagId}', [App\Http\Controllers\CollectionController::class, 'setCardTag'])->name('setCardTag');
     Route::get('battle/{collectionId}', [App\Http\Controllers\CollectionController::class, 'battle'])->name('battle');
+
 
 
     Route::get('cards/index/{collectionId}', [App\Http\Controllers\CardController::class, 'index'])->name('cards.index');
@@ -93,6 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::put('cards/update/{card}', [App\Http\Controllers\CardController::class, 'update'])->name('cards.update');
     Route::delete('cards/destroy/{contact}', [App\Http\Controllers\CardController::class, 'destroy'])->name('cards.destroy');
     Route::get('setFilter/{type}/{filter}/{cardId}', [App\Http\Controllers\CardController::class, 'setFilter'])->name('setFilter');
+    
 
 
     Route::get('redeemTickets', [App\Http\Controllers\RedeemController::class, 'redeemTickets'])->name('redeemTickets');

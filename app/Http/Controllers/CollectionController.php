@@ -18,6 +18,8 @@ use Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Tag;
+use App\Models\CardTag;
 
 
 class CollectionController extends Controller
@@ -481,5 +483,49 @@ class CollectionController extends Controller
             'cards' => $cards->load(["collection.category"]),
             'collection' => $collection,
         ]);
+    }
+
+    public function manageTags($cardId)
+    {
+
+        $card = Card::find($cardId);
+        $tags = Tag::all();
+
+        $cardTags = CardTag::where("card_id", $cardId)->get();
+
+        return Inertia::render('Collection/ManageTags', [
+            'card' => $card->load("collection.category"),
+            'tags' => $tags,
+            'cardTags' => $cardTags->load("tag")
+        ]);
+    }
+
+
+    public function setCardTag($cardId, $tagId)
+    {
+        $cardTag = CardTag::where("card_id", $cardId)->where("tag_id", $tagId)->first();
+
+        if ($cardTag) {
+            CardTag::where("card_id", $cardId)->where("tag_id", $tagId)->delete();
+            // $cardTag->delete();
+        } else {
+            $cardTag = new CardTag();
+            $cardTag->card_id = $cardId;
+            $cardTag->tag_id = $tagId;
+            $cardTag->save();
+        }
+
+        $card = Card::find($cardId);
+        $tags = Tag::all();
+
+        $cardTags = CardTag::where("card_id", $cardId)->get();
+
+        return response()->json([
+
+            'tags' => $tags,
+            'cardTags' => $cardTags->load("tag")
+        ]);
+
+        return redirect()->back();
     }
 }
