@@ -8,6 +8,7 @@
         v-if="$page.props.auth.user.role == 'admin'"
         class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base"
     >
+        {{ state.editMode }}
         <div class="py-3 mx-auto sm:px-6 lg:px-8">
             <div class="mx-auto mt-0 bg-gray-50">
                 <div class="flex flex-wrap">
@@ -22,26 +23,27 @@
 
                     <div class="w-2/12 mt-1">
                         <button
-                            @click="addTag()"
+                            v-if="form.name"
+                            @click="buttonClick"
                             class="bg-sky-400 hover:bg-sky-500 px-2 py-1"
                         >
-                            Create
+                            <span v-if="state.editMode">Editing</span>
+                            <span v-else>Adding</span>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-
-       
     </div>
     <div class="m-2">
-            <span
-                v-for="tag in state.tags"
-                :key="tag.id"
-                class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg"
-                >{{ tag.name }}</span
-            >
-        </div>
+        <span
+            @click="editMode(tag.name)"
+            v-for="tag in state.tags"
+            :key="tag.id"
+            class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg cursor-pointer"
+            >{{ tag.name }}</span
+        >
+    </div>
 </template>
 
 <script>
@@ -71,10 +73,12 @@ export default {
     setup(props, { emit }) {
         const state = reactive({
             tags: null,
+            editMode: false,
         });
 
         const form = useForm({
             name: "",
+            oldName: "",
         });
 
         onMounted(() => {
@@ -88,6 +92,21 @@ export default {
                 });
             } else {
                 state.tags = props.tags;
+                state.editMode = false;
+            }
+        }
+
+        function editMode(tag) {
+            state.editMode = true;
+            form.name = tag;
+            form.oldName = tag;
+        }
+
+        function buttonClick() {
+            if (state.edit == true) {
+                editTag();
+            } else {
+                addTag();
             }
         }
 
@@ -98,11 +117,23 @@ export default {
             });
         }
 
+        function editTag() {
+            form.get(route("editTag"), {
+                onSuccess: (response) => {
+                    state.editMode = false;
+                    form.name = "";
+                },
+                onError: () => {},
+            });
+        }
+
         return {
             state,
             addTag,
             form,
             filterTags,
+            editMode,
+            buttonClick,
         };
     },
 };

@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('addNewTag', [App\Http\Controllers\TagController::class, 'addNewTag'])->name('addNewTag');
+    Route::get('editTag', [App\Http\Controllers\TagController::class, 'editTag'])->name('editTag');
     Route::get('filterTags/{name}', [App\Http\Controllers\TagController::class, 'filterTags'])->name('filterTags');
 
     Route::resource('tags', App\Http\Controllers\TagController::class);

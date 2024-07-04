@@ -60,4 +60,17 @@ class TagController extends Controller
 
         return back();
     }
+
+    public function editTag(Request $request)
+    {
+
+        $tagExists = Tag::where("name", $request->oldName)->first();
+
+        if ($tagExists) {
+            $tagExists->name = $request->name;
+            $tagExists->save();
+        }
+
+        return back();
+    }
 }

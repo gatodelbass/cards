@@ -32,7 +32,7 @@
                 @keyup="filterTags"
                 type="text"
                 class="w-full mx-2"
-                v-model="state.filter"
+                v-model="form.name"
             />
         </div>
 
@@ -41,7 +41,7 @@
                 @click="addTag()"
                 class="bg-sky-400 hover:bg-sky-500 px-2 py-1"
             >
-                Create
+                Create new
             </button>
         </div>
     </div>
@@ -96,9 +96,32 @@ export default {
             state.cardTags = props.cardTags;
         });
 
+        const form = useForm({
+            name: "",
+        });
+
         const state = reactive({
             filter: "",
+            tags: null,
         });
+
+        function addTag() {
+            form.get(route("addNewTag"), {
+                onSuccess: (response) => {},
+                onError: () => {},
+            });
+        }
+
+        function filterTags() {
+            if (form.name != "") {
+                axios.get(route("filterTags", form.name)).then((response) => {
+                    state.tags = response.data.tags;
+                });
+            } else {
+                state.tags = props.tags;
+            }
+        }
+        
 
         function addCard() {
             form.get(route("addNewCard"), {
@@ -119,10 +142,20 @@ export default {
                 .catch(function (error) {});
         }
 
+        function addTag() {
+            form.get(route("addNewTag"), {
+                onSuccess: (response) => {},
+                onError: () => {},
+            });
+        }
+
         return {
             state,
             addCard,
             setCardTag,
+            filterTags,
+            addTag,
+            form,
         };
     },
 };

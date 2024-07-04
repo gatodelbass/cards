@@ -489,7 +489,7 @@ class CollectionController extends Controller
     {
 
         $card = Card::find($cardId);
-        $tags = Tag::all();
+        $tags = Tag::orderBy("name")->get();
 
         $cardTags = CardTag::where("card_id", $cardId)->get();
 
