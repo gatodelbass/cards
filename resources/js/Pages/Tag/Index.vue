@@ -3,12 +3,11 @@
     <h1
         class="text-jost font-semibold text-xl tracking-wide bg-amber-200 text-gray-700"
     ></h1>
-
+    {{ state.editMode }}
     <div
         v-if="$page.props.auth.user.role == 'admin'"
         class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base"
     >
-        {{ state.editMode }}
         <div class="py-3 mx-auto sm:px-6 lg:px-8">
             <div class="mx-auto mt-0 bg-gray-50">
                 <div class="flex flex-wrap">
@@ -37,7 +36,7 @@
     </div>
     <div class="m-2">
         <span
-            @click="editMode(tag.name)"
+            @click="setEditMode(tag.name)"
             v-for="tag in state.tags"
             :key="tag.id"
             class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg cursor-pointer"
@@ -92,18 +91,18 @@ export default {
                 });
             } else {
                 state.tags = props.tags;
-                state.editMode = false;
+                //state.editMode = false;
             }
         }
 
-        function editMode(tag) {
+        function setEditMode(tag) {
             state.editMode = true;
             form.name = tag;
             form.oldName = tag;
         }
 
         function buttonClick() {
-            if (state.edit == true) {
+            if (state.editMode == true) {
                 editTag();
             } else {
                 addTag();
@@ -132,7 +131,7 @@ export default {
             addTag,
             form,
             filterTags,
-            editMode,
+            setEditMode,
             buttonClick,
         };
     },
