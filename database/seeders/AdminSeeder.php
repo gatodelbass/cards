@@ -18,7 +18,8 @@ class AdminSeeder extends Seeder
             'email' => 'davemmgarcia@gmail.com',
             'password' => Hash::make('davemmgarcia@gmail.com'),
             'status' => "active",
-            'role' => "admin"
+            'role' => "admin",
+            'data' => '{"cards_pasted": 0, "gold_obtained": 0, "boxes_obtained": 10, "cards_obtained": 0, "avatars_obtained": 0, "exchanges_accepted": 0}'
         ]);
     }
 }
