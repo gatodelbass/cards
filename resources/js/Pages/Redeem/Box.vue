@@ -1,12 +1,18 @@
 <template>
     <app-layout></app-layout>
-    <h1 class="text-jost font-semibold text-xl tracking-wide bg-amber-200 text-gray-700">Redeem boxes</h1>
+    <h1
+        class="text-jost font-semibold text-xl tracking-wide bg-amber-200 text-gray-700"
+    >
+        Redeem boxes
+    </h1>
 
-    <div v-if="$page.props.auth.user.boxes == 0" class="my-4 text-jost ">You don't have any boxes! You will get a daily box by login</div>
+    <div v-if="$page.props.auth.user.boxes == 0" class="my-4 text-jost">
+        You don't have any boxes! You will get a daily box by login
+    </div>
 
     <button
         v-if="$page.props.auth.user.boxes > 0"
-        class="bg-teal-300 m-2 px-2 py-1 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-2 py-1 border-1 border-amber-300 shadow text-jost"
         @click="redeemBox"
     >
         <span class="w-full">Redeem one box</span>
@@ -41,7 +47,7 @@
 
             <span v-for="n in state.obtainedBox.tickets" :key="n">
                 <img
-                    class="inline-block w-4 mx-0.5"
+                    class="inline-block w-4 mx-0.5 animate-bounce"
                     :src="'/icons/cards.svg'"
                 />
             </span>
@@ -64,7 +70,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from '@inertiajs/vue3'
+import { usePage } from "@inertiajs/vue3";
 
 import CardSmall from "../Card/CardSmall.vue";
 

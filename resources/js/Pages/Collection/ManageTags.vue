@@ -9,7 +9,7 @@
 
     <div class="flex flex-nowrap justify-center my-2 w-1/3">
         <div class="w-2/6">
-            <CardBasic :card="card"> </CardBasic>
+            <CardBasicBig :card="card"> </CardBasicBig>
         </div>
         <div class="w-4/6">
             <div>
@@ -46,14 +46,16 @@
         </div>
     </div>
 
-    <div class="flex flex-wrap justify-center">
-        <span
-            @click="setCardTag(tag.id)"
-            v-for="tag in state.tags"
-            :key="tag.id"
-            class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg cursor-pointer"
-            >{{ tag.name }}</span
-        >
+    <div class="m-2 text-left">
+        <div class="flex flex-wrap">
+            <span
+                @click="setCardTag(tag.id)"
+                v-for="tag in state.tags"
+                :key="tag.id"
+                class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg cursor-pointer"
+                >{{ tag.name }}</span
+            >
+        </div>
     </div>
 </template>
 
@@ -61,7 +63,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CollectionCard from "./CollectionCard.vue";
 import JetInput from "@/Jetstream/Input.vue";
-import CardBasic from "./CardBasic.vue";
+import CardBasicBig from "./CardBasicBig.vue";
 import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
 import { useForm } from "@inertiajs/vue3";
@@ -73,7 +75,7 @@ export default {
         AppLayout,
         CollectionCard,
         JetInput,
-        CardBasic,
+        CardBasicBig,
     },
     props: {
         card: {
@@ -121,7 +123,6 @@ export default {
                 state.tags = props.tags;
             }
         }
-        
 
         function addCard() {
             form.get(route("addNewCard"), {

@@ -75,7 +75,7 @@
     <div class="flex flex-wrap justify-center mt-4 text-jost">
         <button
             @click="sellSelectedCards()"
-            class="px-4 bg-teal-300 py-2 hover:bg-teal-400 mx-1"
+            class="px-4 bg-amber-200 py-2 border-amber-300 border-1 hover:bg-amber-300 mx-1"
         >
             Sell all selected cards
         </button>
@@ -86,7 +86,7 @@
             :key="n"
             @click="goToPage(n)"
             :class="{
-                'bg-teal-300': state.filters.currentPage == n,
+                'bg-amber-200': state.filters.currentPage == n,
             }"
             class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
             >{{ n }}</span
@@ -144,7 +144,7 @@
                     class="w-36 mx-auto mb-1"
                 >
                     <img
-                        class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded-full bg-teal-300"
+                        class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded-full bg-amber-300"
                         :src="'/icons/smiley.svg'"
                     />
                 </div>
@@ -154,7 +154,7 @@
     <div class="flex flex-wrap justify-center mt-4 text-jost">
         <button
             @click="sellSelectedCards()"
-            class="px-4 bg-teal-300 py-2 hover:bg-teal-400 mx-1"
+            class="px-4 bg-amber-200 py-2 hover:bg-amber-300 mx-1 border-1 border-amber-300"
         >
             Sell all selected cards
         </button>
@@ -165,7 +165,7 @@
             :key="n"
             @click="goToPage(n)"
             :class="{
-                'bg-teal-300': state.filters.currentPage == n,
+                'bg-amber-200': state.filters.currentPage == n,
             }"
             class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
             >{{ n }}</span

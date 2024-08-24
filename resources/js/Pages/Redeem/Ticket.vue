@@ -12,39 +12,42 @@
 
     <button
         v-if="$page.props.auth.user.tickets >= 1"
-        class="bg-teal-300 m-2 px-4 py-2 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-4 py-2 border-1 border-amber-300 shadow text-jost"
         @click="redeemCards(1)"
     >
-        <span class="w-full">Redeem 1 ticket</span>
+        <span class="w-full">Redeem</span>
         <div>
-            <span v-for="n in 1" :key="n">
+            <span>
                 <img class="inline-block w-5 mx-1" :src="'/icons/cards.svg'" />
+                x 1
             </span>
         </div>
     </button>
 
     <button
         v-if="$page.props.auth.user.tickets >= 10"
-        class="bg-teal-300 m-2 px-4 py-2 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-4 py-2 border-1 border-amber-300 shadow text-jost"
         @click="redeemCards(10)"
     >
-        <span class="w-full">Redeem 10 tickets</span>
+        <span class="w-full">Redeem</span>
         <div>
-            <span v-for="n in 10" :key="n">
+            <span>
                 <img class="inline-block w-5 mx-1" :src="'/icons/cards.svg'" />
+                x 10
             </span>
         </div>
     </button>
 
     <button
         v-if="$page.props.auth.user.tickets >= 20"
-        class="bg-teal-300 m-2 px-4 py-2 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-4 py-2 border-1 border-amber-300 shadow text-jost"
         @click="redeemCards(20)"
     >
-        <span class="w-full">Redeem 20 tickets</span>
+        <span class="w-full">Redeem</span>
         <div>
-            <span v-for="n in 20" :key="n">
+            <span>
                 <img class="inline-block w-5 mx-1" :src="'/icons/cards.svg'" />
+                x 20
             </span>
         </div>
     </button>
@@ -62,8 +65,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from '@inertiajs/vue3'
-
+import { usePage } from "@inertiajs/vue3";
 
 import CardRedeem from "../Card/CardRedeem.vue";
 
@@ -86,7 +88,6 @@ export default {
         });
 
         async function redeemCards(quantity) {
-
             state.obtainedCards = {};
 
             await axios
@@ -94,7 +95,7 @@ export default {
                 .then(function (response) {
                     state.obtainedCards = {};
 
-                   // console.log(usePage().props.auth.user.tickets);
+                    // console.log(usePage().props.auth.user.tickets);
                     console.log(response);
 
                     //$page.props.auth.user

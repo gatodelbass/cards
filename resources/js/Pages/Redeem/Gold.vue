@@ -14,48 +14,48 @@
 
     <button
         v-if="$page.props.auth.user.gold >= 10000"
-        class="bg-teal-300 m-2 px-4 py-2 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-4 py-2 border-1 border-amber-300 shadow text-jost"
         @click="redeemGold(1)"
     >
-        <span class="w-full">Buy 1 ticket</span>
+        <span class="w-full">Buy</span>
         <div>
-            <span v-for="n in 1" :key="n">
+            <span >
                 <img
                     class="inline-block w-5 mx-1"
                     :src="'/icons/ticket2.svg'"
-                />
+                /> x 1
             </span>
         </div>
     </button>
 
     <button
         v-if="$page.props.auth.user.gold >= 100000"
-        class="bg-teal-300 m-2 px-4 py-2 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-4 py-2 border-1 border-amber-300 shadow text-jost"
         @click="redeemGold(10)"
     >
-        <span class="w-full">Buy 10 tickets</span>
+        <span class="w-full">Buy</span>
         <div>
-            <span v-for="n in 10" :key="n">
+            <span>
                 <img
                     class="inline-block w-5 mx-1"
                     :src="'/icons/ticket2.svg'"
-                />
+                /> x 10
             </span>
         </div>
     </button>
 
     <button
         v-if="$page.props.auth.user.gold >= 200000"
-        class="bg-teal-300 m-2 px-4 py-2 border-1 border-teal-400 shadow text-jost"
+        class="bg-amber-200 m-2 px-4 py-2 border-1 border-amber-300 shadow text-jost"
         @click="redeemGold(20)"
     >
-        <span class="w-full">Buy 20 tickets</span>
+        <span class="w-full">Buy</span>
         <div>
-            <span v-for="n in 20" :key="n">
+            <span>
                 <img
                     class="inline-block w-5 mx-1"
                     :src="'/icons/ticket2.svg'"
-                />
+                /> x 20
             </span>
         </div>
     </button>
@@ -66,7 +66,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from '@inertiajs/vue3'
+import { usePage } from "@inertiajs/vue3";
 
 export default {
     name: "OperatorIndex",

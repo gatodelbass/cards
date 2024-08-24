@@ -29,14 +29,13 @@
             </div>
             <div
                 class="relative p-1 h-40 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-sm m-1 border-1 border-gray-400"
-            >   
-            <div
+            >
+                <div
                     v-if="!exists"
-                    class="top-0 left-0 py-4 z-10 px-1 absolute w-full bg-amber-200 text-gray-700 text-xl animate-pulse text-lobster "
+                    class="top-0 left-0 py-4 z-10 px-1 absolute w-full bg-amber-200 text-gray-700 text-xl animate-pulse text-lobster"
                 >
                     New!
                 </div>
-
 
                 <img
                     class="max-h-full min-h-full object-contain mx-auto rounded-sm z-0"

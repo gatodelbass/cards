@@ -3,7 +3,7 @@
     <h1
         class="text-jost font-semibold text-xl tracking-wide bg-amber-200 text-gray-700"
     ></h1>
-    {{ state.editMode }}
+
     <div
         v-if="$page.props.auth.user.role == 'admin'"
         class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base"
@@ -34,14 +34,16 @@
             </div>
         </div>
     </div>
-    <div class="m-2">
-        <span
-            @click="setEditMode(tag.name)"
-            v-for="tag in state.tags"
-            :key="tag.id"
-            class="bg-gray-200 py-1 px-2 rounded-full mx-1 border-1 border-gray-300 text-lg cursor-pointer"
-            >{{ tag.name }}</span
-        >
+    <div class="m-2 text-left">
+        <div class="flex flex-wrap">
+            <span
+                @click="setEditMode(tag.name)"
+                v-for="tag in state.tags"
+                :key="tag.id"
+                class="bg-gray-200 py-1 px-2 rounded-full mx-1 my-1 border-1 border-gray-300 text-lg cursor-pointer"
+                >{{ tag.name }}</span
+            >
+        </div>
     </div>
 </template>
 
