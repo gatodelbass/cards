@@ -514,19 +514,15 @@ class PlayerController extends Controller
         ]);
     }
 
-
     public function selectAvatar($userAvatarId)
     {
         $userAvatar = UserAvatar::find($userAvatarId);
-        $avatar = Avatar::find($userAvatar->avatar_id);
-
         $user = User::find(Auth::id());
-        $user->avatar = $avatar->image;
+        $user->user_avatar_id = $userAvatarId;
         $user->save();
 
         return response()->json([
-
-            'avatar' => $avatar->image
+            'useravatar' => $userAvatar->load("avatar")
         ]);
     }
 
@@ -535,7 +531,6 @@ class PlayerController extends Controller
     public function sellUserAvatar($userAvatarId)
     {
         $userAvatar = UserAvatar::find($userAvatarId);
-
         $goldObtained = 10000;
         $user = User::find(Auth::id());
         $user->gold += $goldObtained;

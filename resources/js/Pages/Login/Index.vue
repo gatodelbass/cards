@@ -6,10 +6,7 @@
         Home
     </h1>
 
-    <Link
-        v-if="hasIncomingExchanges"
-        :href="route('incomingExchanges')"
-    >
+    <Link v-if="hasIncomingExchanges" :href="route('incomingExchanges')">
         <div
             class="mt-2 hover:bg-sky-900 text-jost bg-gray-900 py-2 text-base md:text-xl cursor-pointer text-teal-300 animate-bounce"
         >
@@ -48,13 +45,14 @@
                 </div>
             </Link>
 
-
-            <Link href="exchangeBag" method="post"> <div
+            <Link href="exchangeBag" method="post">
+                <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl hover:bg-amber-200 hover:border-amber-400"
                 >
                     <img class="w-10 mx-auto" :src="'/icons/backpack.svg'" />
                     <p class="my-2">The exchange bag</p>
-                </div></Link>
+                </div></Link
+            >
 
             <Link :href="route('playerCards')">
                 <div
@@ -155,12 +153,13 @@
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl hover:bg-amber-200 hover:border-amber-400"
                 >
-                    <img class="w-10 mx-auto" src="https://cdns.iconmonstr.com/wp-content/releases/preview/2016/240/iconmonstr-weather-8.png" />
+                    <img
+                        class="w-10 mx-auto"
+                        src="https://cdns.iconmonstr.com/wp-content/releases/preview/2016/240/iconmonstr-weather-8.png"
+                    />
                     <p class="my-2">Camping</p>
                 </div>
             </Link>
-
-    
         </div>
     </div>
 </template>
@@ -169,8 +168,7 @@
 import { onMounted, reactive, computed } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { usePage } from "@inertiajs/vue3";
-import { Link } from '@inertiajs/vue3'
-
+import { Link } from "@inertiajs/vue3";
 
 export default {
     name: "LoginIndex",

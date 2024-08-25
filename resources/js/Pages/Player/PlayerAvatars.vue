@@ -8,19 +8,25 @@
     <div class="justify-center flex flex-wrap px-5 m-2 text-sm md:text-base">
         <div v-for="userAvatar in userAvatars" :key="userAvatar.id">
             <div v-if="userAvatar.status == 'obtained'" class="p-1">
-                <div v-if="$page.props.auth.user.avatar == userAvatar.avatar.image">
+                <div
+                    v-if="$page.props.auth.user.useravatar.id == userAvatar.id"
+                >
                     <img
                         @click="selectAvatar(userAvatar)"
                         :src="'/storage/' + userAvatar.avatar.image"
-                        class="border-teal-400 border-b-4 md:border-b-8 md:border-l-8 w-40 rounded-full m-4"
+                        class="border-yellow-200 border-8 w-40 rounded-full mx-4 mb-3"
                     />
+                    <span
+                        class="text-sm mt-4 px-2 py-1 bg-yellow-200 w-16 rounded-full border-1 border-yellow-300"
+                        >selected</span
+                    >
                 </div>
 
                 <div v-else>
                     <img
                         @click="selectAvatar(userAvatar)"
                         :src="'/storage/' + userAvatar.avatar.image"
-                        class="border-gray-300 border-b-4 md:border-b-8 md:border-l-8 w-40 rounded-full mx-4 cursor-pointer"
+                        class="border-gray-100 border-8 w-40 rounded-full mx-4 cursor-pointer"
                     />
 
                     <img
@@ -38,9 +44,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
-
-import { usePage } from '@inertiajs/vue3'
-
+import { usePage } from "@inertiajs/vue3";
 import CardSmall from "../Card/CardSmall.vue";
 import Button from "../../Jetstream/Button.vue";
 
@@ -78,7 +82,8 @@ export default {
             await axios
                 .get(route("selectAvatar", userAvatar.id))
                 .then(function (response) {
-                    usePage().props.auth.user.avatar = response.data.avatar;
+                    usePage().props.auth.user.useravatar =
+                        response.data.useravatar;
 
                     Swal.fire({
                         toast: true,

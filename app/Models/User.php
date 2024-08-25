@@ -60,4 +60,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserPrize::class);
     }
+
+    public function useravatar(){
+        return $this->hasOne(UserAvatar::class, "id", "user_avatar_id");
+    }
 }

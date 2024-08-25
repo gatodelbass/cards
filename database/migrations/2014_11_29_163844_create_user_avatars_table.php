@@ -17,10 +17,7 @@ class CreateUserAvatarsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('avatar_id')->nullable()->constrained();
-
             $table->string('status')->default("obtained");
-
-            
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('role')->default("user");
             $table->string('nickname');
-            $table->string('email')->unique();
-            //$table->timestamp('email_verified_at')->nullable();
+            $table->string('email')->unique();           
             $table->string('password');
             $table->string('remember_code')->nullable();
             $table->bigInteger('gold')->default(0);
             $table->integer('tickets')->default(0);
             $table->integer('boxes')->default(0);
-            $table->string('status')->default("created");
-            $table->string('avatar')->default("none");
-            $table->json('data')->nullable();           
+            $table->string('status')->default("created");           
+            $table->foreignId('user_avatar_id');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }

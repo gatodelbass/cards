@@ -105,7 +105,7 @@
                                     class="w-12 inline-block rounded-full border-teal-300 border-1"
                                     :src="
                                         '/storage/' +
-                                        $page.props.auth.user.avatar
+                                        $page.props.auth.user.useravatar.avatar.image
                                     "
                                 />
                             </div>

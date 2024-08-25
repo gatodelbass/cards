@@ -29,10 +29,16 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+       // dd($request->user()->load("useravatar.avatar"));
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+
+              
+
+                'user' => $request->user()->load("useravatar.avatar"),
             ],
         ];
     }
