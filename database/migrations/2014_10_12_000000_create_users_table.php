@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('tickets')->default(0);
             $table->integer('boxes')->default(0);
             $table->string('status')->default("created");           
-            $table->foreignId('user_avatar_id');
+            $table->foreignId('user_avatar_id')->nullable();
             $table->json('data')->nullable();
             $table->timestamps();
         });

@@ -32,14 +32,25 @@ class HandleInertiaRequests extends Middleware
 
        // dd($request->user()->load("useravatar.avatar"));
 
+       if ($request->user()) {
+        # code...
         return [
             ...parent::share($request),
-            'auth' => [
-
-              
+            'auth' => [    
 
                 'user' => $request->user()->load("useravatar.avatar"),
             ],
         ];
+       } else {
+        return [
+            ...parent::share($request),
+            'auth' => [    
+               
+               
+            ],
+        ];
+       }
+
+       
     }
 }

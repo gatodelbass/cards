@@ -171,6 +171,18 @@ class LoginController extends Controller
         $user->data = json_encode($data);
 
         $user->save();
+
+        $randomAvatar = Avatar::all()->random();
+
+        $userAvatar = new UserAvatar();
+        $userAvatar->user_id = $user->id;
+        $userAvatar->avatar_id = $randomAvatar->id;
+        $userAvatar->save();
+
+
+        $user->user_avatar_id = $userAvatar->id;
+        $user->save();
+
         $user->notify(new WelcomeEmailNotification($user));
 
         return $this->afterRegister($user);
