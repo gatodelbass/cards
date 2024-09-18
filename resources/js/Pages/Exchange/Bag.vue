@@ -28,8 +28,12 @@
             <div class="">
                 <div class="justify-center flex flex-wrap bg p-1">
                     <div v-if="state.wantedCard">
-                        <CardBasic :card="state.wantedCard" :exists="true">
-                        </CardBasic>
+                        <CardBag
+                            :card="state.wantedCard"
+                            :exists="true"
+                            :owner="state.wantedCard.nickname"
+                        >
+                        </CardBag>
                     </div>
                     <button
                         @click="makeOffer(state.wantedCard.id, state.myCard.id)"
@@ -40,8 +44,12 @@
                     </button>
 
                     <div v-if="state.myCard">
-                        <CardBasic :card="state.myCard.card" :exists="true">
-                        </CardBasic>
+                        <CardBag
+                            :card="state.myCard.card"
+                            :exists="true"
+                            :owner="state.myCard.card.nickname"
+                        >
+                        </CardBag>
                     </div>
                 </div>
 
@@ -69,12 +77,13 @@
                                 class="w-6 inline-block mx-1 p-0.5 rounded-full bg-teal-300"
                                 :src="'/icons/smiley.svg'"
                         /></span>
-                        <CardBasic
+
+                        <CardBag
                             @click="offerCard(cardx)"
                             :card="cardx.card"
                             :exists="true"
                         >
-                        </CardBasic>
+                        </CardBag>
                     </div>
                 </div>
 
@@ -158,7 +167,7 @@
     </div>
 
     <div class="flex flex-wrap justify-center">
-        <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">           
+        <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">
             <CardBag
                 @click="showTradeModal(bagCard)"
                 :card="bagCard"

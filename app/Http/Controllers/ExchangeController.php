@@ -69,12 +69,12 @@ class ExchangeController extends Controller
 
             $bagCards->whereIn("rarity", $rarity);
             $bagCards2 = $bagCards->clone();
-            $totalPages = ceil($bagCards2->count() / $cardsPerPage);           
+            $totalPages = ceil($bagCards2->count() / $cardsPerPage);
 
             return response()->json([
                 'bagCards' => $bagCards->skip($skip)->take($cardsPerPage)->orderBy("rarity", "DESC")->get(),
                 'currentPage' => $currentPage,
-                'totalPages' => $totalPages    
+                'totalPages' => $totalPages
             ]);
         } else {
             $bagCards  = DB::table('cards')->select('cards.*', "categories.icon", "users.nickname", "user_cards.id")
@@ -92,7 +92,7 @@ class ExchangeController extends Controller
                 'currentPage' => $currentPage,
                 'totalPages' => $totalPages
             ]);
-        }      
+        }
     }
 
     // public function getExchangeCards($filter)
@@ -231,10 +231,9 @@ class ExchangeController extends Controller
     {
         $ownerCard = UserCard::find($ownerCardId);
         $wantedCard = $ownerCard->card;
-       
-
         $owner = $ownerCard->user;
 
+        //owner cards is just to show if the owner already have some of my available cards
         $ownerCards = DB::table('user_cards')
             ->join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where('user_cards.user_id', '=', $owner->id)
@@ -243,9 +242,9 @@ class ExchangeController extends Controller
         $excludeTrades = DB::table('user_cards')
             ->join('trades', 'user_cards.id', '=',  'trades.player_card_id')
             ->where('user_cards.user_id', '=', Auth::id())
-            ->where('trades.status', '=', 'offered')->pluck('user_cards.id');       
+            ->where('trades.status', '=', 'offered')->pluck('user_cards.id');
 
-          $availableCardsIds = DB::table('user_cards')
+        $availableCardsIds = DB::table('user_cards')
             ->select("user_cards.id")
             ->join('cards', 'user_cards.card_id', '=',  'cards.id')
             ->where("user_id", Auth::user()->id)
@@ -254,20 +253,8 @@ class ExchangeController extends Controller
             ->whereNotIn("cards.id",  $excludeTrades)
             ->where("cards.id", "!=", $wantedCard->id)->pluck('user_cards.id');
 
-           // dd($availableCardsIds);
-           
-
-            $availableCards = UserCard::whereIn("id",  $availableCardsIds)
+        $availableCards = UserCard::whereIn("id",  $availableCardsIds)
             ->get()->load("card.collection.category");
-                 //dd($availableCards);
-
-
-        // $availableCards =  $availableCards->filter(function ($userCard) use ($rarity) {
-
-        //     if ($userCard->card->rarity == $rarity) {
-        //         return $userCard;
-        //     }
-        // });
 
         return response()->json([
             'availableCards' => $availableCards,

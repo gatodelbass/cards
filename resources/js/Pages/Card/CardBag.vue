@@ -2,7 +2,7 @@
     <div
         class="w-44 h-78 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
     >
-        <div class="text-xs bg-amber-200">
+        <div v-if="owner" class="text-xs bg-amber-200">
             <img class="w-5 inline-block p-0.5" :src="'/icons/user.svg'" />
             {{ owner }}
         </div>
