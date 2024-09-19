@@ -1,23 +1,21 @@
 <template>
     <!-- component -->
 
-    
-
     <div
-        class="m-2 text-jost relative w-72  mt-36  break-words bg-gradient-to-br from-gray-400 via-sky-100 to-gray-400  shadow-lg rounded border-1 border-gray-400"
+        class="m-2 text-jost relative w-72 mt-36 break-words bg-gradient-to-br from-gray-400 via-sky-100 to-gray-400 shadow-lg rounded border-1 border-gray-400"
     >
         <div class="px-0">
             <div class="flex flex-wrap justify-center">
                 <div class="w-full flex justify-center">
                     <div class="relative">
                         <img
-                            :src="'/storage/' + player.avatar"
-                            class="border-8 border-amber-200 rounded-full align-middle absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
+                            :src="'/storage/' + player.useravatar.avatar.image"
+                            class="p-2 border-8 border-gray-700 rounded-full align-middle absolute -m-16 -ml-14 lg:-ml-20 max-w-[170px]"
                         />
                     </div>
                 </div>
 
-                <div class="w-full text-center mt-20"></div>
+                <div class="w-full text-center mt-32"></div>
 
                 <!--
                 <div class="w-full text-center mt-20">

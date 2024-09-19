@@ -31,7 +31,7 @@ class PlayerController extends Controller
         $userPrizes = UserPrize::where("user_id", $user->id)->orderBy('created_at', 'DESC')->get();
 
         return Inertia::render('Player/PlayerProfile', [
-            'user' => $user,
+            'user' => $user->load("useravatar.avatar"),
             'userPrizes' => $userPrizes->load("prize"),
         ]);
     }

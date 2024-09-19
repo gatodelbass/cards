@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-44 h-auto my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
+        class="w-44 h-78 my-2 mx-2 border-1 border-gray-300 rounded-sm p-0.5 bg-gray-800 shadow text-sm"
     >
         <div v-if="owner" class="text-xs bg-amber-200">
             <img class="w-5 inline-block p-0.5" :src="'/icons/user.svg'" />
@@ -58,6 +58,20 @@
                 class="flex my-1 text-center items-center justify-center border-1 border-gray-400 mx-1 text-yellow-200"
             >
                 <p class="px-1 py-0.5 truncate ...">{{ card.name }}</p>
+            </div>
+
+            <div class="flex mb-1">
+                <div class="w-1/2 text-center">
+                    <p class="px-1 font-semibold text-yellow-200">
+                        ATK: {{ card.atk }}
+                    </p>
+                </div>
+
+                <div class="w-1/2 text-center">
+                    <p class="px-1 font-semibold text-yellow-200">
+                        DEF: {{ card.def }}
+                    </p>
+                </div>
             </div>
         </div>
     </div>

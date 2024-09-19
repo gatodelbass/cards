@@ -57,10 +57,7 @@
                     v-if="state.availableCards != null"
                     class="overflow-auto h-80 mt-2 border-1 border-gray-200 rounded bg-gradient-to-tr from-sky-900 via-sky-800 to-sky-500"
                 >
-                    <div class="w-full text-gray-200 my-1">
-                        My available cards
-                    </div>
-
+                   
                     <div
                         v-for="cardx in state.availableCards"
                         :key="cardx.id"
