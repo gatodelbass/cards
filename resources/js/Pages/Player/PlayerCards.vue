@@ -86,9 +86,9 @@
             :key="n"
             @click="goToPage(n)"
             :class="{
-                'bg-amber-200': state.filters.currentPage == n,
+                'bg-amber-200 border-gray-500': state.filters.currentPage == n,
             }"
-            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
+            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-100"
             >{{ n }}</span
         >
     </div>

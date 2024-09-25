@@ -57,7 +57,6 @@
                     v-if="state.availableCards != null"
                     class="overflow-auto h-80 mt-2 border-1 border-gray-200 rounded bg-gradient-to-tr from-sky-900 via-sky-800 to-sky-500"
                 >
-                   
                     <div
                         v-for="cardx in state.availableCards"
                         :key="cardx.id"
@@ -163,6 +162,19 @@
         </label>
     </div>
 
+    <div class="flex flex-wrap justify-center my-4">
+        <span
+            v-for="n in state.filters.totalPages"
+            :key="n"
+            @click="goToPage(n)"
+            :class="{
+                'bg-amber-200 border-gray-500': state.filters.currentPage == n,
+            }"
+            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-100"
+            >{{ n }}</span
+        >
+    </div>
+
     <div class="flex flex-wrap justify-center">
         <div v-for="bagCard in state.bagCards" :key="bagCard.id" class="">
             <CardBag
@@ -174,15 +186,16 @@
             </CardBag>
         </div>
     </div>
+
     <div class="flex flex-wrap justify-center my-4">
         <span
             v-for="n in state.filters.totalPages"
             :key="n"
             @click="goToPage(n)"
             :class="{
-                'bg-teal-300': state.filters.currentPage == n,
+                'bg-amber-200 border-gray-500': state.filters.currentPage == n,
             }"
-            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-200"
+            class="flex items-center justify-center px-3 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-100"
             >{{ n }}</span
         >
     </div>
