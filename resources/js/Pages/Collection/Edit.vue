@@ -1,183 +1,118 @@
 <template>
-    <app-layout>
-        <template #header>
-            <div class="flex items-center justify-between">
-                <h2
-                    class="text-2xl leading-tight text-lightBlue-500 font-semibold"
+    <app-layout> </app-layout>
+    <div
+        v-if="$page.props.auth.user.role == 'admin'"
+        class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base"
+    >
+        <div class="py-3 mx-auto sm:px-6 lg:px-8">
+            <div class="bg-emerald-300">
+                <div
+                    class="flex justify-between items-start p-5 rounded-t border-b"
                 >
-                    OPERARIOS
-                </h2>
-            </div>
-        </template>
-
-        <div class="max-w-4xl mx-auto mt-4 border-1">
-            <div class="py-3 mx-auto sm:px-6 lg:px-8">
-                <div class="bg-emerald-300">
-                    <div
-                        class="flex justify-between items-start p-5 rounded-t border-b"
+                    <h3
+                        class="text-3xl font-semibold text-gray-900 lg:text-4xl"
                     >
-                        <h3
-                            class="text-3xl font-semibold text-gray-900 lg:text-4xl"
-                        >
-                            Editar operario
-                        </h3>
-                    </div>
+                        Edit collection
+                    </h3>
+                    
                 </div>
+            </div>
 
-                <div class="mx-auto mt-0 bg-white text-jost text-base">
-                    <div class="py-3 mx-auto sm:px-6 lg:px-8">
-                        <div class="flex justify-center py-4">
-                            <div
-                                class="flex bg-lightBlue-500 rounded-full md:p-4 p-2 border-1 border-gray-300"
-                            >
-                                <img
-                                    :src="'/icons/workerWhiteIcon.svg'"
-                                    class="w-10"
-                                />
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap">
-                            <div class="w-full md:w-1/3 mb-4 px-2">
-                                <jet-label for="name">Nombre: </jet-label>
-                                <jet-input
-                                    id="other_position"
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.name"
-                                />
-                                <jet-input-error
-                                    :message="form.errors.name"
-                                    class="mt-2"
-                                />
-                            </div>
-
-                            <div class="w-full md:w-1/3 mb-4 px-2">
-                                <jet-label for="name">Cedula: </jet-label>
-                                <jet-input
-                                    id="other_position"
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.document"
-                                />
-                                <jet-input-error
-                                    :message="form.errors.document"
-                                    class="mt-2"
-                                />
-                            </div>
-
-                            <div class="w-full md:w-1/3 mb-4 px-2">
-                                <jet-label for="phone">Teléfono:</jet-label>
-                                <jet-input
-                                    id="phone"
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.phone"
-                                />
-                                <jet-input-error
-                                    :message="form.errors.phone"
-                                    class="mt-2"
-                                />
-                            </div>
-
-                            <div class="w-full md:w-1/3 mb-4 px-2">
-                                <jet-label for="email">Email:</jet-label>
-                                <jet-input
-                                    id="email"
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.email"
-                                />
-                                <jet-input-error
-                                    :message="form.errors.email"
-                                    class="mt-2"
-                                />
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap">
-                            <label
-                                class="inline-flex items-center m-2 px-2 py-1"
-                            >
-                                <input
-                                    v-model="form.position"
-                                    type="checkbox"
-                                    value="Alistador"
-                                    class="rounded-sm form-checkbox h-6 w-6 text-orange-500"
-                                /><span class="ml-2 font-semibold text-gray-700"
-                                    >Alistador</span
-                                >
-                            </label>
-
-                            <label
-                                class="inline-flex items-center m-2 px-2 py-1"
-                            >
-                                <input
-                                    v-model="form.position"
-                                    type="checkbox"
-                                    value="Cabinero"
-                                    class="rounded-sm form-checkbox h-6 w-6 text-orange-500"
-                                /><span class="ml-2 font-semibold text-gray-700"
-                                    >Cabinero</span
-                                >
-                            </label>
-
-                            <label
-                                class="inline-flex items-center m-2 px-2 py-1"
-                            >
-                                <input
-                                    v-model="form.position"
-                                    type="checkbox"
-                                    value="Colorista"
-                                    class="rounded-sm form-checkbox h-6 w-6 text-orange-500"
-                                /><span class="ml-2 font-semibold text-gray-700"
-                                    >Colorista</span
-                                >
-                            </label>
-
-                            <label
-                                class="inline-flex items-center m-2 px-2 py-1"
-                            >
-                                <input
-                                    v-model="form.position"
-                                    type="checkbox"
-                                    value="Brillador"
-                                    class="rounded-sm form-checkbox h-6 w-6 text-orange-500"
-                                /><span class="ml-2 font-semibold text-gray-700"
-                                    >Brillador</span
-                                >
-                            </label>
-                            <div class="w-full md:w-1/3 mb-4 px-2">
+            <div class="mx-auto mt-0 bg-gray-50">
+                <div class="py-3 mx-auto sm:px-6 lg:px-8">
+                    <div class="flex flex-wrap">
+                        <div class="w-full mb-4 px-2">
+                            <jet-label for="name"
+                                >Collection name (max 50):
+                            </jet-label>
+                            <jet-input
+                                id="other_position"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.name"
+                            />
                             <jet-input-error
-                                    :message="form.errors.position"
-                                    class="mt-2"
-                                />
-                            </div>
+                                :message="form.errors.name"
+                                class="mt-2"
+                            />
+                        </div>
+
+                        <div class="w-full mb-4 px-2">
+                            <jet-label for="criteria"
+                                >Description text for your collection (max 200):
+                            </jet-label>
+                            <jet-text-area
+                                v-model="form.text"
+                                type="text"
+                                class="mt-1 block w-full text-sm md:text-base"
+                            />
+                            <jet-input-error
+                                :message="form.errors.text"
+                                class="mt-2"
+                            />
+                        </div>
+
+                        <div class="w-full mb-4 px-2">
+                            <jet-label for="category_id"
+                                >Select the category for your collection:
+                            </jet-label>
+                            <jet-input-error
+                                :message="form.errors.category_id"
+                                class="mt-2"
+                            />
                         </div>
 
                         <div
-                            class="flex items-center justify-center px-0 my-4 md:gap-8 gap-4 text-white text-lg"
+                            class="flex flex-wrap mx-auto sm:px-6 lg:px-8 justify-center"
                         >
-                            <Link
-                                :href="
-                                    route('operators.index', record.client_id)
-                                "
-                                class="w-auto bg-orange-500 hover:bg-orange-600 rounded-sm shadow-xl px-4 py-2"
+                            <div
+                                v-for="category in categories"
+                                :key="category.id"
+                                class="mx-2 my-1 cursor-pointer"
                             >
-                                Cancelar
-                            </Link>
+                                <div
+                                    v-if="form.category_id == category.id"
+                                    class="border-emerald-400 border-6 rounded p-1"
+                                >
+                                    <img
+                                        @click="selectCategory(category.id)"
+                                        :src="'/icons/' + category.icon"
+                                        class="w-12"
+                                    />{{ category.name }}
+                                </div>
 
-                            <button
-                                @click="save()"
-                                class="w-auto bg-lightBlue-500 hover:bg-lightBlue-600 rounded-sm shadow-xl px-4 py-2 text-josefin"
-                            >
-                                Editar operario
-                            </button>
+                                <div v-else>
+                                    <img
+                                        @click="selectCategory(category.id)"
+                                        :src="'/icons/' + category.icon"
+                                        class="w-12"
+                                    />{{ category.name }}
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-center px-0 my-4 md:gap-8 gap-4 text-white text-lg"
+                    >
+                        <Link
+                            :href="route('login.index')"
+                            class="w-auto bg-orange-500 hover:bg-orange-600 rounded-sm shadow-xl px-4 py-2"
+                        >
+                            Go back
+                        </Link>
+
+                        <button
+                            @click="edit()"
+                            class="w-auto bg-sky-500 hover:bg-sky-600 rounded-sm shadow-xl px-4 py-2 text-josefin"
+                        >
+                            Edit
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </app-layout>
+    </div>
 </template>
 
 <script>
@@ -187,7 +122,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetInputError from "@/Jetstream/InputError.vue";
 import JetLabel from "@/Jetstream/Label.vue";
-
+import JetTextArea from "@/Jetstream/Textarea.vue";
 
 import Swal from "sweetalert2";
 
@@ -198,11 +133,14 @@ export default {
         JetInput,
         JetInputError,
         JetLabel,
-       
-       
+        JetTextArea,
     },
     props: {
-        record: {
+        collection: {
+            type: Object,
+            default: null,
+        },
+        categories: {
             type: Object,
             default: null,
         },
@@ -220,29 +158,25 @@ export default {
         });
 
         const form = useForm({
-            client_id: null,
             name: null,
-            document: null,
-            position: [],
-            phone: null,
-            email: null,
-            status: "activo",
-            _method: "PUT",
+            text: null,
+            category_id: null,
+            user_id: null,
+            status: null,
         });
 
         onMounted(() => {
             form.reset();
-            form.client_id = props.record.client_id;
-            form.name = props.record.name;
-            form.document = props.record.document;
-            form.position = props.record.position;
-            form.phone = props.record.phone;
-            form.email = props.record.email;
-            form.status = props.record.status;
+            form.collection_id = props.collection.collection_id;
+            form.name = props.collection.name;
+            form.text = props.collection.text;
+            form.user_id = props.collection.user_id;
+            form.status = props.collection.status;
+            form.category_id = props.collection.category_id;
         });
 
-        function save() {
-            form.post(route("operators.update", props.record.id), {
+        function edit() {
+            form.put(route("collections.update", props.collection.id), {
                 onSuccess: () => {
                     Swal.fire({
                         toast: true,
@@ -270,10 +204,15 @@ export default {
             });
         }
 
+        function selectCategory(category_id) {
+            form.category_id = category_id;
+        }
+
         return {
-            save,
+            edit,
             form,
             state,
+            selectCategory,
         };
     },
 };

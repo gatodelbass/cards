@@ -96,28 +96,28 @@ class CollectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editCollection($id)
     {
         Auth::user()->userAdmin();
 
+        $collection = Collection::find($id);
+
         return Inertia::render('Collection/Edit', [
-            'record' => Collection::find($id),
+            'collection' => $collection->load("category"),
+            'categories' => Category::all(),
         ]);
     }
 
 
-    public function update(CollectionRequest $request, Collection $category)
+    public function update(CollectionRequest $request, Collection $collection)
     {
         Auth::user()->userAdmin();
+        $collection = Collection::find($collection->id);
+        $collection->name = $request->name;
+        $collection->text = $request->text;
+        $collection->category_id = $request->category_id;
+        $collection->save();
 
-        $category->update($request->validated());
-
-
-        $log = new Log;
-        $log->user_id = Auth::user()->id;
-        $log->event = "editar locomotora";
-        $log->message = Auth::user()->name . " (ID " . Auth::user()->id . ") ha editado locomotora " . $category->name . " (ID " . $category->id . ")";
-        $log->save();
 
         return Redirect::route('collections.index');
     }

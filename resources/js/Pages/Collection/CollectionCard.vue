@@ -92,6 +92,13 @@
                         Create from directory
                     </button>
                 </Link>
+                <Link :href="route('editCollection', collection.id)">
+                    <button
+                        class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
+                    >
+                        Edit collection
+                    </button>
+                </Link>
             </div>
         </div>
     </div>

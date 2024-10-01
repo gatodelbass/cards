@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('manageCards/{collectionId}', [App\Http\Controllers\CollectionController::class, 'manageCards'])->name('manageCards');
     Route::get('manageCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'manageCollection'])->name('manageCollection');
     Route::get('createFromDirectory/{collectionId}', [App\Http\Controllers\CollectionController::class, 'createFromDirectory'])->name('createFromDirectory');
+    Route::get('editCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'editCollection'])->name('editCollection');
+
 
     Route::get('saveCardName/{cardId}/{cardName}', [App\Http\Controllers\CollectionController::class, 'saveCardName'])->name('saveCardName');
     Route::post('saveCardImage', [App\Http\Controllers\CollectionController::class, 'saveCardImage'])->name('saveCardImage');
