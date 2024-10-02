@@ -1,5 +1,5 @@
 <template>
- <div class="justify-center bg-yellow-50">
+ <div class="justify-center h-full">
         <div class="w-10/12 mb-1">
             <div class="w-6/12 inline-block">
                 <span v-for="n in card.rarity" :key="n"> ⭐ </span>

@@ -7,10 +7,17 @@
     ></div>
 
     <!-- The dialog -->
-    <div
+    <!-- <div
         v-if="state.showModal"
         id="dialog"
         class="fixed z-50 md:top-1/4 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/3 w-2/3 rounded-md px-8 py-0 drop-shadow-lg justify-center flex"
+    >
+        <CardBig @click="closeModal" :card="state.showCard"> </CardBig>
+    </div> -->
+    <div
+        v-if="state.showModal"
+        id="dialog"
+        class="fixed z-50 drop-shadow-lg"
     >
         <CardBig @click="closeModal" :card="state.showCard"> </CardBig>
     </div>

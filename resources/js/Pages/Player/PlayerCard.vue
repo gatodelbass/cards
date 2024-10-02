@@ -14,6 +14,7 @@
                         />
                     </div>
                 </div>
+                -
 
                 <div class="w-full text-center mt-32"></div>
             </div>
