@@ -105,14 +105,14 @@
                                     class="w-12 inline-block rounded-full border-teal-300 border-1"
                                     :src="
                                         '/storage/' +
-                                        $page.props.auth.user.useravatar.avatar.image
+                                        $page.props.auth.user.useravatar.avatar
+                                            .image
                                     "
                                 />
                             </div>
                         </Link>
-
                         <Link
-                            v-if="$page.props.user == null"
+                            v-if="$page.props.auth.user == null"
                             :href="route('loginForm')"
                             class="inline-block mx-1"
                             ><button

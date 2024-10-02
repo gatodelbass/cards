@@ -16,39 +16,6 @@
                 </div>
 
                 <div class="w-full text-center mt-32"></div>
-
-                <!--
-                <div class="w-full text-center mt-20">
-                    <div class="flex justify-center lg:pt-4 pt-8 pb-0">
-                        <div class="p-3 text-center">
-                            <span
-                                class="text-xl font-bold block uppercase tracking-wide text-slate-700"
-                                >3,360</span
-                            >
-                            <span class="text-sm text-slate-400">Photos</span>
-                        </div>
-                        <div class="p-3 text-center">
-                            <span
-                                class="text-xl font-bold block uppercase tracking-wide text-slate-700"
-                                >2,454</span
-                            >
-                            <span class="text-sm text-slate-400"
-                                >Followers</span
-                            >
-                        </div>
-
-                        <div class="p-3 text-center">
-                            <span
-                                class="text-xl font-bold block uppercase tracking-wide text-slate-700"
-                                >564</span
-                            >
-                            <span class="text-sm text-slate-400"
-                                >Following</span
-                            >
-                        </div>
-                    </div>
-                </div>
-                -->
             </div>
             <div class="text-center mt-2">
                 <h3

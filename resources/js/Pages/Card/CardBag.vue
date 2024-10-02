@@ -11,6 +11,7 @@
             <div class="flex my-1">
                 <div class="w-3/10 mx-1 ml-2">
                     <img
+                        v-if="card.icon"
                         :src="'/icons/' + card.icon"
                         
                         class="w-5 inline-block bg-yellow-200 p-0.5 rounded-full border-1 border-gray-100"

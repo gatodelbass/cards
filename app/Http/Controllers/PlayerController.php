@@ -567,7 +567,7 @@ class PlayerController extends Controller
         $users = User::all();
 
         return Inertia::render('Player/Players', [
-            'players' => $users,
+            'players' => $users->load("useravatar.avatar"),
         ]);
     }
 }
