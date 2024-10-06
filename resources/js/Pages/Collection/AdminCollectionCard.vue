@@ -62,13 +62,6 @@
                     }}</span>
                 </p>
 
-                <Link :href="route('addCards', collection.id)">
-                    <button
-                        class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"
-                    >
-                        Add cards
-                    </button>
-                </Link>
                 <Link :href="route('createCardsFromText', collection.id)">
                     <button
                         class="px-4 my-0.5 shadow w-full bg-gray-400 text-gray-700 hover:bg-emerald-400"

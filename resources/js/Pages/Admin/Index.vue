@@ -4,14 +4,21 @@
     <div class="w-full text-jost">
         <div
             class="container flex flex-wrap mx-auto text-blueGray-800 p-2 md:p-10 text-sm md:text-base justify-center"
-        >   
-            
-             <Link :href="route('submittedCollections')">
+        >
+            <Link :href="route('submittedCollections')">
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
                 >
                     <img class="w-10 mx-auto" :src="'/icons/list.svg'" />
                     <p class="my-2">Submitted collections</p>
+                </div>
+            </Link>
+            <Link :href="route('adminCollections')">
+                <div
+                    class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
+                >
+                    <img class="w-10 mx-auto" :src="'/icons/list.svg'" />
+                    <p class="my-2">collections management</p>
                 </div>
             </Link>
 
@@ -49,7 +56,7 @@
                 </div>
             </Link>
 
-             <Link :href="route('emoji')">
+            <Link :href="route('emoji')">
                 <div
                     class="w-28 h-28 border-1 border-purple-300 p-2 m-2 rounded shadow-xl"
                 >

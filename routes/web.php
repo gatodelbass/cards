@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
     Route::get('previewAlbum/{collectionId}', [App\Http\Controllers\CollectionController::class, 'previewAlbum'])->name('previewAlbum');
     Route::get('adminIndex', [App\Http\Controllers\AdminController::class, 'adminIndex'])->name('adminIndex');
     Route::get('submittedCollections', [App\Http\Controllers\AdminController::class, 'submittedCollections'])->name('submittedCollections');
+    Route::get('adminCollections', [App\Http\Controllers\CollectionController::class, 'adminCollections'])->name('adminCollections');
+    Route::get('createCardsFromText/{collectionId}', [App\Http\Controllers\CollectionController::class, 'createCardsFromText'])->name('createCardsFromText');
     Route::resource('categories', App\Http\Controllers\CategoryController::class);
     Route::get('activateCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'activateCollection'])->name('activateCollection');
     Route::get('errorsCollection/{collectionId}', [App\Http\Controllers\CollectionController::class, 'errorsCollection'])->name('errorsCollection');

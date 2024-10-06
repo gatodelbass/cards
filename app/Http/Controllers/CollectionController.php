@@ -528,4 +528,30 @@ class CollectionController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function adminCollections() {
+        Auth::user()->userAdmin();
+
+        return Inertia::render('Collection/AdminCollections', [
+            'collections' => Collection::all()->load(['category', 'cards']),           
+        ]);
+
+    }
+
+    public function createCardsFromText($collectionId) {
+        Auth::user()->userAdmin();
+
+        $collection = Collection::find($collectionId);
+
+        
+
+        return Inertia::render('Collection/CreateCardsFromText', [
+            'collection' => $collection->load(['category', 'cards']),           
+        ]);
+
+    }
+
+
+    
 }
