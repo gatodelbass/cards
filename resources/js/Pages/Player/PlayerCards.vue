@@ -106,37 +106,34 @@
             >
             </CardBasic>
 
-            <div class="justify-center flex">
+            <div class="justify-center flex my-1">
                 <div v-if="userCard.status == 'exchange'" class="w-36 mb-1">
-                    <img
+                    <span
                         @click="sellUserCard(userCard)"
-                        class="w-4 md:w-6 inline-block mx-1 cursor-pointer"
-                        :src="'/icons/banknote.svg'"
-                    />
-                    <img
+                        class="text-sm rounded bg-amber-400 px-1 py-1 border-1 border-gray-500 m-1 cursor-pointer"
+                        >sell</span
+                    >
+                    <span
                         @click="changeStatusUserCard(userCard, 'exchange')"
-                        class="w-4 md:w-6 inline-block mx-1 p-0.5 rounded cursor-pointer"
-                        :src="'/icons/backpack.svg'"
-                        :class="{
-                            'bg-amber-200': userCard.status == 'exchange',
-                        }"
-                    />
-                    <img
+                        class="text-sm rounded bg-amber-200 px-1 py-1 border-1 border-gray-500 m-1 cursor-pointer"
+                        >bag</span
+                    >
+                    <span
                         @click="changeStatusUserCard(userCard, 'protected')"
-                        class="w-4 md:w-6 inline-block mx-1 cursor-pointer p-0.5"
-                        :src="'/icons/unlock.svg'"
-                    />
+                        class="text-sm rounded bg-gray-100 px-1 py-1 border-1 border-gray-500 m-1 cursor-pointer"
+                        >lock</span
+                    >
                 </div>
 
                 <div
                     v-if="userCard.status == 'protected'"
                     class="w-36 mx-auto p-0.5 mb-1"
                 >
-                    <img
+                    <span
                         @click="changeStatusUserCard(userCard, 'exchange')"
-                        class="w-4 md:w-6 inline-block mx-1 cursor-pointer p-0.5 rounded bg-amber-200"
-                        :src="'/icons/lock.svg'"
-                    />
+                        class="text-sm rounded bg-amber-200 px-1 py-1 border-1 border-gray-500 m-1 cursor-pointer"
+                        >unlock</span
+                    >
                 </div>
 
                 <div

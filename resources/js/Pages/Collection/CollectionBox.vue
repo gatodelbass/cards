@@ -8,14 +8,14 @@
                 <div class="justify-center mx-auto flex">
                     <div class="border-1 border-white rounded-sm">
                         <img
-                            class="w-full border-gray-900 border-1 rounded-sm"
+                            class="w-full border-gray-900 border-1 rounded-sm max-h-56"
                             :src="collection.cover_card"
                             alt="image"
                         />
                     </div>
                 </div>
                 <div>
-                    <p class="text-white mt-2 text-lg tracking-wider">
+                    <p class="text-white mt-2 text-lg tracking-wider overflow-hidden">
                         {{ collection.name }}
                     </p>
                 </div>

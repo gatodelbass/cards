@@ -5,6 +5,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp, Link  } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/index.js';
+import { TailwindPagination } from 'laravel-vue-pagination';
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

@@ -30,11 +30,11 @@
     <div class="flex flex-wrap justify-center text-jost">
         <div
             v-if="state.obtainedBox.avatar"
-            class="w-28 h-28 border-1 border-gray-500 bg-gradient-to-tr from-sky-400 via-teal-400 to-sky-400 p-1 m-2 rounded shadow-xl"
+            class="w-28 h-28 border-1 border-gray-500 bg-gradient-to-tr from-sky-300 via-teal-300 to-purple-300 p-1 m-2 rounded shadow-xl"
         >
             <p class="my-1">1 avatar!</p>
             <img
-                class="w-14 inline-block rounded-full border-gray-50 border-2"
+                class="w-14 inline-block rounded-full "
                 :src="'/storage/' + state.obtainedBox.avatar.image"
             />
         </div>

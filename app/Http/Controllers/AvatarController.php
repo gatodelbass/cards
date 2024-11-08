@@ -52,7 +52,6 @@ class AvatarController extends Controller
 
         if ($request->image != null) {
             $path = Storage::disk('public')->put('avatars', $request->image);
-
             $avatar = new Avatar();
             $avatar->image = $path;
             $avatar->save();
@@ -103,25 +102,14 @@ class AvatarController extends Controller
 
     public function update(Request $request, $id)
     {
-
-
         if ($request->image != null) {
-
-            Log::debug("pasa1" . $request->image);
-
             $path = Storage::disk('public')->put('avatars', $request->image);
-
             $avatar = Avatar::find($id);
             $avatar->image = $path;
             $avatar->save();
         } else {
             Log::debug("paila");
         }
-
-
-
-
-
         return Redirect::route('avatars.index');
     }
 
@@ -137,9 +125,6 @@ class AvatarController extends Controller
 
         $Avatar = Avatar::find($id);
         $Avatar->delete();
-
-
-
         return Redirect::route('Avatars.index');
     }
 

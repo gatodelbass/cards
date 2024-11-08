@@ -78,6 +78,29 @@
             </span>
         </div>
     </div>
+
+    <div class="mt-10">
+
+        
+
+        <Component 
+            :is="link.url ? 'Link' : 'span'"
+            v-for="link in collections.links"
+            :key="link" 
+              :href="link.url"
+            v-html="link.label"
+            class="px-3 py-2 h-8 m-0.5 text-lobster text-gray-500 border-gray-300 border-1 hover:bg-amber-100"
+            :class="{
+                'bg-amber-200 border-gray-500': collections.current_page == link.label
+            }"
+
+
+        />
+
+      
+
+
+    </div>
 </template>
 
 <script>
@@ -87,7 +110,8 @@ import CollectionBox from "./CollectionBox.vue";
 import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
 
-import { usePage } from '@inertiajs/vue3'
+import { usePage } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 export default {
     name: "OperatorIndex",
@@ -120,7 +144,7 @@ export default {
         });
 
         onMounted(() => {
-            state.collections = props.collections;
+            state.collections = props.collections.data;
 
             props.categories.forEach((category) => {
                 state.selectedCategories.push(category.id);
@@ -174,7 +198,7 @@ export default {
                     params: { selectedCategories: state.selectedCategories },
                 })
                 .then(function (response) {
-                    state.collections = response.data.collections;
+                    state.collections = response.data.collections.data;
                 })
                 .catch(function (error) {
                     alert(error);

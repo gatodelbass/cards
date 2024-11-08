@@ -311,14 +311,14 @@ class CollectionController extends Controller
     public function exploreCollections()
     {
 
-        $collections = Collection::where('status', 'active')->orderBy('created_at', 'DESC')->get();
+        $collections = Collection::where('status', 'active')->orderBy('created_at', 'DESC')->with('cards', 'category')->paginate(5);
 
         $userCollections = Auth::user()->usercollections()->pluck('collection_id');
 
 
         return Inertia::render('Collection/Explore', [
 
-            'collections' => $collections->load(["cards", "category", "user"]),
+            'collections' => $collections,
             'categories' => Category::orderBy('name')->get(),
             'userCollections' => $userCollections,
 
@@ -329,10 +329,11 @@ class CollectionController extends Controller
 
     public function getResults(Request $request)
     {
-        $collections = Collection::where('status', 'active')->whereIn('category_id', $request->selectedCategories)->orderBy('created_at', 'DESC')->get();
+        $collections = Collection::where('status', 'active')->whereIn('category_id', $request->selectedCategories)
+                                    ->orderBy('created_at', 'DESC')->with('cards', 'category')->paginate(5);
 
         return response()->json([
-            'collections' => $collections->load('cards', 'category')
+            'collections' => $collections,
         ]);
     }
 
