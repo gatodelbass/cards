@@ -152,8 +152,10 @@ Route::middleware('auth')->group(function () {
 
     //CAMPING
     Route::get('campingIndex', [App\Http\Controllers\CampingController::class, 'campingIndex'])->name('campingIndex');
+    Route::get('createCampingItem', [App\Http\Controllers\CampingController::class, 'createCampingItem'])->name('createCampingItem');
     Route::get('campingItems', [App\Http\Controllers\CampingController::class, 'campingItems'])->name('campingItems');
-
+    Route::post('storeCampingitem', [App\Http\Controllers\CampingController::class, 'storeCampingitem'])->name('storeCampingitem');
+Route::get('campingPlay', [App\Http\Controllers\CampingController::class, 'campingPlay'])->name('campingPlay');
 
 
 });
