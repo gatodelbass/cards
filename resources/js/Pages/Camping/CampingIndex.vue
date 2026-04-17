@@ -21,7 +21,7 @@
     </div>
     </Link>
 
-    <div class="justify-start flex flex-auto">
+    <div class="flex flex-wrap">
 
         <div v-for="item in campingItems" class="w-64 border border-gray-300  p-1 m-1">
             <div class="w-full p-0.5 border text-left bg-teal-200 border-gray-300">{{ item.name }}</div>

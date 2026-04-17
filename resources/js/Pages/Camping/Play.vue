@@ -4,7 +4,7 @@
         Home
     </h1>
 
-    <div class="justify-start flex flex-auto">
+    <div class="justify-start flex flex-wrap">
 
         <button @click="selectedWeather()" :disabled="state.spinningWeather"
             class="m-1 py-1 px-2 border border-gray-200 w-24 h-24">
@@ -34,7 +34,7 @@
             state.currentNumber - state.totalCost }}</b></div>
     </div>
 
-    <div class="justify-start flex flex-auto text-xs">
+    <div class="justify-start flex flex-wrap text-xs">
         <div v-for="item in state.addedItems" key="index" class="w-24 border border-gray-300  p-1 m-1">
             <div class="w-full p-0.5 border text-left bg-gray-200 border-gray-300 truncate">{{ item.name }}</div>
 
@@ -49,7 +49,7 @@
 
 
 
-    <div class="justify-start flex flex-auto">
+    <div class="justify-start flex flex-wrap">
 
         <div v-for="item in campingItems" class="w-64 border border-gray-300  p-1 m-1">
             <div class="w-full p-0.5 border text-left bg-gray-200 border-gray-300">{{ item.name }}</div>
