@@ -111,7 +111,7 @@ export default {
             state.spinning = true;
 
             state.interval = setInterval(() => {
-                state.currentNumber = Math.floor(Math.random() * (250 - 50 + 1)) + 50;
+                state.currentNumber = Math.floor(Math.random() * (200 - 70 + 1)) + 70;
 
             }, 100);
 
@@ -149,7 +149,7 @@ export default {
             state.spinningTime = true;
 
             state.intervalTime = setInterval(() => {
-                state.selectedTime = Math.floor(Math.random() * 5) + 1;
+                state.selectedTime = Math.floor(Math.random() * (5 - 1)) + 2;
 
             }, 100);
 
