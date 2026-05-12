@@ -1,48 +1,11 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/**/*.vue',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
     ],
-
     theme: {
-        borderWidth: {
-            DEFAULT: '1px',
-            '0': '0',
-            '1': '1px',
-            '2': '2px',
-           '3': '3px',
-            '4': '4px',
-           '6': '6px',
-           '8': '8px',
-          },
-        extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
-         
-              spacing: {
-                '78': '19.4rem',
-
-                '150': '40rem',
-              },
-
-              animation: {
-                'ping1': 'ping 0.8s cubic-bezier(0, 0, 0.2, 1) infinite',
-                'ping2': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-                'ping3': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
-                'ping4': 'ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite',
-                'ping5': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',         
-                'ping10': 'ping 5s cubic-bezier(0, 0, 0.2, 1) infinite',
-        
-               
-               }
-        },
+        extend: {},
     },
-
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [],
 };
