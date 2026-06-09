@@ -153,6 +153,13 @@ Route::middleware('auth')->group(function () {
     //CAMPING
     Route::get('campingIndex', [App\Http\Controllers\CampingController::class, 'campingIndex'])->name('campingIndex');
     Route::get('campingItems', [App\Http\Controllers\CampingController::class, 'campingItems'])->name('campingItems');
+     Route::get('confiIndex', [App\Http\Controllers\ConfiController::class, 'confiIndex'])->name('confiIndex');
+      Route::get('talesIndex', [App\Http\Controllers\ConfiController::class, 'talesIndex'])->name('talesIndex');
+
+      Route::get('talesCreate', [App\Http\Controllers\ConfiController::class, 'talesCreate'])->name('talesCreate');
+    Route::post('taleStore', [App\Http\Controllers\ConfiController::class, 'taleStore'])->name('taleStore');
+    Route::get('taleEdit/{id}', [App\Http\Controllers\ConfiController::class, 'taleEdit'])->name('taleEdit');
+    Route::put('taleUpdate', [App\Http\Controllers\ConfiController::class, 'taleUpdate'])->name('taleUpdate');
 
 
 
