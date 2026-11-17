@@ -19,5 +19,20 @@ export default defineConfig({
                 },
             },
         }),
+        
     ],
+
+     server: {
+        host: '127.0.0.1',
+        port: 5173,
+        strictPort: true,
+
+        cors: {
+            origin: 'http://cards.local:8080',
+        },
+
+        hmr: {
+            host: '127.0.0.1',
+        },
+    },
 });
